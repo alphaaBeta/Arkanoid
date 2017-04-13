@@ -1,12 +1,9 @@
 #include "Ball.h"
 
+#include <math.h>
 
 
-Ball::Ball()
-{
+double Ball::V() {
+	return (sqrt((vx*vx) + (vy*vy)));
 }
 
-
-Ball::~Ball()
-{
-}
