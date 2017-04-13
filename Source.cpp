@@ -4,6 +4,7 @@
 
 int main(int argc, char* argv[])
 {
-	// Body of the program goes here.
+	// TODO:
+	//-powerup class
 	return 0;
 }

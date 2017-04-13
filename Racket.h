@@ -4,11 +4,21 @@
 #include "Ball.h"
 
 
-class Racket
+class Racket	//singleton
 {
+private:
+	Racket() {}
+	Racket(const Racket&);
+
 public:
-	Racket();
+	
 	~Racket();
+
+	static Racket& getInstance() {
+
+		static Racket instance;
+		return instance;
+	}
 
 	/////////////////////
 	//----MAIN VARS----//
@@ -22,7 +32,6 @@ public:
 	//----MAIN METHODS----//
 	////////////////////////
 
-	void Bounce(Ball&);
 	int Move();	//let's return 0 when hit the border
 
 
