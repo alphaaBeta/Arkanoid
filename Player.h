@@ -4,8 +4,21 @@ class Player	//singleton
 {
 
 private:
-	Player() {}
+	Player(): lives(3), score(0), difficulty(1), level(1) {}
 	Player(const Player &);
+
+	
+
+
+public:
+
+	static Player& getInstance()
+	{
+		
+		static Player instance;
+		return instance;
+
+	}
 
 	/////////////////////
 	//----MAIN VARS----//
@@ -16,21 +29,10 @@ private:
 
 	/////////////////////
 
-
-public:
-
-	static Player& getInstance()
-	{
-		
-		static Player instance;
-		return instance;
-	}
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
-	void LoseLive();
-	void AddPoints(int);
-	void SetDifficulty(int);
-	void SetLevel(int);
+	
+
 };

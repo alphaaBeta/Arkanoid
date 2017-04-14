@@ -4,7 +4,7 @@
 
 #include <math.h>
 
-inline double CheckDistance(double x1, double x21 , double x22 = 999.0) {	//check distance between coordinate (1) and a line (2) closest to it
+inline double GetDistanceFromLine(double x1, double x21 , double x22 = 999.0) {	//check distance between coordinate (1) and a line (2) closest to it
 	if (abs(x1 - x21) > abs(x1 - x22)) {
 		return abs(x1 - x22);
 	}
@@ -12,9 +12,9 @@ inline double CheckDistance(double x1, double x21 , double x22 = 999.0) {	//chec
 }
 
 
-inline double Ball::V() {
+/*inline double Ball::V() {
 	return (sqrt((Vx*Vx) + (Vy*Vy)));
-} 
+}*/ 
 
 void Ball::MultiplyBalls(int amt, Ball& src) {
 
@@ -29,13 +29,14 @@ char Ball::CheckCollision() {
 	
 
 	double xnew, ynew;
-	xnew = this->x + Vx * 0.01;
-	ynew = this->y + Vy * 0.01;
+	xnew = this->x + Vx * ONE_STEP;
+	ynew = this->y + Vy * ONE_STEP;
+
 	//checking collision with bordering walls
-	if (CheckDistance(xnew, 0.0, double(FIELD_WIDTH))<=radius) {
+	if (GetDistanceFromLine(xnew, 0.0, double(FIELD_WIDTH))<=radius) {
 		return 'x';
 	}
-	if (CheckDistance(ynew, 0.0, double(FIELD_HEIGHT)) <= radius) {
+	if (GetDistanceFromLine(ynew, 0.0, double(FIELD_HEIGHT)) <= radius) {
 		return 'y';
 	}
 
@@ -44,23 +45,25 @@ char Ball::CheckCollision() {
 	double RacketX = (Racket::getInstance()).x;
 	double RacketWidth = (Racket::getInstance()).width;
 
-	if (CheckDistance(ynew, RacketY) <= radius) {
-		if (CheckDistance(xnew, RacketX) <= RacketWidth/2) {
+	if (GetDistanceFromLine(ynew, RacketY) <= radius) {
+		if (GetDistanceFromLine(xnew, RacketX) <= RacketWidth/2) {
 			return 'p';
 		}
 	} 
 	
+	//checking collison with blocks
 	Block *aux = (GameField::getInstance()).BlockMatrix[int(round(ynew))][int(round(xnew))];
 	if (aux==nullptr) {//let's check if nearest 'block' in matrix is filled
-		if (CheckDistance(xnew, double(round(xnew))) <= radius) {
+		if (GetDistanceFromLine(xnew, double(round(xnew))) <= radius) {
 			bncdOff = aux;
 			return 'x';
 		}
-		else if (CheckDistance(ynew, double(round(ynew))) <= radius) {
+		else if (GetDistanceFromLine(ynew, double(round(ynew))) <= radius) {
 			bncdOff = aux;
 			return 'y';
 		}
 	}
+	return 0;
 
 }
 
@@ -70,7 +73,7 @@ void Ball::Bounce(char how, Block *gothit = 0) {
 	switch (how)
 	{
 	case 'p':	//TODO: improve this
-		double RSpeed = (Racket::getInstance()).speed; //?????????????????//
+		double RSpeed = (Racket::getInstance()).speed; 
 		if (signbit(Vx))
 			this->Vx = Vx - RSpeed;
 		else
@@ -101,4 +104,15 @@ void Ball::Bounce(char how, Block *gothit = 0) {
 
 	}
 
+}
+
+void Ball::Move(){
+
+	char aux = this->CheckCollision();
+	if (!aux) {
+		this->x = x + (Vx * ONE_STEP);
+		this->y = y + (Vy * ONE_STEP);
+	}
+	else
+		this->Bounce(aux);
 }

@@ -32,10 +32,17 @@ public:
 	////////////////////////
 
 	void LoadBlockLayout();	//load specific block layout(from file)
+	int AddBlock();
 
 private:
 	
-	GameField() : width(FIELD_WIDTH), height(FIELD_HEIGHT) {}
+	GameField() : width(FIELD_WIDTH), height(FIELD_HEIGHT) {
+		for (int i = 0; i < FIELD_WIDTH; i++) {	//setting pointers to 0
+			for (int j = 0; j < FIELD_HEIGHT; j++) {
+				BlockMatrix[i][j] = nullptr;
+			}
+		}
+	}
 
 	GameField(const GameField&);
 

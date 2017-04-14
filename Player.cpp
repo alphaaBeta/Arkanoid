@@ -6,7 +6,3 @@ Player::Player()
 {
 }
 
-
-Player::~Player()
-{
-}

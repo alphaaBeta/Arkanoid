@@ -7,7 +7,7 @@
 class Racket	//singleton
 {
 private:
-	Racket() {}
+	Racket() : x(FIELD_WIDTH/2), y(1), speed(0.02), width(2.0) {}
 	Racket(const Racket&);
 
 public:
@@ -24,7 +24,7 @@ public:
 	//----MAIN VARS----//
 	/////////////////////
 
-	int speed;
+	double speed;
 	double width;
 	double x, y; //location of the center
 
@@ -32,7 +32,7 @@ public:
 	//----MAIN METHODS----//
 	////////////////////////
 
-	int Move();	//let's return 0 when hit the border
+	int Move(char, double);	//let's return 0 when hit the border
 
 
 	//TODO:
