@@ -1,0 +1,21 @@
+#pragma once
+
+//Gamefield
+
+#define FIELD_WIDTH 12
+#define FIELD_HEIGHT 16
+
+
+//Ball
+
+#define ONE_STEP 0.01
+#define BALL_LIMIT 20
+
+//Block
+
+#define REGULAR_BLOCK_HEALTH 1
+#define STRONG_BLOCK_HEALTH 3
+#define VERY_STRONG_BLOCK_HEALTH 100
+#define INDESTRUCTIBLE_BLOCK_HEALTH 0
+
+enum BlockType { REGULAR, STRONG, VERY_STRONG, INDESTRUCTIBLE };

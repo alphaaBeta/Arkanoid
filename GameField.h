@@ -1,16 +1,37 @@
 #pragma once
 
-#include "Block.h"
+#include "Config.h"
 
-#define FIELD_WIDTH 12
-#define FIELD_HEIGHT 16
-
+class Block;
 
 class GameField	//singleton
 {
 public:
 
-	~GameField();
+	
+	/////////////////////
+	//----MAIN VARS----//
+	/////////////////////
+
+	const int width, height;
+	Block *BlockMatrix[FIELD_WIDTH][FIELD_HEIGHT]; //creating a matrix to roughly know block location
+	
+
+	////////////////////////
+	//----MAIN METHODS----//
+	////////////////////////
+
+	//TODO: void LoadBlockLayout();	//load specific block layout(from file)
+
+	int AddBlock(int, int, BlockType, int);	//x, y, type, colour
+
+
+	~GameField() {
+		for (int i = 0; i < FIELD_WIDTH; i++) {	//removing matrix
+			delete[] BlockMatrix[i];
+		}
+		delete[] BlockMatrix;
+	}
 
 	static GameField& getInstance()
 	{
@@ -19,20 +40,6 @@ public:
 		return instance;
 	}
 
-	/////////////////////
-	//----MAIN VARS----//
-	/////////////////////
-
-	const int width, height;
-	Block *BlockMatrix[FIELD_HEIGHT][FIELD_WIDTH]; //creating a matrix to roughly know block location
-	
-
-	////////////////////////
-	//----MAIN METHODS----//
-	////////////////////////
-
-	void LoadBlockLayout();	//load specific block layout(from file)
-	int AddBlock();
 
 private:
 	

@@ -1,13 +1,14 @@
 #include "Racket.h"
 
+#include "Ball.h"
 
 
 int Racket::Move(char dir, double step = 0.01) {
 
-	
+	double xnew;
 	switch (dir) {
 	case 'l':
-		double xnew = this->x - step;
+		xnew = this->x - step;
 		if (GetDistanceFromLine(this->x, 0.0) <= this->width / 2) {
 			return 0;
 		}
@@ -16,7 +17,7 @@ int Racket::Move(char dir, double step = 0.01) {
 		return 1;
 
 	case 'r':
-		double xnew = this->x + step;
+		xnew = this->x + step;
 		if (GetDistanceFromLine(this->x, double(FIELD_WIDTH)) <= this->width / 2) {
 			return 0;
 		}

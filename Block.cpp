@@ -2,9 +2,9 @@
 
 
 
-void Block::Hit(int a) {
-	this->health--;
-	if (health == 0) {	
+void Block::Hit(int a = 1) {
+	this->health-=a;
+	if (health == 0 || (health == -1 && a == 2)) {
 		this->Destroy();
 	}
 	else if (health < 0) {	//indestructible blocks remain indestructible

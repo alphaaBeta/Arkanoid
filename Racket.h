@@ -1,18 +1,16 @@
 #pragma once
 
-#include "GameField.h"
-#include "Ball.h"
-
+#include "Config.h"
 
 class Racket	//singleton
 {
 private:
-	Racket() : x(FIELD_WIDTH/2), y(1), speed(0.02), width(2.0) {}
+	Racket() : x(double((FIELD_WIDTH)/2)), y(1.0), speed(0.02), width(2.0) {}
 	Racket(const Racket&);
 
 public:
 	
-	~Racket();
+	//~Racket();
 
 	static Racket& getInstance() {
 
