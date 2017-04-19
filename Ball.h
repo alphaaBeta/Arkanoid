@@ -73,6 +73,7 @@ public:
 	////////////////////////
 
 	void MultiplyBalls(int, Ball&);	//creates x balls at one's location recursively
+									//can be improved
 	char CheckCollision();	//checks if ball will collide with an object or gamefield edge. 
 							//Returns 'p' for racket, 'x' for horizontal and 'y' for vertical hit
 	void Bounce(char, Block * = 0);
