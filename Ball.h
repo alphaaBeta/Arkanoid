@@ -1,7 +1,9 @@
 #pragma once
 
+#include <vector>
 
 #include "Config.h"
+
 
 class Block;
 class Racket;
@@ -14,59 +16,48 @@ class Ball
 
 private:
 	
-
-public:
+	//Creates an independent ball
 	Ball() {
 
-		BallAmmount++;
+		if (BallAmount == BALL_LIMIT - 1) { printf("Ball limit reached!"); }
+		else {
+			BallAmount++;
 
-		this->x = double(FIELD_WIDTH) / 2;
-		this->y = 2.0;
-		this->Vx = 1.0;
-		this->Vy = 1.0;
 
-		//this->bncdOff = new Block;
-		for (int i = 0; i < BALL_LIMIT; i++) {//TODO:...
-			if (!BallArray[i]) {
-				BallArray[i] = this;
-				i = BALL_LIMIT;
-			}
+			this->radius = 5;
+			this->x = double(SCREEN_WIDTH) / 2;
+			this->y = double(SCREEN_HEIGHT) / 2;
+			this->Vx = 350;
+			this->Vy = 350;
+			this->power = 1;
+
 		}
 
-
-	};
-
-	Ball(Ball& src) {	//creates additional ball at former ball's location, with changed speed
-		BallAmmount++;
-
-		Ball();//????????????????????//
-
-		this->x = src.x;
-		this->y = src.y;
-		this->Vx = src.Vx + 0.04 * src.Vx;
-		this->Vy = src.Vy + 0.04 * src.Vy;
-
 	}
 
-	~Ball() {
-		//delete bncdOff;
-		//delete this;
+	//creates additional ball at former ball's location
+	Ball(Ball& src) {
+
+		Ball *newBall = AddBall();
+
+		newBall->x = src.x;
+		newBall->y = src.y;
+		newBall->Vx = src.Vx;
+		newBall->Vy = src.Vy;
 	}
 
+public:
 
-
-	static Ball *BallArray[BALL_LIMIT];
 
 
 	/////////////////////
 	//----MAIN VARS----//
 	/////////////////////
 
-	static int BallAmmount;
-	double radius;	//radius, 0.01 - one pixel
+	static int BallAmount;
+	int radius;
 	double x, y, Vx, Vy;
 	int power;
-	//inline double V();	//inline for overall speed. useless?
 
 	////////////////////////
 	//----MAIN METHODS----//
@@ -74,16 +65,44 @@ public:
 
 	void MultiplyBalls(int, Ball&);	//creates x balls at one's location recursively
 									//can be improved
-	char CheckCollision();	//checks if ball will collide with an object or gamefield edge. 
+	void CheckCollision(float);	//checks if ball will collide with an object or gamefield edge. 
 							//Returns 'p' for racket, 'x' for horizontal and 'y' for vertical hit
 	void Bounce(char, Block * = 0);
-	void Move();
+	void Move( float );
 
-	static void MoveBalls();
+	static void MoveBalls(float);
+
+	//static Ball *BallArray[BALL_LIMIT];
+
+	static std::vector<Ball *> BallList;
+
+	
+	static Ball* AddBall() { 
+		Ball *newBall = new Ball;
+
+
+		Ball::BallList.push_back(newBall);
+		return newBall;
+	}
+
+
+
+	~Ball() {
+		delete this;
+	}
+
+
+
+
 
 	//TODO:
 	//-checks for bonuses player has 
-	//-something for ball limit
 
 };
 
+inline double GetDistanceFromLine(double x1, double x21, double x22) {	//check distance between coordinate (1) and a line (2) closest to it
+	if (fabs(x1 - x21) > fabs(x1 - x22)) {
+		return fabs(x1 - x22);
+	}
+	else return fabs(x1 - x21);
+}

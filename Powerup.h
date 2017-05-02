@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Racket.h"
 
-Ball *BallArray[BALL_LIMIT];
+
 
 class Powerup
 {
@@ -36,9 +36,9 @@ public:
 class TripleBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < BALL_LIMIT; i++) {
-			if (BallArray[i]) {
-				BallArray[i]->MultiplyBalls(TRIPLE_PWUP_BALL_NUMBER, *(BallArray[i]));
+		for (int i = 0; i < Ball::BallList.size(); i++) {
+			if (!Ball::BallList.empty()) {
+				Ball::BallList[i]->MultiplyBalls(TRIPLE_PWUP_BALL_NUMBER, *(Ball::BallList[i]));
 			}
 		}
 	}
@@ -49,8 +49,8 @@ public:
 class BigBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < BALL_LIMIT; i++) {
-			BallArray[i]->radius *= BIGBALL_PWUP_RADIUS_MULTIPLER;
+		for (int i = 0; i < Ball::BallList.size(); i++) {
+			Ball::BallList[i]->radius *= BIGBALL_PWUP_RADIUS_MULTIPLER;
 		}
 	}
 };
@@ -85,9 +85,9 @@ public:
 class FastBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < BALL_LIMIT; i++) {
-			BallArray[i]->Vx *= FASTBALL_PWUP_INCRASE;
-			BallArray[i]->Vy *= FASTBALL_PWUP_INCRASE;
+		for (int i = 0; i < Ball::BallList.size(); i++) {
+			Ball::BallList[i]->Vx *= FASTBALL_PWUP_INCRASE;
+			Ball::BallList[i]->Vy *= FASTBALL_PWUP_INCRASE;
 		}
 	}
 };
@@ -95,9 +95,9 @@ public:
 class SlowBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < BALL_LIMIT; i++) {
-			BallArray[i]->Vx *= SLOWBALL_PWUP_DECRASE;
-			BallArray[i]->Vy *= SLOWBALL_PWUP_DECRASE;
+		for (int i = 0; i < Ball::BallList.size(); i++) {
+			Ball::BallList[i]->Vx *= SLOWBALL_PWUP_DECRASE;
+			Ball::BallList[i]->Vy *= SLOWBALL_PWUP_DECRASE;
 		}
 	}
 };

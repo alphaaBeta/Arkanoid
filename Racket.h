@@ -5,8 +5,9 @@
 class Racket	//singleton
 {
 private:
-	Racket() : x(double((FIELD_WIDTH)/2)), y(1.0), speed(0.02), width(2.0) {}
-	Racket(const Racket&);
+	Racket() : x(double((SCREEN_WIDTH)/2)), y(double(SCREEN_HEIGHT - BLOCK_HEIGHT*2)), speed(0.0), width(double(RACKET_LENGTH)) {}
+	Racket(const Racket& org) : x(org.x), y(org.y), speed(org.speed), width(org.width) {
+	}
 
 public:
 	
@@ -22,15 +23,21 @@ public:
 	//----MAIN VARS----//
 	/////////////////////
 
+	//Speed of the racket
 	double speed;
+
+	//Width of the racket
 	double width;
-	double x, y; //location of the center
+	
+	//location of the center
+	double x, y; 
 
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
-	int Move(char, double);	//let's return 0 when hit the border
+	//Returns 0 if border is hit
+	int Move(float);	
 
 
 	//TODO:

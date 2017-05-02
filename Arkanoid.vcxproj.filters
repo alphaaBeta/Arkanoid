@@ -38,10 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="SDL2.lib" />
-    <Library Include="SDL2main.lib" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,5 +59,16 @@
     <ClInclude Include="Powerup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\ball.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\block.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\racket-1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

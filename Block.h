@@ -1,30 +1,46 @@
 #pragma once
 
-#include "Config.h"
 
+#include "Config.h"
+#include "GameField.h"
+
+
+//colour struct, consists of:
+//r, g, b, a : red, green, blue, alpha
 
 
 
 class Block
 {
 public:
-	Block(char hlt = 1, int clr = 0, char sX = 2, char sY = 1) : health(hlt), colour(clr), sizeX(sX), sizeY(sY) { }
-	~Block() { delete this; }
+	Block(char hlt = 1, unsigned char r = 0, unsigned char g = 0, unsigned char b = 0, unsigned char a = 255) : health(hlt), x(0), y(0) {
+		colour.r = r;
+		colour.g = g;
+		colour.b = b;
+		colour.a = a;
+	}
+	//~Block() { delete this; }
 
 	/////////////////////
 	//----MAIN VARS----//
 	/////////////////////
 
-	int colour;
-	int x1, y1; //for lower left corner
-	char sizeX, sizeY;	//width and height. 1 means it takes up one space in matrix
+	Colour colour;
+
+	//Cords for upper left corner
+	int x, y; 
+
+	//Cords on GameField matrix
+	
 	char health;
 
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
-	void Hit(int);	//argument for strength
+	//int - strength (how much health lost per hit)
+	void Hit(int);	
+
 	void Destroy();
 
 	//TODO:
@@ -36,26 +52,31 @@ public:
 class RegularBlock : public Block 
 {
 public:
-	RegularBlock(char hlt = REGULAR_BLOCK_HEALTH, int clr = 0) : Block(hlt, clr) {}
+	RegularBlock(char hlt = REGULAR_BLOCK_HEALTH, unsigned char r = 0, unsigned char g = 255, unsigned char b = 0, unsigned char a = 255)
+		: Block(hlt, r, g, b, a) {}
+
 };
 
 
 class StrongBlock : public Block
 {
 public:
-	StrongBlock(char hlt = STRONG_BLOCK_HEALTH, int clr = 2) : Block(hlt, clr) {}
+	StrongBlock(char hlt = STRONG_BLOCK_HEALTH, unsigned char r = 0, unsigned char g = 0, unsigned char b = 255, unsigned char a = 255)
+		: Block(hlt, r, g, b, a) {}
 };
 
 
 class VeryStrongBlock : public Block
 {
 public:
-	VeryStrongBlock(char hlt = VERY_STRONG_BLOCK_HEALTH, int clr = 4) : Block(hlt, clr) {}
+	VeryStrongBlock(char hlt = VERY_STRONG_BLOCK_HEALTH, unsigned char r = 255, unsigned char g = 255, unsigned char b = 0, unsigned char a = 255)
+		: Block(hlt, r, g, b, a) {}
 };
 
 
 class IndestructibleBlock : public Block
 {
 public:
-	IndestructibleBlock(char hlt = INDESTRUCTIBLE_BLOCK_HEALTH, int clr = 6) : Block(hlt, clr) {}
+	IndestructibleBlock(char hlt = INDESTRUCTIBLE_BLOCK_HEALTH, unsigned char r = 200, unsigned char g = 200, unsigned char b = 200, unsigned char a = 255)
+		: Block(hlt, r, g, b, a) {}
 };

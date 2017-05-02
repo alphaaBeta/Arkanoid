@@ -9,7 +9,6 @@ private:
 	Player(): lives(3), score(0), difficulty(1), level(1) {}
 	Player(const Player &);
 
-	
 
 
 public:

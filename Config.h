@@ -1,14 +1,24 @@
 #pragma once
+#include <iostream>	//TODO;???
+
+const int SCREEN_WIDTH = 520;
+const int SCREEN_HEIGHT = 480;
+
+const int BLOCK_WIDTH = 40;
+const int BLOCK_HEIGHT = 16;
 
 //Gamefield
 
-#define FIELD_WIDTH 12
-#define FIELD_HEIGHT 16
+const int FIELD_WIDTH = SCREEN_WIDTH / BLOCK_WIDTH;
+const int FIELD_HEIGHT = SCREEN_HEIGHT / BLOCK_HEIGHT;
 
+
+const int RACKET_LENGTH = 120;
+//const int RACKET_THICKNESS = 8;
+const double RACKET_SPEED = 500;
 
 //Ball
 
-#define ONE_STEP 0.01
 #define BALL_LIMIT 20
 
 //Block
@@ -31,3 +41,11 @@
 #define SLOWBALL_PWUP_DECRASE 0.5
 
 enum BlockType { REGULAR, STRONG, VERY_STRONG, INDESTRUCTIBLE };
+
+
+struct Colour {
+	unsigned char r = 0;
+	unsigned char g = 0;
+	unsigned char b = 0;
+	unsigned char a = 0;
+};

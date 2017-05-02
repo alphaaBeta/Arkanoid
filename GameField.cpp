@@ -2,14 +2,17 @@
 
 #include "Block.h"
 
-int GameField::AddBlock(int x, int y, BlockType type, int colour) {
 
-	if (!BlockMatrix[x][y]) { return 0; }
+std::vector<Block *> GameField::BlockList;
+
+int GameField::AddBlock(int x, int y, BlockType type, Colour colour) {
+
+	if (BlockMatrix[x][y]) { return 0; }
 	
 	switch (type) {
 
 	case REGULAR:
-		BlockMatrix[x][y] = new RegularBlock;
+		BlockMatrix[x][y] = new RegularBlock;		
 		break;
 	case STRONG:
 		BlockMatrix[x][y] = new StrongBlock;
@@ -22,15 +25,19 @@ int GameField::AddBlock(int x, int y, BlockType type, int colour) {
 		break;
 	}
 
-	BlockMatrix[x][y]->colour = colour;
+	//Set block's x and y to some specific pixel value
+	BlockMatrix[x][y]->x = x*BLOCK_WIDTH;
+	BlockMatrix[x][y]->y = y*BLOCK_HEIGHT;
 
-	for (int i = 2; i <= BlockMatrix[x][y]->sizeX; i++) {	//for different sizes
-		BlockMatrix[x + i - 1][y] = BlockMatrix[x][y];
-		if (BlockMatrix[x][y]->sizeY != 1) {
-			for (int j = 2; j <= BlockMatrix[x][y]->sizeY; j++) {
-				BlockMatrix[x + i - 1][y + j -1] = BlockMatrix[x][y];
-			}
-		}
+	//Set colour if one is given
+	if (colour.a) {
+		BlockMatrix[x][y]->colour = colour;
 	}
+	
+	//Add a pointer to the block to the end of the list
+	BlockList.push_back(BlockMatrix[x][y]);
+
+	
+	
 	
 }

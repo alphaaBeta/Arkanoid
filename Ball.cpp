@@ -1,27 +1,25 @@
 #include "Ball.h"
 
 #include <math.h>
+#include <vector>
 #include "Racket.h"
 #include "GameField.h"
 #include "Block.h"
 
-inline double GetDistanceFromLine(double x1, double x21, double x22 ) {	//check distance between coordinate (1) and a line (2) closest to it
-	if (fabs(x1 - x21) > fabs(x1 - x22)) {
-		return fabs(x1 - x22);
-	}
-	else return fabs(x1 - x21);
-}
+#define PI 3.14159265
 
 
 //initializing static vars
-int Ball::BallAmmount = 0;
+
+//Amount of balls
+int Ball::BallAmount = 0;
 
 
-Ball *(Ball::BallArray)[BALL_LIMIT] = { 0 };
+std::vector<Ball *> Ball::BallList;
 
-void Ball::MoveBalls() {
-	for (int i = 0; i < BALL_LIMIT; i++) {
-		BallArray[i]->Move();
+void Ball::MoveBalls(float timeStamp) {
+	for (int i = 0; i < Ball::BallList.size(); i++) {
+		Ball::BallList[i]->Move(timeStamp);
 	}
 }
 
@@ -29,34 +27,75 @@ void Ball::MoveBalls() {
 void Ball::MultiplyBalls(int amt, Ball& src) {
 
 	if (amt > 0) {
-		Ball aux(src);
+		Ball *aux = AddBall();
+
+		aux->x = src.x;
+		aux->y = src.y;
+		aux->Vx = src.Vx + src.Vx*0.02;
+		aux->Vy = src.Vy + src.Vy*0.02;
+
 		amt--;
-		MultiplyBalls(amt, aux);
+		MultiplyBalls(amt, *aux);
 	}
 }
 
-char Ball::CheckCollision() {
+void Ball::CheckCollision( float timeStep) {
 	
 
+
+
+
+
 	double xnew, ynew;
-	xnew = this->x + Vx * ONE_STEP;
-	ynew = this->y + Vy * ONE_STEP;
+	xnew = this->x + (this->Vx * timeStep);
+	ynew = this->y + (this->Vy * timeStep);
 	char how;
 
-	//checking collision with bordering walls
-	if (GetDistanceFromLine(xnew, 0.0, double(FIELD_WIDTH))<=radius) {
-		how = 'x';
-		Bounce(how);
+	//Checking collison with blocks
+	
+	
 
-		return how;
+	
 
+	
+	//Collision with blocks
+	for (int i = 0; i < GameField::getInstance().BlockList.size(); i++) {
+		int xc, xb = GameField::getInstance().BlockList[i]->x;
+		int yc, yb = GameField::getInstance().BlockList[i]->y;
+
+		//Find closest x coord on the block, according to ball
+		if (this->x < xb) {
+			xc = xb;
+		}
+		else if (this->x > xb + BLOCK_WIDTH) {
+			xc = xb + BLOCK_WIDTH;
+		}
+		else
+			xc = this->x;
+
+
+		//Find closest y coord on the block, according to ball
+		if (this->y < yb) {
+			yc = yb;
+		}
+		else if (this->y > yb + BLOCK_HEIGHT) {
+			yc = yb + BLOCK_HEIGHT;
+		}
+		else
+			yc = this->y;
+
+		//Get squared distance between the point and ball coord, check with ball radius - squared
+		if ((yc - this->y)*(yc - this->y) + (xc - this->x)*(xc - this->x) <= this->radius*this->radius) {
+
+			//Check on which side of the block is it
+			if(abs(yc-yb) <= 0.01 || abs(yc-yb-BLOCK_HEIGHT) <= 0.01)
+			Bounce('y', GameField::getInstance().BlockList[i]);
+			else Bounce('x', GameField::getInstance().BlockList[i]);
+		}
 	}
-	if (GetDistanceFromLine(ynew, 0.0, double(FIELD_HEIGHT)) <= radius) {
-		how = 'y';
-		Bounce(how);
 
-		return how;
-	}
+
+	
 
 	//checking colllision with racket
 
@@ -64,65 +103,73 @@ char Ball::CheckCollision() {
 	double RacketX = (Racket::getInstance()).x;
 	double RacketWidth = (Racket::getInstance()).width;
 
-	if (GetDistanceFromLine(ynew, RacketY) <= radius) {
-		if (GetDistanceFromLine(xnew, RacketX) <= RacketWidth/2) {
+	if (abs(ynew - RacketY) <= this->radius) {
+		if (RacketX - RacketWidth/2 <= xnew && RacketX + RacketWidth/2 >= xnew) {
 			how = 'p';
 			Bounce(how);
 
-			return how;
-		}
-	} 
-	
-	//checking collison with blocks
-	
-	if (signbit(this->Vx)) { xnew -= 1; }	//if Vx or Vy is negative, move the check range a bit
-	if (signbit(this->Vy)) { ynew -= 1; }
-
-	Block *aux = (GameField::getInstance()).BlockMatrix[int(round(ynew))][int(round(xnew))];
-	if (aux==nullptr) {//let's check if nearest 'block' in matrix is filled
-		if (GetDistanceFromLine(xnew, double(round(xnew))) <= radius) {
-			how = 'x';
-			Bounce(how, aux);
-
-			return how;
-		}
-		else if (GetDistanceFromLine(ynew, double(round(ynew))) <= radius) {
-			how = 'y';
-			Bounce(how, aux);
-
-			return how;
+			return;
 		}
 	}
-	return 0;
+
+	//checking collision with bordering walls
+	if ((xnew <= radius) || ((SCREEN_WIDTH - xnew) <= radius)) {
+		how = 'x';
+		Bounce(how);
+
+		return;
+
+	}
+	if ((ynew <= radius) || ((SCREEN_HEIGHT - ynew) <= radius)) {
+		how = 'y';
+		Bounce(how);
+
+		return;
+	}
+
+	
+	return;
 
 }
 
 void Ball::Bounce(char how, Block *gothit) {
 	
 	double RSpeed;
+	double xSpeed;
+	double ratio;
+	double RacketX = (Racket::getInstance()).x;
+	double RacketWidth = (Racket::getInstance()).width;
+	double inter, angle, ballSpeed;
 	switch (how)
 	{
-	case 'p':	//TODO: improve this
-		RSpeed = (Racket::getInstance()).speed; 
-		if (signbit(Vx))
-			this->Vx = Vx - RSpeed;
-		else
-			this->Vx = Vx + RSpeed;
-		this->Vy = -Vy - RSpeed;
+	case 'p':
+
+
+
+		inter = RacketX - this->x;
+		inter = inter / (RacketWidth / 2);
+		angle = inter * 5 * PI / 12;//75 degrees
+
+		ballSpeed = sqrt(Vx*Vx + Vy*Vy);	//sum of x and y speed vectors
+
+		this->Vx = -ballSpeed*sin(angle);
+		this->Vy = -ballSpeed*cos(angle);
 
 		break;
 
 	case 'x':
-		this->Vy = -Vy;
+		this->Vx = -Vx;
 
-		if (gothit) {	//inform the block that we hit it
+		if (gothit) {	
+			//Inform the block that we hit it
 			(*gothit).Hit(this->power);
 			gothit = 0;
 		}
 		break;
 
 	case 'y':
-		this->Vx = -Vx;
+		this->Vy = -Vy;
+
 
 		if (gothit) {
 			(*gothit).Hit(this->power);
@@ -134,11 +181,12 @@ void Ball::Bounce(char how, Block *gothit) {
 
 }
 
-void Ball::Move(){
+void Ball::Move( float timeStep){
 
-	char aux = this->CheckCollision();
+	//char aux = 
+		this->CheckCollision(timeStep);
 	
-	this->x = x + (Vx * ONE_STEP);
-	this->y = y + (Vy * ONE_STEP);
+	this->x += (Vx * timeStep);
+	this->y += (Vy * timeStep);
 	
 }

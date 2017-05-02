@@ -3,28 +3,29 @@
 #include "Ball.h"
 
 
-int Racket::Move(char dir, double step = 0.01) {
+int Racket::Move(float timeStep) {
 
-	double xnew;
-	switch (dir) {
-	case 'l':
-		xnew = this->x - step;
-		if (GetDistanceFromLine(this->x, 0.0) <= this->width / 2) {
-			return 0;
-		}
-		else
-			this->x = xnew;
-		return 1;
 
-	case 'r':
-		xnew = this->x + step;
-		if (GetDistanceFromLine(this->x, double(FIELD_WIDTH)) <= this->width / 2) {
-			return 0;
-		}
-		else
-			this->x = xnew;
-		return 1;
+	
+	this->x += this->speed * timeStep;
+	 
 
+
+	//Check for left side
+	if (this->x < this->width / 2) {
+		this->x = this->width / 2;
+		return 0;
 	}
+	
+	//Check for right side
+	else if ((SCREEN_WIDTH - this->x) < (this->width / 2)) {
+		this->x = SCREEN_WIDTH - (this->width / 2);
+		return 0;
+	}
+
+	else {
+		return 1;
+	}
+
 
 }
