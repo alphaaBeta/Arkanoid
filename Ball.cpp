@@ -17,10 +17,15 @@ int Ball::BallAmount = 0;
 
 std::vector<Ball *> Ball::BallList;
 
-void Ball::MoveBalls(float timeStamp) {
+char Ball::MoveBalls(float timeStamp) {
+	char how = 0;
+	char aux = 0;
 	for (int i = 0; i < Ball::BallList.size(); i++) {
-		Ball::BallList[i]->Move(timeStamp);
+		how  = (Ball::BallList[i])->Move(timeStamp);
+		if (how != 0) { aux = how; }
+
 	}
+	return aux;
 }
 
 
@@ -39,7 +44,7 @@ void Ball::MultiplyBalls(int amt, Ball& src) {
 	}
 }
 
-void Ball::CheckCollision( float timeStep) {
+char Ball::CheckCollision( float timeStep) {
 	
 
 
@@ -89,9 +94,11 @@ void Ball::CheckCollision( float timeStep) {
 
 			//Check on which side of the block is it
 			if(abs(yc-yb) <= 0.01 || abs(yc-yb-BLOCK_HEIGHT) <= 0.01)
-			Bounce('y', GameField::getInstance().BlockList[i]);
-			else Bounce('x', GameField::getInstance().BlockList[i]);
+			 how = Bounce('y', GameField::getInstance().BlockList[i]);
+			else how = Bounce('x', GameField::getInstance().BlockList[i]);
+			return how;
 		}
+		
 	}
 
 
@@ -106,33 +113,33 @@ void Ball::CheckCollision( float timeStep) {
 	if (abs(ynew - RacketY) <= this->radius) {
 		if (RacketX - RacketWidth/2 <= xnew && RacketX + RacketWidth/2 >= xnew) {
 			how = 'p';
-			Bounce(how);
+			how = Bounce(how);
 
-			return;
+			return how;
 		}
 	}
 
 	//checking collision with bordering walls
 	if ((xnew <= radius) || ((SCREEN_WIDTH - xnew) <= radius)) {
 		how = 'x';
-		Bounce(how);
+		how = Bounce(how);
 
-		return;
+		return how;
 
 	}
 	if ((ynew <= radius) || ((SCREEN_HEIGHT - ynew) <= radius)) {
 		how = 'y';
-		Bounce(how);
+		how = Bounce(how);
 
-		return;
+		return how;
 	}
 
 	
-	return;
+	return 0 ;
 
 }
 
-void Ball::Bounce(char how, Block *gothit) {
+char Ball::Bounce(char how, Block *gothit) {
 	
 	double RSpeed;
 	double xSpeed;
@@ -154,8 +161,8 @@ void Ball::Bounce(char how, Block *gothit) {
 
 		this->Vx = -ballSpeed*sin(angle);
 		this->Vy = -ballSpeed*cos(angle);
-
-		break;
+		
+		return 'p';
 
 	case 'x':
 		this->Vx = -Vx;
@@ -165,7 +172,8 @@ void Ball::Bounce(char how, Block *gothit) {
 			(*gothit).Hit(this->power);
 			gothit = 0;
 		}
-		break;
+		
+		return 'x';
 
 	case 'y':
 		this->Vy = -Vy;
@@ -175,18 +183,20 @@ void Ball::Bounce(char how, Block *gothit) {
 			(*gothit).Hit(this->power);
 			gothit = 0;
 		}
-		break;
+		
+		return 'x';
 
 	}
+	return 0;
 
 }
 
-void Ball::Move( float timeStep){
+char Ball::Move( float timeStep){
 
-	//char aux = 
-		this->CheckCollision(timeStep);
+	char aux = (this->CheckCollision)(timeStep);
 	
 	this->x += (Vx * timeStep);
 	this->y += (Vy * timeStep);
+	return aux;
 	
 }

@@ -65,12 +65,12 @@ public:
 
 	void MultiplyBalls(int, Ball&);	//creates x balls at one's location recursively
 									//can be improved
-	void CheckCollision(float);	//checks if ball will collide with an object or gamefield edge. 
+	char CheckCollision(float);	//checks if ball will collide with an object or gamefield edge. 
 							//Returns 'p' for racket, 'x' for horizontal and 'y' for vertical hit
-	void Bounce(char, Block * = 0);
-	void Move( float );
+	char Bounce(char, Block * = 0);
+	char Move( float );
 
-	static void MoveBalls(float);
+	static char MoveBalls(float);
 
 	//static Ball *BallArray[BALL_LIMIT];
 

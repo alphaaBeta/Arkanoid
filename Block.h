@@ -3,6 +3,7 @@
 
 #include "Config.h"
 #include "GameField.h"
+#include "Powerup.h"
 
 
 //colour struct, consists of:

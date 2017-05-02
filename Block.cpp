@@ -15,6 +15,10 @@ void Block::Hit(int a = 1) {
 void Block::Destroy() {
 	//TODO:
 	//bonus drop
+	Powerup *aux;
+
+	aux = new BigBallPWUP(double(this->x), double(this->y));
+	GameField::getInstance().PowerupList.push_back(aux);
 
 	//Removes the block from the block list-vector
 	for (int i = 0; i < (GameField::getInstance()).BlockList.size(); i++) {

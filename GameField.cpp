@@ -4,6 +4,7 @@
 
 
 std::vector<Block *> GameField::BlockList;
+std::vector<Powerup *> GameField::PowerupList;
 
 int GameField::AddBlock(int x, int y, BlockType type, Colour colour) {
 

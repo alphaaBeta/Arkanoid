@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <stdio.h>
 #include <string>
 
@@ -129,8 +130,10 @@ SDL_Renderer* gRenderer = NULL;
 LTexture gBallTexture;
 LTexture gBlockTexture;
 LTexture gRacketTexture;
+LTexture gPwupTexture;
 
-
+Mix_Chunk *gPing = NULL;
+Mix_Chunk *gRacketPong = NULL;
 ///////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -400,7 +403,7 @@ bool init()
 	bool success = true;
 
 	//Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 	{
 		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
 		success = false;
@@ -441,6 +444,13 @@ bool init()
 					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 					success = false;
 				}
+
+				//Initialize SDL_mixer
+				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+				{
+					printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+					success = false;
+				}
 			}
 		}
 	}
@@ -474,6 +484,27 @@ bool loadMedia()
 		success = false;
 	}
 
+	if (!gPwupTexture.loadFromFile("resources/pwup.bmp")) {
+		printf("Failed to load pwup texture!\n");
+		success = false;
+	}
+
+
+	//Load sound effects
+	gPing = Mix_LoadWAV("resources/ping.wav");
+	if (gPing == NULL)
+	{
+		printf("Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
+	gRacketPong = Mix_LoadWAV("resources/racket.wav");
+	if (gRacketPong == NULL)
+	{
+		printf("Failed to load high sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+
 	return success;
 }
 
@@ -481,6 +512,13 @@ void close()
 {
 	//Free loaded images
 	gBallTexture.free();
+	gBlockTexture.free();
+	gRacketTexture.free();
+
+	Mix_FreeChunk(gPing);
+	Mix_FreeChunk(gRacketPong);
+	gPing = 0;
+	gRacketPong = 0;
 
 	//Destroy window	
 	SDL_DestroyRenderer(gRenderer);
@@ -491,6 +529,7 @@ void close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+	Mix_Quit();
 }
 
 //Render all the balls
@@ -534,6 +573,21 @@ void RenderRacket() {
 	gRacketTexture.render(int((Racket::getInstance()).x - ((Racket::getInstance()).width / 2)),
 							int((Racket::getInstance()).y),
 							&rackRect);
+}
+
+void RenderPwups() {
+
+	SDL_Rect Rect = { 0, 0 };
+	Rect.w = 12;
+	Rect.h = 12;
+
+	for (int i = 0; i < GameField::getInstance().PowerupList.size(); i++) {
+		//setcolr
+		gPwupTexture.render(GameField::getInstance().PowerupList[i]->x,\
+			GameField::getInstance().PowerupList[i]->y,
+			&Rect);
+	}
+	
 }
 
 void handleInput(SDL_Event& e)
@@ -647,10 +701,15 @@ int main(int argc, char* argv[])
 				float timeStep = stepTimer.getTicks() / 1000.f;
 
 				//Move the racket and ball and check collision
-				Ball::MoveBalls(timeStep);
-
+				char how = Ball::MoveBalls(timeStep);
+				if (how == 'p') {
+					Mix_PlayChannel(-1, gRacketPong, 0);
+				}
+				else if (how == 'x') {
+					Mix_PlayChannel(-1, gPing, 0);
+				}
 				Racket::getInstance().Move(timeStep);
-
+				Powerup::MoveAll(timeStep);
 
 				stepTimer.start();
 
@@ -665,6 +724,7 @@ int main(int argc, char* argv[])
 				RenderBalls();
 				RenderBlocks();
 				RenderRacket();
+				RenderPwups();
 
 
 				//Update screen

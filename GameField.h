@@ -4,6 +4,7 @@
 #include <vector>
 
 class Block;
+class Powerup;
 
 
 class GameField	//singleton
@@ -19,6 +20,7 @@ public:
 	//Matrix to roughly know block location
 	Block *BlockMatrix[FIELD_WIDTH][FIELD_HEIGHT];
 	static std::vector<Block *> BlockList;
+	static std::vector<Powerup *> PowerupList;
 
 	////////////////////////
 	//----MAIN METHODS----//
@@ -30,10 +32,6 @@ public:
 
 
 	~GameField() {
-		/*for (int i = 0; i < FIELD_WIDTH; i++) {	//removing matrix
-			delete[] BlockMatrix[i];
-		}
-		delete[] BlockMatrix;*/
 		for (int i = 0; i < BlockList.size(); i++) {
 			delete BlockList[i];
 		}
