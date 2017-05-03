@@ -54,6 +54,8 @@ char Ball::CheckCollision( float timeStep) {
 	double xnew, ynew;
 	xnew = this->x + (this->Vx * timeStep);
 	ynew = this->y + (this->Vy * timeStep);
+
+	//Used to play sound
 	char how;
 
 	//Checking collison with blocks
@@ -93,7 +95,7 @@ char Ball::CheckCollision( float timeStep) {
 		if ((yc - this->y)*(yc - this->y) + (xc - this->x)*(xc - this->x) <= this->radius*this->radius) {
 
 			//Check on which side of the block is it
-			if(abs(yc-yb) <= 0.01 || abs(yc-yb-BLOCK_HEIGHT) <= 0.01)
+			if(abs(yc-yb) <= 0.001 || abs(yc-yb-BLOCK_HEIGHT) <= 0.001)
 			 how = Bounce('y', GameField::getInstance().BlockList[i]);
 			else how = Bounce('x', GameField::getInstance().BlockList[i]);
 			return how;
@@ -149,15 +151,17 @@ char Ball::Bounce(char how, Block *gothit) {
 	double inter, angle, ballSpeed;
 	switch (how)
 	{
+
 	case 'p':
 
-
+		//Calculating the speed of the ball after bouncing off the paddle
 
 		inter = RacketX - this->x;
 		inter = inter / (RacketWidth / 2);
-		angle = inter * 5 * PI / 12;//75 degrees
+		angle = inter * 5 * PI / 12; //75 degrees
 
-		ballSpeed = sqrt(Vx*Vx + Vy*Vy);	//sum of x and y speed vectors
+		//sum of x and y speed vectors
+		ballSpeed = sqrt(Vx*Vx + Vy*Vy);
 
 		this->Vx = -ballSpeed*sin(angle);
 		this->Vy = -ballSpeed*cos(angle);

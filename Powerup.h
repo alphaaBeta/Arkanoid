@@ -53,25 +53,20 @@ public:
 
 	
 	double x, y, Vy;
+
+	Colour color;
 };
 
 class TripleBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < Ball::BallList.size(); i++) {
-			if (!Ball::BallList.empty()) {
-				Ball::BallList[i]->MultiplyBalls(TRIPLE_PWUP_BALL_NUMBER, *(Ball::BallList[i]));
-			}
-			Destroy(this);
-		}
+
+		Ball::BallList[0]->MultiplyBalls(TRIPLE_PWUP_BALL_NUMBER, *(Ball::BallList[0]));
+
+		Destroy(this);
 	}
-
 	
-
-
-
-
-
+	TripleBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 0, 255, 255 }; }
 };
 
 class BigBallPWUP : public Powerup {
@@ -83,13 +78,14 @@ public:
 		Destroy(this);
 	}
 
-	BigBallPWUP(double xx, double yy) : Powerup(xx, yy) {}
+	BigBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 0, 255, 255 }; }
 };
 
 class ShootPWUP : public Powerup {
 public:
 	//TODO:
 	//void Collect();
+	ShootPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 255, 20, 147, 255 }; }
 };
 
 class ExtraLivePWUP : public Powerup {
@@ -98,7 +94,7 @@ public:
 		(Player::getInstance()).lives += EXTRALIVE_PWUP_LIVE_AMT;
 		Destroy(this);
 	}
-
+	ExtraLivePWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 255, 0, 255 }; }
 };
 
 class BigRacketPWUP : public Powerup {
@@ -107,6 +103,7 @@ public:
 		(Racket::getInstance()).width *= BIGRACKET_PWUP_INCRASE;
 		Destroy(this);
 	}
+	BigRacketPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 255, 0, 255 }; }
 };
 
 class SmallRacketPWUP : public Powerup {
@@ -115,6 +112,7 @@ public:
 		(Racket::getInstance()).width *= SMALLRACKET_PWUP_DECRASE;
 		Destroy(this);
 	}
+	SmallRacketPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 255, 0, 0, 255 }; }
 };
 
 class FastBallPWUP : public Powerup {
@@ -126,6 +124,7 @@ public:
 		}
 		Destroy(this);
 	}
+	FastBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 255, 0, 0, 255 }; }
 };
 
 class SlowBallPWUP : public Powerup {
@@ -137,4 +136,5 @@ public:
 		}
 		Destroy(this);
 	}
+	SlowBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 255, 0, 255 }; }
 };

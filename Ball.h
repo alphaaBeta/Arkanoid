@@ -63,17 +63,21 @@ public:
 	//----MAIN METHODS----//
 	////////////////////////
 
-	void MultiplyBalls(int, Ball&);	//creates x balls at one's location recursively
-									//can be improved
-	char CheckCollision(float);	//checks if ball will collide with an object or gamefield edge. 
-							//Returns 'p' for racket, 'x' for horizontal and 'y' for vertical hit
+	//Creates x balls at one's location
+	void MultiplyBalls(int, Ball&);	
+
+	//checks if ball will collide with an object or gamefield edge. 
+	//Returns 'p' for racket, 'x' for horizontal and 'y' for vertical hit
+	char CheckCollision(float);
+
 	char Bounce(char, Block * = 0);
+
 	char Move( float );
 
+	//Moves all the balls
 	static char MoveBalls(float);
 
-	//static Ball *BallArray[BALL_LIMIT];
-
+	//List to keep track of balls
 	static std::vector<Ball *> BallList;
 
 	
@@ -86,23 +90,9 @@ public:
 	}
 
 
-
 	~Ball() {
 		delete this;
 	}
 
 
-
-
-
-	//TODO:
-	//-checks for bonuses player has 
-
 };
-
-inline double GetDistanceFromLine(double x1, double x21, double x22) {	//check distance between coordinate (1) and a line (2) closest to it
-	if (fabs(x1 - x21) > fabs(x1 - x22)) {
-		return fabs(x1 - x22);
-	}
-	else return fabs(x1 - x21);
-}

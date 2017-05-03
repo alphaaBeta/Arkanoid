@@ -3,7 +3,7 @@
 #include <SDL_mixer.h>
 #include <stdio.h>
 #include <string>
-
+#include <time.h>
 //#include <SDL_ttf.h>
 
 
@@ -575,14 +575,18 @@ void RenderRacket() {
 							&rackRect);
 }
 
+//Render powerups
 void RenderPwups() {
 
 	SDL_Rect Rect = { 0, 0 };
 	Rect.w = 12;
 	Rect.h = 12;
+	Colour clr;
 
 	for (int i = 0; i < GameField::getInstance().PowerupList.size(); i++) {
-		//setcolr
+		clr = GameField::getInstance().PowerupList[i]->color;
+		gPwupTexture.setColor(clr.r, clr.g, clr.b);
+		gPwupTexture.setAlpha(clr.a);
 		gPwupTexture.render(GameField::getInstance().PowerupList[i]->x,\
 			GameField::getInstance().PowerupList[i]->y,
 			&Rect);
@@ -630,6 +634,8 @@ void handleInput(SDL_Event& e)
 
 int main(int argc, char* argv[])
 {
+
+	srand(time(NULL));
 	//Start up SDL and create window
 	if (!init())
 	{

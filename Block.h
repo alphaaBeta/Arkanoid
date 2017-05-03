@@ -20,7 +20,6 @@ public:
 		colour.b = b;
 		colour.a = a;
 	}
-	//~Block() { delete this; }
 
 	/////////////////////
 	//----MAIN VARS----//
@@ -31,21 +30,16 @@ public:
 	//Cords for upper left corner
 	int x, y; 
 
-	//Cords on GameField matrix
-	
 	char health;
 
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
-	//int - strength (how much health lost per hit)
 	void Hit(int);	
 
 	void Destroy();
 
-	//TODO:
-	//-bonus drop chance on Destroy
 };
 
 

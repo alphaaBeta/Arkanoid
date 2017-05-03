@@ -6,8 +6,7 @@ class Racket	//singleton
 {
 private:
 	Racket() : x(double((SCREEN_WIDTH)/2)), y(double(SCREEN_HEIGHT - BLOCK_HEIGHT*2)), speed(0.0), width(double(RACKET_LENGTH)) {}
-	Racket(const Racket& org) : x(org.x), y(org.y), speed(org.speed), width(org.width) {
-	}
+	Racket(const Racket& org) : x(org.x), y(org.y), speed(org.speed), width(org.width) { }
 
 public:
 	
