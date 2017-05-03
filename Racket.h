@@ -31,6 +31,9 @@ public:
 	//location of the center
 	double x, y; 
 
+	//If shooting is enabled
+	char shooting;
+
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////

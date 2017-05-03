@@ -1,11 +1,14 @@
 #pragma once
 
+//#include <vector>
+
 #include "Config.h"
 
 #include "Ball.h"
 #include "Player.h"
 #include "Racket.h"
 #include "GameField.h"
+#include "Block.h"
 
 
 class Powerup
@@ -83,8 +86,11 @@ public:
 
 class ShootPWUP : public Powerup {
 public:
-	//TODO:
-	//void Collect();
+	
+	void Collect() {
+		Racket::getInstance().shooting = 1;
+		Destroy(this);
+	}
 	ShootPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 255, 20, 147, 255 }; }
 };
 
@@ -138,3 +144,4 @@ public:
 	}
 	SlowBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 255, 0, 255 }; }
 };
+

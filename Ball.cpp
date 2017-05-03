@@ -129,16 +129,34 @@ char Ball::CheckCollision( float timeStep) {
 		return how;
 
 	}
-	if ((ynew <= radius) || ((SCREEN_HEIGHT - ynew) <= radius)) {
+	if ((ynew <= radius)) {
 		how = 'y';
 		how = Bounce(how);
 
 		return how;
 	}
 
+	//if it falls out of the screen
+	if (ynew > SCREEN_HEIGHT) {
+		Destroy();
+
+		if (Ball::BallList.empty()) {
+			Player::getInstance().lives--;
+		}
+	}
+
 	
 	return 0 ;
 
+}
+
+void Ball::Destroy() {
+	for (int i = 0; i < Ball::BallList.size(); i++) {
+		if (Ball::BallList[i] == this) {
+			Ball::BallList.erase(Ball::BallList.begin() + i);
+			delete this;
+		}
+	}
 }
 
 char Ball::Bounce(char how, Block *gothit) {

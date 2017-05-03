@@ -74,6 +74,8 @@ public:
 
 	char Move( float );
 
+	void Destroy();
+
 	//Moves all the balls
 	static char MoveBalls(float);
 
@@ -90,9 +92,7 @@ public:
 	}
 
 
-	~Ball() {
-		delete this;
-	}
+	~Ball() {	}
 
 
 };

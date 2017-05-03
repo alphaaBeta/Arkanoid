@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include <time.h>
-//#include <SDL_ttf.h>
+//#include <SDL_ttf.h>//text
 
 
 
@@ -15,6 +15,7 @@
 #include "Block.h"
 #include "GameField.h"
 #include "Powerup.h"
+#include "Missile.h"
 
 
 
@@ -130,7 +131,9 @@ SDL_Renderer* gRenderer = NULL;
 LTexture gBallTexture;
 LTexture gBlockTexture;
 LTexture gRacketTexture;
+LTexture gRacketTexture2;
 LTexture gPwupTexture;
+LTexture gBulletTexture;
 
 Mix_Chunk *gPing = NULL;
 Mix_Chunk *gRacketPong = NULL;
@@ -478,14 +481,21 @@ bool loadMedia()
 	}
 
 	//Load Racket texture
-	if (!gRacketTexture.loadFromFile("resources/racket-1.bmp"))
+	if (!gRacketTexture.loadFromFile("resources/racket-1.bmp") || !gRacketTexture2.loadFromFile("Resources/racket-2.bmp"))
 	{
-		printf("Failed to load racket texture!\n");
+		printf("Failed to load racket textures!\n");
 		success = false;
 	}
 
+	//Load Pwup texture
 	if (!gPwupTexture.loadFromFile("resources/pwup.bmp")) {
 		printf("Failed to load pwup texture!\n");
+		success = false;
+	}
+
+	//Load bullet texture
+	if (!gBulletTexture.loadFromFile("resources/bullet.bmp")) {
+		printf("Failed to load bullet texture!\n"); 
 		success = false;
 	}
 
@@ -549,6 +559,7 @@ void RenderBalls() {
 void RenderBlocks() {
 
 	int i;
+	//Rectangle alllows to resize texture
 	SDL_Rect blockRect = { 0, 0 };
 	blockRect.w = BLOCK_WIDTH;
 	blockRect.h = BLOCK_HEIGHT;
@@ -570,9 +581,16 @@ void RenderRacket() {
 	rackRect.w = int((Racket::getInstance()).width);
 	rackRect.h = 8;
 
+	//regular texture
+	if(!Racket::getInstance().shooting)
 	gRacketTexture.render(int((Racket::getInstance()).x - ((Racket::getInstance()).width / 2)),
 							int((Racket::getInstance()).y),
 							&rackRect);
+	//if shooting powerup is up
+	else if(Racket::getInstance().shooting == 1)
+		gRacketTexture2.render(int((Racket::getInstance()).x - ((Racket::getInstance()).width / 2)),
+			int((Racket::getInstance()).y),
+			&rackRect);
 }
 
 //Render powerups
@@ -594,6 +612,26 @@ void RenderPwups() {
 	
 }
 
+//Render bullets
+void RenderBullets() {
+
+	SDL_Rect Rect = { 0,0 };
+	Rect.w = 3;
+	Rect.h = 10;
+
+	Colour clr = { 255, 0, 0, 255 };
+
+	for (int i = 0; i < Missile::MissileList.size(); i++) {
+		gBulletTexture.setColor(clr.r, clr.g, clr.b);
+		gBulletTexture.setAlpha(clr.a);
+
+		gBulletTexture.render(\
+			Missile::MissileList[i]->x - 1,
+			Missile::MissileList[i]->y,
+			&Rect);
+	}
+}
+
 void handleInput(SDL_Event& e)
 {
 	//If a key was pressed
@@ -604,6 +642,10 @@ void handleInput(SDL_Event& e)
 		{
 		case SDLK_LEFT: Racket::getInstance().speed -= RACKET_SPEED; break;
 		case SDLK_RIGHT: Racket::getInstance().speed += RACKET_SPEED; break;
+		case SDLK_UP: 
+			if ((Racket::getInstance()).shooting) {
+				Missile *aux = new Missile((Racket::getInstance()).x, (Racket::getInstance()).y);
+			}
 		}
 	}
 
@@ -688,6 +730,8 @@ int main(int argc, char* argv[])
 				GameField::getInstance().AddBlock(i, 5, REGULAR, clr);
 			}
 
+			Racket::getInstance().shooting = 0;
+
 			//While application is running
 			while (!quit)
 			{
@@ -716,6 +760,7 @@ int main(int argc, char* argv[])
 				}
 				Racket::getInstance().Move(timeStep);
 				Powerup::MoveAll(timeStep);
+				Missile::MoveAll(timeStep);
 
 				stepTimer.start();
 
@@ -729,9 +774,9 @@ int main(int argc, char* argv[])
 				//Render ball and racket
 				RenderBalls();
 				RenderBlocks();
-				RenderRacket();
 				RenderPwups();
-
+				RenderBullets();
+				RenderRacket();
 
 				//Update screen
 				SDL_RenderPresent(gRenderer);

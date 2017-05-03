@@ -129,6 +129,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="GameField.cpp" />
+    <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="Racket.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="GameField.h" />
+    <ClInclude Include="Missile.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Powerup.h" />
     <ClInclude Include="Racket.h" />
@@ -147,7 +149,9 @@
     <Image Include="pwup.bmp" />
     <Image Include="resources\ball.png" />
     <Image Include="resources\block.png" />
+    <Image Include="resources\bullet.bmp" />
     <Image Include="resources\racket-1.bmp" />
+    <Image Include="resources\racket-2.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

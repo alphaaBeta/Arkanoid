@@ -2,7 +2,7 @@
 
 
 
-void Block::Hit(int a = 1) {
+void Block::Hit(int a) {
 	this->health-=a;
 	if (health == 0 || (health == -1 && a == 2)) {
 		this->Destroy();
@@ -15,9 +15,9 @@ void Block::Hit(int a = 1) {
 void Block::Destroy() {
 	
 	//Random chance of dropping a powerup
-	if (rand() % 100 < 10) {
+	if (rand() % 10 < 10) {
 		Powerup *aux;
-		int a = rand() % 8;
+		int a = 2; //rand() % 8;
 		switch (a) {
 		case 0:
 			aux = new BigBallPWUP(double(this->x), double(this->y));

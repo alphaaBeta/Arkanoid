@@ -21,6 +21,8 @@ public:
 		colour.a = a;
 	}
 
+	~Block() {}
+
 	/////////////////////
 	//----MAIN VARS----//
 	/////////////////////
@@ -36,7 +38,7 @@ public:
 	//----MAIN METHODS----//
 	////////////////////////
 
-	void Hit(int);	
+	void Hit(int = 1);	
 
 	void Destroy();
 
