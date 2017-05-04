@@ -19,7 +19,7 @@ const double RACKET_SPEED = 500;
 
 //Ball
 
-#define BALL_LIMIT 20
+#define BALL_LIMIT 12
 
 //Block
 
@@ -34,7 +34,7 @@ const double RACKET_SPEED = 500;
 #define POWERUP_SPEED 250
 
 
-#define TRIPLE_PWUP_BALL_NUMBER 3
+#define TRIPLE_PWUP_BALL_NUMBER 2
 #define BIGBALL_PWUP_RADIUS_MULTIPLER 2
 #define EXTRALIVE_PWUP_LIVE_AMT 1
 #define BIGRACKET_PWUP_INCRASE 1.4

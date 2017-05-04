@@ -28,7 +28,7 @@ private:
 			this->x = double(SCREEN_WIDTH) / 2;
 			this->y = double(SCREEN_HEIGHT) / 2;
 			this->Vx = 350;
-			this->Vy = 350;
+			this->Vy = -350;
 			this->power = 1;
 
 		}

@@ -142,7 +142,10 @@ char Ball::CheckCollision( float timeStep) {
 
 		if (Ball::BallList.empty()) {
 			Player::getInstance().lives--;
+			if ((Player::getInstance()).lives)
+				AddBall();
 		}
+		Ball::BallAmount--;
 	}
 
 	
