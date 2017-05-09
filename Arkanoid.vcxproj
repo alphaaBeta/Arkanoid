@@ -130,8 +130,6 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="Missile.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Powerup.cpp" />
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Source.cpp" />

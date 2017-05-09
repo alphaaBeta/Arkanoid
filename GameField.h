@@ -39,7 +39,7 @@ public:
 
 	~GameField() {
 		for (int i = 0; i < BlockList.size(); i++) {
-			delete BlockList[i];//TODO??
+			delete (BlockList[i]);//TODO??
 		}
 	}
 
@@ -62,7 +62,7 @@ private:
 		}
 	}
 
-	//Tylko do zablokowania tworzenia nowych obiektór
+
 	GameField(const GameField&) {}
 
 };

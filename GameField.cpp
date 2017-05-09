@@ -39,6 +39,6 @@ int GameField::AddBlock(int x, int y, BlockType type, Colour colour) {
 	BlockList.push_back(BlockMatrix[x][y]);
 
 	
-	
+	return 1;
 	
 }

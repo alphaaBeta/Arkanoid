@@ -67,8 +67,8 @@ char Ball::CheckCollision( float timeStep) {
 	
 	//Collision with blocks
 	for (int i = 0; i < GameField::getInstance().BlockList.size(); i++) {
-		int xc, xb = GameField::getInstance().BlockList[i]->x;
-		int yc, yb = GameField::getInstance().BlockList[i]->y;
+		double xc, xb = GameField::getInstance().BlockList[i]->x;
+		double yc, yb = GameField::getInstance().BlockList[i]->y;
 
 		//Find closest x coord on the block, according to ball
 		if (this->x < xb) {
@@ -91,11 +91,11 @@ char Ball::CheckCollision( float timeStep) {
 		else
 			yc = this->y;
 
-		//Get squared distance between the point and ball coord, check with ball radius - squared
+		//Get squared distance between the point and ball coord, check with ball radius(squared)
 		if ((yc - this->y)*(yc - this->y) + (xc - this->x)*(xc - this->x) <= this->radius*this->radius) {
 
 			//Check on which side of the block is it
-			if(abs(yc-yb) <= 0.001 || abs(yc-yb-BLOCK_HEIGHT) <= 0.001)
+			if(abs(yc-yb) <= 0.1 || abs(yc-yb-BLOCK_HEIGHT) <= 0.1)
 			 how = Bounce('y', GameField::getInstance().BlockList[i]);
 			else how = Bounce('x', GameField::getInstance().BlockList[i]);
 			return how;
@@ -138,7 +138,7 @@ char Ball::CheckCollision( float timeStep) {
 
 	//if it falls out of the screen
 	if (ynew > SCREEN_HEIGHT) {
-		Destroy();
+		this->Destroy();
 
 		if (Ball::BallList.empty()) {
 			Player::getInstance().lives--;
@@ -156,19 +156,17 @@ char Ball::CheckCollision( float timeStep) {
 void Ball::Destroy() {
 	for (int i = 0; i < Ball::BallList.size(); i++) {
 		if (Ball::BallList[i] == this) {
+
+			delete Ball::BallList[i];
+
 			Ball::BallList.erase(Ball::BallList.begin() + i);
-			delete this;
+			
 		}
 	}
 }
 
 char Ball::Bounce(char how, Block *gothit) {
 	
-	double RSpeed;
-	double xSpeed;
-	double ratio;
-	double RacketX = (Racket::getInstance()).x;
-	double RacketWidth = (Racket::getInstance()).width;
 	double inter, angle, ballSpeed;
 	switch (how)
 	{
@@ -177,8 +175,10 @@ char Ball::Bounce(char how, Block *gothit) {
 
 		//Calculating the speed of the ball after bouncing off the paddle
 
-		inter = RacketX - this->x;
-		inter = inter / (RacketWidth / 2);
+		inter = Racket::getInstance().x - this->x;
+		inter = inter / (Racket::getInstance().width / 2);
+
+		//Maximum angle of the bounce
 		angle = inter * 5 * PI / 12; //75 degrees
 
 		//sum of x and y speed vectors

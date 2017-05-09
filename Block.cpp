@@ -17,7 +17,7 @@ void Block::Destroy() {
 	//Random chance of dropping a powerup
 	if (rand() % 10 < 10) {
 		Powerup *aux;
-		int a = 1; //rand() % 8;
+		int a = 2;// rand() % 8;
 		switch (a) {
 		case 0:
 			aux = new BigBallPWUP(double(this->x), double(this->y));

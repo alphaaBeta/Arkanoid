@@ -30,12 +30,6 @@
     <ClCompile Include="Racket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Powerup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Missile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

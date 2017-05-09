@@ -9,7 +9,6 @@ class Block;
 class Racket;
 
 
-inline double GetDistanceFromLine(double, double, double = 999.0);
 
 class Ball
 {
@@ -70,10 +69,15 @@ public:
 	//Returns 'p' for racket, 'x' for horizontal and 'y' for vertical hit
 	char CheckCollision(float);
 
+	//Sets new speed vectors for the ball
+	//returns whether it bounced off the edge(block) or racket
 	char Bounce(char, Block * = 0);
 
+	//Calculates new ball location
+	//returns whatever Bounce does
 	char Move( float );
 
+	//
 	void Destroy();
 
 	//Moves all the balls
