@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <SDL_ttf.h>
 #include <string>
 
 #include "Ball.h"
@@ -110,6 +111,9 @@ public:
 
 	SDL_Renderer* gRenderer = NULL;
 
+	SDL_Rect leftViewport = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	SDL_Rect rightViewport = { SCREEN_WIDTH + 1, 0, SCREEN_WIDTH + SIDEBAR_WIDTH, SCREEN_HEIGHT };
+
 	//Scene textures
 	LTexture gBallTexture;
 	LTexture gBlockTexture;
@@ -117,7 +121,9 @@ public:
 	LTexture gRacketTexture2;
 	LTexture gPwupTexture;
 	LTexture gBulletTexture;
+	LTexture gTextTexture;
 
+	TTF_Font *gFont = 0;
 
 	Mix_Chunk *gPing = NULL;
 	Mix_Chunk *gRacketPong = NULL;

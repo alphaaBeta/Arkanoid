@@ -153,6 +153,13 @@
     <Image Include="resources\racket-1.bmp" />
     <Image Include="resources\racket-2.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\arial.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\ping.wav" />
+    <Media Include="resources\racket.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

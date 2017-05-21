@@ -168,7 +168,7 @@ bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor
 	free();
 
 	//Render text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Solid(Render::getInstance().gFont, textureText.c_str(), textColor);
 	if (textSurface != NULL)
 	{
 		//Create texture from surface pixels
@@ -276,7 +276,7 @@ bool init()
 		}
 
 		//Create window
-		Render::getInstance().gWindow = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		Render::getInstance().gWindow = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH+SIDEBAR_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (Render::getInstance().gWindow == NULL)
 		{
 			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -301,6 +301,13 @@ bool init()
 				if (!(IMG_Init(imgFlags) & imgFlags))
 				{
 					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+					success = false;
+				}
+
+				//Initialize SDL_ttf
+				if (TTF_Init() == -1)
+				{
+					printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
 					success = false;
 				}
 
@@ -371,6 +378,20 @@ bool loadMedia()
 		success = false;
 	}
 
+	//Load font
+	Render::getInstance().gFont = TTF_OpenFont("resources/arial.ttf", 28);
+	if (Render::getInstance().gFont == NULL)
+	{
+		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+		success = false;
+	}
+	else
+	{
+		//Set text color as black
+		SDL_Color textColor = { 0, 0, 0, 255 };
+
+	}
+
 	return success;
 }
 
@@ -380,6 +401,13 @@ void close()
 	Render::getInstance().gBallTexture.free();
 	Render::getInstance().gBlockTexture.free();
 	Render::getInstance().gRacketTexture.free();
+	Render::getInstance().gPwupTexture.free();
+	//Free font texture
+	Render::getInstance().gTextTexture.free();
+
+	//Free global font
+	TTF_CloseFont(Render::getInstance().gFont);
+	Render::getInstance().gFont = NULL;
 
 	Mix_FreeChunk(Render::getInstance().gPing);
 	Mix_FreeChunk(Render::getInstance().gRacketPong);
@@ -396,6 +424,8 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 	Mix_Quit();
+	TTF_Quit();
+
 }
 
 //Render all the balls

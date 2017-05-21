@@ -6,6 +6,7 @@ void Block::Hit(int a) {
 	this->health-=a;
 	if (health == 0 || (health == -1 && a == 2)) {
 		this->Destroy();
+		Player::getInstance().score += 100;	//incrase player score
 	}
 	else if (health < 0) {	//indestructible blocks remain indestructible
 		health = 0;
@@ -15,9 +16,9 @@ void Block::Hit(int a) {
 void Block::Destroy() {
 	
 	//Random chance of dropping a powerup
-	if (rand() % 10 < 10) {
+	if (rand() % 100 < 10) {
 		Powerup *aux;
-		int a = 2;// rand() % 8;
+		int a = rand() % 8;
 		switch (a) {
 		case 0:
 			aux = new BigBallPWUP(double(this->x), double(this->y));

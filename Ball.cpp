@@ -64,7 +64,7 @@ char Ball::CheckCollision( float timeStep) {
 
 	
 
-	
+	/*
 	//Collision with blocks
 	for (int i = 0; i < GameField::getInstance().BlockList.size(); i++) {
 		double xc, xb = GameField::getInstance().BlockList[i]->x;
@@ -101,9 +101,48 @@ char Ball::CheckCollision( float timeStep) {
 			return how;
 		}
 		
+	}*/
+	int xCord, yCord;
+	
+	if (Vy < 0) {
+		xCord = int(xnew/BLOCK_WIDTH);
+		yCord = round((ynew - radius)/BLOCK_HEIGHT) - 1;
+		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
+
+		else if (GameField::getInstance().BlockMatrix[xCord][yCord]) {
+			how = Bounce('y', GameField::getInstance().BlockMatrix[xCord][yCord]);
+			return how;
+		}
+	}else {
+		xCord = int(xnew / BLOCK_WIDTH);
+		yCord = round((ynew + radius) / BLOCK_HEIGHT);
+		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
+
+		else if (GameField::getInstance().BlockMatrix[xCord][yCord]) {
+			how = Bounce('y', GameField::getInstance().BlockMatrix[xCord][yCord]);
+			return how;
+		}
 	}
 
+	if (Vx < 0) {
+		xCord = round((xnew - radius) / BLOCK_WIDTH) - 1;
+		yCord = int(ynew / BLOCK_HEIGHT);
+		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
+		else if(GameField::getInstance().BlockMatrix[xCord][yCord]) {
+			how = Bounce('x', GameField::getInstance().BlockMatrix[xCord][yCord]);
+			return how;
+		}
+	}else {
+		xCord = round((xnew + radius) / BLOCK_WIDTH);
+		yCord = int(ynew / BLOCK_HEIGHT);
+		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
+
+		else if (GameField::getInstance().BlockMatrix[xCord][yCord]) {
+			how = Bounce('x', GameField::getInstance().BlockMatrix[xCord][yCord]);
+			return how;
+		}
+	}
 	
 
 	//checking colllision with racket

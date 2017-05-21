@@ -1,8 +1,9 @@
 #pragma once
 //#include <iostream>	
 
-const int SCREEN_WIDTH = 520;
+const int SCREEN_WIDTH = 520;	//width of the gamefield
 const int SCREEN_HEIGHT = 480;
+const int SIDEBAR_WIDTH = 200;
 
 const int BLOCK_WIDTH = 40;
 const int BLOCK_HEIGHT = 16;
@@ -14,7 +15,6 @@ const int FIELD_HEIGHT = SCREEN_HEIGHT / BLOCK_HEIGHT;
 
 
 const int RACKET_LENGTH = 120;
-//const int RACKET_THICKNESS = 8;
 const double RACKET_SPEED = 500;
 
 //Ball
@@ -25,7 +25,7 @@ const double RACKET_SPEED = 500;
 
 #define REGULAR_BLOCK_HEALTH 1
 #define STRONG_BLOCK_HEALTH 3
-#define VERY_STRONG_BLOCK_HEALTH 100
+#define VERY_STRONG_BLOCK_HEALTH 5
 #define INDESTRUCTIBLE_BLOCK_HEALTH 0
 
 //Powerups

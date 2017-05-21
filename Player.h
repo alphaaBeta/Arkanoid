@@ -6,7 +6,7 @@ class Player	//singleton
 {
 
 private:
-	Player(): lives(3), score(0), difficulty(1), level(1) {}
+	Player(): lives(3), score(0), level(1), difficulty(1) {}
 	Player(const Player &) {}
 
 
@@ -25,8 +25,7 @@ public:
 	//----MAIN VARS----//
 	/////////////////////
 
-	int lives, score;
-	char difficulty, level;
+	int lives, score, level, difficulty;
 
 	/////////////////////
 
