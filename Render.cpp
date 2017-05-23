@@ -432,11 +432,11 @@ void close()
 void Render::RenderBalls() {
 
 	int i;
-	for (i = 0; i < (Ball::BallList).size(); i++) {
+	for (i = 0; i < (Ball::ballList).size(); i++) {
 		SDL_Rect ballRect = { 0, 0 };
-		ballRect.w = (Ball::BallList)[i]->radius * 2;
-		ballRect.h = (Ball::BallList)[i]->radius * 2;
-		Render::getInstance().gBallTexture.render(int((Ball::BallList)[i]->x - (Ball::BallList)[i]->radius), int((Ball::BallList)[i]->y - (Ball::BallList)[i]->radius), &ballRect);
+		ballRect.w = (Ball::ballList)[i]->radius * 2;
+		ballRect.h = (Ball::ballList)[i]->radius * 2;
+		Render::getInstance().gBallTexture.render(int((Ball::ballList)[i]->x - (Ball::ballList)[i]->radius), int((Ball::ballList)[i]->y - (Ball::ballList)[i]->radius), &ballRect);
 
 	}
 }
@@ -450,12 +450,12 @@ void Render::RenderBlocks() {
 	blockRect.w = BLOCK_WIDTH;
 	blockRect.h = BLOCK_HEIGHT;
 
-	for (i = 0; i < (GameField::BlockList).size(); i++) {
-		Colour clr = { GameField::getInstance().BlockList[i]->colour };
+	for (i = 0; i < (GameField::blockList).size(); i++) {
+		Colour clr = { GameField::getInstance().blockList[i]->colour };
 		//Setting colour and alpha of texture, before rendering the correct block
 		Render::getInstance().gBlockTexture.setColor(clr.r, clr.g, clr.b);
 		Render::getInstance().gBlockTexture.setAlpha(clr.a);
-		Render::getInstance().gBlockTexture.render(int((GameField::BlockList)[i]->x), int((GameField::BlockList)[i]->y), &blockRect);
+		Render::getInstance().gBlockTexture.render(int((GameField::blockList)[i]->x), int((GameField::blockList)[i]->y), &blockRect);
 
 	}
 }
@@ -487,12 +487,12 @@ void Render::RenderPwups() {
 	Rect.h = 12;
 	Colour clr;
 
-	for (int i = 0; i < GameField::getInstance().PowerupList.size(); i++) {
-		clr = GameField::getInstance().PowerupList[i]->color;
+	for (int i = 0; i < GameField::getInstance().powerupList.size(); i++) {
+		clr = GameField::getInstance().powerupList[i]->color;
 		Render::getInstance().gPwupTexture.setColor(clr.r, clr.g, clr.b);
 		Render::getInstance().gPwupTexture.setAlpha(clr.a);
-		Render::getInstance().gPwupTexture.render(GameField::getInstance().PowerupList[i]->x, \
-			GameField::getInstance().PowerupList[i]->y,
+		Render::getInstance().gPwupTexture.render(GameField::getInstance().powerupList[i]->x, \
+			GameField::getInstance().powerupList[i]->y,
 			&Rect);
 	}
 

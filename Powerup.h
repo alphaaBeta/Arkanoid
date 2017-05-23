@@ -17,9 +17,9 @@ public:
 	Powerup(double xx, double yy) : x(xx), y(yy), Vy(POWERUP_SPEED) { }
 	
 	void Destroy() {
-		for (int i = 0; i < GameField::getInstance().PowerupList.size(); i++) {
-			if ((GameField::getInstance()).PowerupList[i] == this) {
-				GameField::getInstance().PowerupList.erase(GameField::getInstance().PowerupList.begin() + i);
+		for (int i = 0; i < GameField::getInstance().powerupList.size(); i++) {
+			if ((GameField::getInstance()).powerupList[i] == this) {
+				GameField::getInstance().powerupList.erase(GameField::getInstance().powerupList.begin() + i);
 				delete this;
 				
 			}
@@ -47,10 +47,10 @@ public:
 	static void MoveAll(float timeStep) {
 
 		//If it falls out of the screen
-		for (int i = 0; i < GameField::getInstance().PowerupList.size(); i++) {
-			if ((GameField::getInstance()).PowerupList[i]->Move(timeStep) == -1) {
+		for (int i = 0; i < GameField::getInstance().powerupList.size(); i++) {
+			if ((GameField::getInstance()).powerupList[i]->Move(timeStep) == -1) {
 				//Remove
-				(GameField::getInstance()).PowerupList[i]->Destroy();
+				(GameField::getInstance()).powerupList[i]->Destroy();
 			}
 		}
 	}
@@ -66,7 +66,7 @@ class TripleBallPWUP : public Powerup {
 public:
 	void Collect() {
 
-		Ball::BallList[0]->MultiplyBalls(TRIPLE_PWUP_BALL_NUMBER, *(Ball::BallList[0]));
+		Ball::ballList[0]->MultiplyBalls(TRIPLE_PWUP_BALL_NUMBER, *(Ball::ballList[0]));
 
 		this->Destroy();
 	}
@@ -77,8 +77,8 @@ public:
 class BigBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < Ball::BallList.size(); i++) {
-			Ball::BallList[i]->radius *= BIGBALL_PWUP_RADIUS_MULTIPLER;
+		for (int i = 0; i < Ball::ballList.size(); i++) {
+			Ball::ballList[i]->radius *= BIGBALL_PWUP_RADIUS_MULTIPLER;
 		}
 		this->Destroy();
 	}
@@ -126,9 +126,9 @@ public:
 class FastBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < Ball::BallList.size(); i++) {
-			Ball::BallList[i]->Vx *= FASTBALL_PWUP_INCRASE;
-			Ball::BallList[i]->Vy *= FASTBALL_PWUP_INCRASE;
+		for (int i = 0; i < Ball::ballList.size(); i++) {
+			Ball::ballList[i]->Vx *= FASTBALL_PWUP_INCRASE;
+			Ball::ballList[i]->Vy *= FASTBALL_PWUP_INCRASE;
 		}
 		this->Destroy();
 	}
@@ -138,9 +138,9 @@ public:
 class SlowBallPWUP : public Powerup {
 public:
 	void Collect() {
-		for (int i = 0; i < Ball::BallList.size(); i++) {
-			Ball::BallList[i]->Vx *= SLOWBALL_PWUP_DECRASE;
-			Ball::BallList[i]->Vy *= SLOWBALL_PWUP_DECRASE;
+		for (int i = 0; i < Ball::ballList.size(); i++) {
+			Ball::ballList[i]->Vx *= SLOWBALL_PWUP_DECRASE;
+			Ball::ballList[i]->Vy *= SLOWBALL_PWUP_DECRASE;
 		}
 		this->Destroy();
 	}

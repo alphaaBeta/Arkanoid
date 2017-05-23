@@ -18,9 +18,9 @@ private:
 	//Creates an independent ball
 	Ball() {
 
-		if (BallAmount == BALL_LIMIT - 1) { printf("Ball limit reached!"); }
+		if (ballAmount == BALL_LIMIT - 1) { printf("Ball limit reached!"); }
 		else {
-			BallAmount++;
+			ballAmount++;
 
 
 			this->radius = 5;
@@ -53,7 +53,7 @@ public:
 	//----MAIN VARS----//
 	/////////////////////
 
-	static int BallAmount;
+	static int ballAmount;
 	int radius;
 	double x, y, Vx, Vy;
 	int power;
@@ -84,14 +84,14 @@ public:
 	static char MoveBalls(float);
 
 	//List to keep track of balls
-	static std::vector<Ball *> BallList;
+	static std::vector<Ball *> ballList;
 
 	
 	static Ball* AddBall() { 
 		Ball *newBall = new Ball;
 
 
-		Ball::BallList.push_back(newBall);
+		Ball::ballList.push_back(newBall);
 		return newBall;
 	}
 

@@ -12,16 +12,16 @@
 //initializing static vars
 
 //Amount of balls
-int Ball::BallAmount = 0;
+int Ball::ballAmount = 0;
 
 
-std::vector<Ball *> Ball::BallList;
+std::vector<Ball *> Ball::ballList;
 
 char Ball::MoveBalls(float timeStamp) {
 	char how = 0;
 	char aux = 0;
-	for (int i = 0; i < Ball::BallList.size(); i++) {
-		how  = (Ball::BallList[i])->Move(timeStamp);
+	for (int i = 0; i < Ball::ballList.size(); i++) {
+		how  = (Ball::ballList[i])->Move(timeStamp);
 		if (how != 0) { aux = how; }
 
 	}
@@ -109,8 +109,8 @@ char Ball::CheckCollision( float timeStep) {
 		yCord = round((ynew - radius)/BLOCK_HEIGHT) - 1;
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
-		else if (GameField::getInstance().BlockMatrix[xCord][yCord]) {
-			how = Bounce('y', GameField::getInstance().BlockMatrix[xCord][yCord]);
+		else if (GameField::getInstance().blockMatrix[xCord][yCord]) {
+			how = Bounce('y', GameField::getInstance().blockMatrix[xCord][yCord]);
 			return how;
 		}
 	}else {
@@ -118,8 +118,8 @@ char Ball::CheckCollision( float timeStep) {
 		yCord = round((ynew + radius) / BLOCK_HEIGHT);
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
-		else if (GameField::getInstance().BlockMatrix[xCord][yCord]) {
-			how = Bounce('y', GameField::getInstance().BlockMatrix[xCord][yCord]);
+		else if (GameField::getInstance().blockMatrix[xCord][yCord]) {
+			how = Bounce('y', GameField::getInstance().blockMatrix[xCord][yCord]);
 			return how;
 		}
 	}
@@ -129,8 +129,8 @@ char Ball::CheckCollision( float timeStep) {
 		yCord = int(ynew / BLOCK_HEIGHT);
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
-		else if(GameField::getInstance().BlockMatrix[xCord][yCord]) {
-			how = Bounce('x', GameField::getInstance().BlockMatrix[xCord][yCord]);
+		else if(GameField::getInstance().blockMatrix[xCord][yCord]) {
+			how = Bounce('x', GameField::getInstance().blockMatrix[xCord][yCord]);
 			return how;
 		}
 	}else {
@@ -138,8 +138,8 @@ char Ball::CheckCollision( float timeStep) {
 		yCord = int(ynew / BLOCK_HEIGHT);
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
-		else if (GameField::getInstance().BlockMatrix[xCord][yCord]) {
-			how = Bounce('x', GameField::getInstance().BlockMatrix[xCord][yCord]);
+		else if (GameField::getInstance().blockMatrix[xCord][yCord]) {
+			how = Bounce('x', GameField::getInstance().blockMatrix[xCord][yCord]);
 			return how;
 		}
 	}
@@ -179,12 +179,12 @@ char Ball::CheckCollision( float timeStep) {
 	if (ynew > SCREEN_HEIGHT) {
 		this->Destroy();
 
-		if (Ball::BallList.empty()) {
+		if (Ball::ballList.empty()) {
 			Player::getInstance().lives--;
 			if ((Player::getInstance()).lives)
 				AddBall();
 		}
-		Ball::BallAmount--;
+		Ball::ballAmount--;
 	}
 
 	
@@ -193,12 +193,12 @@ char Ball::CheckCollision( float timeStep) {
 }
 
 void Ball::Destroy() {
-	for (int i = 0; i < Ball::BallList.size(); i++) {
-		if (Ball::BallList[i] == this) {
+	for (int i = 0; i < Ball::ballList.size(); i++) {
+		if (Ball::ballList[i] == this) {
 
-			delete Ball::BallList[i];
+			delete Ball::ballList[i];
 
-			Ball::BallList.erase(Ball::BallList.begin() + i);
+			Ball::ballList.erase(Ball::ballList.begin() + i);
 			
 		}
 	}

@@ -27,8 +27,8 @@ Missile::~Missile()
 
 Block* Missile::CheckCollision() {
 	Block *aux = 0;
-	for (int i = 0; i < GameField::getInstance().BlockList.size(); i++) {
-		aux = GameField::getInstance().BlockList[i];
+	for (int i = 0; i < GameField::getInstance().blockList.size(); i++) {
+		aux = GameField::getInstance().blockList[i];
 		if (this->x >= aux->x && this->x < aux->x + BLOCK_WIDTH) {
 			if (this->y > aux->y && this->y <= aux->y + BLOCK_HEIGHT) {
 				return aux;

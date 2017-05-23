@@ -47,20 +47,20 @@ void Block::Destroy() {
 		}
 
 		
-		GameField::getInstance().PowerupList.push_back(aux);
+		GameField::getInstance().powerupList.push_back(aux);
 	}
 
 	//Removes the block from the block list-vector
-	for (int i = 0; i < (GameField::getInstance()).BlockList.size(); i++) {
-		if ((GameField::getInstance()).BlockList[i] == this) {
+	for (int i = 0; i < (GameField::getInstance()).blockList.size(); i++) {
+		if ((GameField::getInstance()).blockList[i] == this) {
 			//Wowie
-			(GameField::getInstance()).BlockList.erase\
-				((GameField::getInstance()).BlockList.begin() + i);
+			(GameField::getInstance()).blockList.erase\
+				((GameField::getInstance()).blockList.begin() + i);
 		}
 	}
 
 	//Sets the block pointer to 0 on array.
-	GameField::getInstance().BlockMatrix[this->x / BLOCK_WIDTH][this->y / BLOCK_HEIGHT] = 0;
+	GameField::getInstance().blockMatrix[this->x / BLOCK_WIDTH][this->y / BLOCK_HEIGHT] = 0;
 
 	delete this;
 }

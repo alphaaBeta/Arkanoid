@@ -19,13 +19,13 @@ public:
 
 	//Matrix to roughly know block location
 	//Used to check if block is alredy placed in one place, to avoid multiple blocks on the same tile
-	Block *BlockMatrix[FIELD_WIDTH][FIELD_HEIGHT];
+	Block *blockMatrix[FIELD_WIDTH][FIELD_HEIGHT];
 
 	//List to keep track of blocks
-	static std::vector<Block *> BlockList;
+	static std::vector<Block *> blockList;
 
 	//List to keep track of powerups
-	static std::vector<Powerup *> PowerupList;
+	static std::vector<Powerup *> powerupList;
 
 	////////////////////////
 	//----MAIN METHODS----//
@@ -38,8 +38,8 @@ public:
 
 
 	~GameField() {
-		for (int i = 0; i < BlockList.size(); i++) {
-			delete (BlockList[i]);//TODO??
+		for (int i = 0; i < blockList.size(); i++) {
+			delete (blockList[i]);//TODO??
 		}
 	}
 
@@ -57,7 +57,7 @@ private:
 	GameField() {
 		for (int i = 0; i < FIELD_WIDTH; i++) {
 			for (int j = 0; j < FIELD_HEIGHT; j++) {
-				BlockMatrix[i][j] = NULL;
+				blockMatrix[i][j] = NULL;
 			}
 		}
 	}
