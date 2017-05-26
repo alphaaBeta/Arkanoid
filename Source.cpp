@@ -144,27 +144,27 @@ int main(int argc, char* argv[])
 				{
 					SDL_Rect border = { 0, 0, 10, SCREEN_HEIGHT };
 					SDL_SetRenderDrawColor(Render::getInstance().gRenderer, 0x00, 0x00, 0x00, 0xFF);
-					SDL_RenderFillRect(Render::getInstance().gRenderer, &border); }
+					SDL_RenderFillRect(Render::getInstance().gRenderer, &border);
 
-				SDL_Color textColour = { 0,0,0 };
-				textToRender.str( "" );
-				textToRender << "Level: " << Player::getInstance().level;
-				Render::getInstance().gTextTexture.loadFromRenderedText(textToRender.str().c_str() , textColour);
-				
-				Render::getInstance().gTextTexture.render(10, 0);
+					SDL_Color textColour = { 0,0,0 };
+					textToRender.str("");
+					textToRender << "Level: " << Player::getInstance().level;
+					Render::getInstance().gTextTexture.loadFromRenderedText(textToRender.str().c_str(), textColour);
 
-				textToRender.str( "" );
-				textToRender << "Lives: " << Player::getInstance().lives;
-				Render::getInstance().gTextTexture.loadFromRenderedText(textToRender.str().c_str(), textColour);
-				
-				Render::getInstance().gTextTexture.render(10, 80);
+					Render::getInstance().gTextTexture.render(10, 0);
 
-				textToRender.str( "" );
-				textToRender << "Score: " << Player::getInstance().score;
-				Render::getInstance().gTextTexture.loadFromRenderedText(textToRender.str().c_str(), textColour);
+					textToRender.str("");
+					textToRender << "Lives: " << Player::getInstance().lives;
+					Render::getInstance().gTextTexture.loadFromRenderedText(textToRender.str().c_str(), textColour);
 
-				Render::getInstance().gTextTexture.render(10, 120);
+					Render::getInstance().gTextTexture.render(10, 80);
 
+					textToRender.str("");
+					textToRender << "Score: " << Player::getInstance().score;
+					Render::getInstance().gTextTexture.loadFromRenderedText(textToRender.str().c_str(), textColour);
+
+					Render::getInstance().gTextTexture.render(10, 120);
+				}
 
 
 

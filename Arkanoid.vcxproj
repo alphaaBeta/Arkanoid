@@ -131,6 +131,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="Missile.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Racket.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -162,7 +163,15 @@
     <Media Include="resources\ping.wav" />
     <Media Include="resources\racket.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="levels.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

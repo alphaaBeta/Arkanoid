@@ -34,7 +34,9 @@ public:
 	//TODO: void LoadBlockLayout();	//load specific block layout(from file)
 
 	//x, y, type, colour
-	int AddBlock(int, int, BlockType, Colour);	
+	int AddBlock(int, int, BlockType, Colour = { 0,0,0,0 });
+	
+	//Purge the matrix and vector
 
 
 	~GameField() {

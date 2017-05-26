@@ -1,12 +1,40 @@
 #pragma once
 
 #include "Config.h"
+#include "GameField.h"
+
+#include <stdio.h>
+#include <string>
+#include <fstream>
+#include <vector>
+#include "json.hpp"
+
+struct level {
+	int nO;
+	std::vector< std::vector<BlockType>> blocks;	//might make it string instead of BlockType
+};
+
+class Player;
+
+class FileOp
+{
+	friend Player;
+protected:
+	//Loads n level from JSON file
+	static int LoadLevel(int n);
+
+	//Loads a savefile
+	//int LoadGame();
+
+	//Saves the game
+	//int SaveGame();
+};
 
 class Player	//singleton
 {
 
 private:
-	Player(): lives(3), score(0), level(1), difficulty(1) {}
+	Player(): lives(3), score(0), level(0), difficulty(1) {}
 	Player(const Player &) {}
 
 
@@ -33,5 +61,14 @@ public:
 	//----MAIN METHODS----//
 	////////////////////////
 
+	//Proceeds to next level
+	int NextLevel();
+	int LoadGame();
+	int SaveGame();
+
+	friend FileOp;
+	
 
 };
+
+
