@@ -1,32 +1,35 @@
-[
-  {
-    "level1": [
-      [ "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG" ] ,
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ]
-    ]
-  },
+{
 
-  {
-    "level2": [
-      [ "STRONG" ],
-      [ "STRONG", "STRONG", "STRONG", "STRONG" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ]
-    ]
-  },
+  "level1": [
+    [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+  ],
 
-  {
-    "level3": [
-      [ "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG", "STRONG" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ],
-      [ "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR", "REGULAR" ]
-    ]
-  }
-]
+
+  "level2": [
+    [ 2 ],
+    [ 2 ],
+    [ 2, 2, 2, 2 ],
+    [ 2, 2, 2, 2 ],
+    [ 1, 1, 1, 1, 1, 1 ],
+    [ 1, 1, 1, 1, 1, 1 ],
+    [ 2, 2, 2, 2, 2, 2, 2, 2 ],
+    [ 2, 2, 2, 2, 2, 2, 2, 2 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+    [ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 ],
+    [ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1 ]
+  ],
+
+
+  "level3": [
+    [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+    [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+  ]
+
+}

@@ -106,7 +106,7 @@ char Ball::CheckCollision( float timeStep) {
 	
 	if (Vy < 0) {
 		xCord = int(xnew/BLOCK_WIDTH);
-		yCord = round((ynew - radius)/BLOCK_HEIGHT) - 1;
+		yCord = int(round((ynew - radius)/BLOCK_HEIGHT)) - 1;
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
 		else if (GameField::getInstance().blockMatrix[xCord][yCord]) {
@@ -115,7 +115,7 @@ char Ball::CheckCollision( float timeStep) {
 		}
 	}else {
 		xCord = int(xnew / BLOCK_WIDTH);
-		yCord = round((ynew + radius) / BLOCK_HEIGHT);
+		yCord = int(round((ynew + radius) / BLOCK_HEIGHT));
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
 		else if (GameField::getInstance().blockMatrix[xCord][yCord]) {
@@ -125,7 +125,7 @@ char Ball::CheckCollision( float timeStep) {
 	}
 
 	if (Vx < 0) {
-		xCord = round((xnew - radius) / BLOCK_WIDTH) - 1;
+		xCord = int(round((xnew - radius) / BLOCK_WIDTH)) - 1;
 		yCord = int(ynew / BLOCK_HEIGHT);
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 
@@ -134,7 +134,7 @@ char Ball::CheckCollision( float timeStep) {
 			return how;
 		}
 	}else {
-		xCord = round((xnew + radius) / BLOCK_WIDTH);
+		xCord = int(round((xnew + radius) / BLOCK_WIDTH));
 		yCord = int(ynew / BLOCK_HEIGHT);
 		if (xCord < 0 || yCord < 0 || xCord >= FIELD_WIDTH || yCord >= FIELD_HEIGHT) {}
 

@@ -37,6 +37,10 @@ public:
 	int AddBlock(int, int, BlockType, Colour = { 0,0,0,0 });
 	
 	//Purge the matrix and vector
+	void PurgeBlocks();
+
+	//Checks if board is clear
+	bool IsClear();
 
 
 	~GameField() {

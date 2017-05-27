@@ -2,6 +2,7 @@
 
 #include "Config.h"
 #include "GameField.h"
+#include "Ball.h"
 
 #include <stdio.h>
 #include <string>
@@ -9,10 +10,7 @@
 #include <vector>
 #include "json.hpp"
 
-struct level {
-	int nO;
-	std::vector< std::vector<BlockType>> blocks;	//might make it string instead of BlockType
-};
+
 
 class Player;
 

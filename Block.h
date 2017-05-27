@@ -6,11 +6,6 @@
 #include "Powerup.h"
 
 
-//colour struct, consists of:
-//r, g, b, a : red, green, blue, alpha
-
-
-
 class Block
 {
 public:
@@ -32,6 +27,7 @@ public:
 	//Cords for upper left corner
 	int x, y; 
 
+	//How many times a block can be hit before disappearing
 	char health;
 
 	////////////////////////

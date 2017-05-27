@@ -491,8 +491,9 @@ void Render::RenderPwups() {
 		clr = GameField::getInstance().powerupList[i]->color;
 		Render::getInstance().gPwupTexture.setColor(clr.r, clr.g, clr.b);
 		Render::getInstance().gPwupTexture.setAlpha(clr.a);
-		Render::getInstance().gPwupTexture.render(GameField::getInstance().powerupList[i]->x, \
-			GameField::getInstance().powerupList[i]->y,
+		Render::getInstance().gPwupTexture.render(\
+			int(GameField::getInstance().powerupList[i]->x), \
+			int(GameField::getInstance().powerupList[i]->y), \
 			&Rect);
 	}
 

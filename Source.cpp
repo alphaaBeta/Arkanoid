@@ -56,40 +56,17 @@ int main(int argc, char* argv[])
 			//Event handler
 			SDL_Event e;
 
+			//aux string to use SDL function rendering TTF
 			std::stringstream textToRender;
 
-
+			//used to set speed
 			LTimer stepTimer;
+			
 
-			Ball::AddBall();
+			//Loads nextlevel (level1)
+			Player::getInstance().NextLevel();
 
-			//Ball::BallList[0]->MultiplyBalls(3, *(Ball::BallList[0]));
-
-			Colour clr = { 0, 0, 0, 0 };
-
-			for (int i = 0; i < FIELD_WIDTH; i++) {
-				GameField::getInstance().AddBlock(i, 0, VERY_STRONG, clr);
-			}
-
-			for (int i = 0; i < FIELD_WIDTH; i++) {
-				GameField::getInstance().AddBlock(i, 1, STRONG, clr);
-			}
-
-			for (int i = 0; i < FIELD_WIDTH; i++) {
-				GameField::getInstance().AddBlock(i, 2, STRONG, clr);
-			}
-
-			for (int i = 0; i < FIELD_WIDTH; i++) {
-				GameField::getInstance().AddBlock(i, 3, REGULAR, clr);
-			}
-			for (int i = 0; i < FIELD_WIDTH; i++) {
-				GameField::getInstance().AddBlock(i, 4, REGULAR, clr);
-			}
-			for (int i = 0; i < FIELD_WIDTH; i++) {
-				GameField::getInstance().AddBlock(i, 5, REGULAR, clr);
-			}
-
-			Racket::getInstance().shooting = 0;
+			
 			SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().leftViewport);
 
 			//While application is running
@@ -110,33 +87,47 @@ int main(int argc, char* argv[])
 
 				float timeStep = stepTimer.getTicks() / 1000.f;
 
-				//Move the racket and ball and check collision
-				char how = Ball::MoveBalls(timeStep);
+				//Move everything
+				char how;
+				{
+					how = Ball::MoveBalls(timeStep);
+					Racket::getInstance().Move(timeStep);
+					Powerup::MoveAll(timeStep);
+					Missile::MoveAll(timeStep);
+					//Enemy::MoveAll(timeStep);
+				}
+
+				//Proceed to next level if board is clear
+				if (GameField::getInstance().IsClear())
+					Player::getInstance().NextLevel();
+
+				//Play sounds, for ball
+				//Bounce from pallet
 				if (how == 'p') {
 					Mix_PlayChannel(-1, Render::getInstance().gRacketPong, 0);
 				}
+				//Bounce from block/whatever
 				else if (how == 'x') {
 					Mix_PlayChannel(-1, Render::getInstance().gPing, 0);
 				}
-				Racket::getInstance().Move(timeStep);
-				Powerup::MoveAll(timeStep);
-				Missile::MoveAll(timeStep);
 
+				//Measurin how long does it take to render(to go through the loop
 				stepTimer.start();
 
 				//Clear screen
 				SDL_SetRenderDrawColor(Render::getInstance().gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 				SDL_RenderClear(Render::getInstance().gRenderer);
 
-				//gBallTexture.render(10, 10);
 
-
-				//Render ball and racket
-				Render::RenderBalls();
-				Render::RenderBlocks();
-				Render::RenderPwups();
-				Render::RenderBullets();
-				Render::RenderRacket();
+				//Render everything
+				{
+					Render::RenderBalls();
+					Render::RenderBlocks();
+					Render::RenderPwups();
+					Render::RenderBullets();
+					Render::RenderRacket();
+					//Render::RenderEnemies();
+				}
 
 				//Rendering right interface
 				SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().rightViewport);
@@ -167,8 +158,9 @@ int main(int argc, char* argv[])
 				}
 
 
-
+				//Set viewport back to left one
 				SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().leftViewport);
+				
 				//Update screen
 				SDL_RenderPresent(Render::getInstance().gRenderer);
 			}
