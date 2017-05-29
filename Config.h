@@ -42,7 +42,13 @@ const double RACKET_SPEED = 500;
 #define FASTBALL_PWUP_INCRASE 1.5
 #define SLOWBALL_PWUP_DECRASE 0.5
 
+const int MISSILE_SPEED = 400;
+
+const int ENEMY_SPEED = 100;
+const int ENEMY_SIZE = 20;
+
 enum BlockType { NONE, REGULAR, STRONG, VERY_STRONG, INDESTRUCTIBLE };
+
 
 
 struct Colour {

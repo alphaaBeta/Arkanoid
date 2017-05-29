@@ -9,14 +9,14 @@ Missile::Missile()
 {
 	this->x = 0;
 	this->y = 0;
-	this->Vy = -400;
+	this->Vy = MISSILE_SPEED;
 	MissileList.push_back(this);
 }
 
-Missile::Missile(double x, double y) {
+Missile::Missile(double x, double y, int s) {
 	this->x = x;
 	this->y = y;
-	this->Vy = -400;
+	this->Vy = s;
 	MissileList.push_back(this);
 }
 

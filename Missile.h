@@ -11,7 +11,7 @@ public:
 
 	Missile();
 	~Missile();
-	Missile(double, double);
+	Missile(double, double, int = -MISSILE_SPEED);
 
 	char Move(float timeStep);
 
