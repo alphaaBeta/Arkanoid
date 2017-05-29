@@ -6,6 +6,7 @@
 #include <sstream>
 #include <time.h>
 #include <SDL_ttf.h>//text
+#include <typeinfo>
 
 
 
@@ -17,6 +18,7 @@
 #include "GameField.h"
 #include "Powerup.h"
 #include "Missile.h"
+#include "Enemy.h"
 
 #include "Render.h"
 
@@ -68,6 +70,16 @@ int main(int argc, char* argv[])
 
 			
 			SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().leftViewport);
+
+			Enemy *test = new EnemyDiagonal;
+			Enemy *test2 = new EnemyDiagonal;
+			Enemy *test3 = new EnemyShooting;
+
+			Enemy::enemyList;
+
+			//Enemy::GetInst<EnemyDiagonal>();
+			std::vector<Enemy*> testt = Enemy::GetInst<EnemyDiagonal>();
+			std::vector<Enemy*> testt3 = Enemy::GetInst<EnemyDiagonal, EnemyShooting>();
 
 			//While application is running
 			while (!quit)

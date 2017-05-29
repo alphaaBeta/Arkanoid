@@ -1,10 +1,6 @@
 #include "Enemy.h"
 
-
-
-Enemy::Enemy()
-{
-}
+std::vector<Enemy*> Enemy::enemyList;
 
 
 Enemy::~Enemy()

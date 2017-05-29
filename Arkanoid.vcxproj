@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\SDL2_mixer-2.0.1\include;C:\SDL2-image\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2_mixer-2.0.1\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2-image\lib\x64;C:\SDL2-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDL2_image\include;C:\SDL2_mixer-2.0.1\include;C:\SDL2-image\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDL2_image\lib\x64;C:\SDL2_mixer-2.0.1\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2-image\lib\x64;C:\SDL2-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\SDL2_mixer-2.0.1\include;C:\SDL2-image\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2_mixer-2.0.1\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2-image\lib\x64;C:\SDL2-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDL2_image\include;C:\SDL2_mixer-2.0.1\include;C:\SDL2-image\include;C:\SDL2_ttf-2.0.14\include;C:\SDL2-2.0.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDL2_image\lib\x64;C:\SDL2_mixer-2.0.1\lib\x64;C:\SDL2_ttf-2.0.14\lib\x64;C:\SDL2-image\lib\x64;C:\SDL2-2.0.5\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
