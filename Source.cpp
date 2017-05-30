@@ -66,20 +66,22 @@ int main(int argc, char* argv[])
 			
 
 			//Loads nextlevel (level1)
-			Player::getInstance().NextLevel();
+			Player::getInstance().NextLevel(Player::getInstance().level++);
 
 			
 			SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().leftViewport);
-
+			/*
 			Enemy *test = new EnemyDiagonal;
 			Enemy *test2 = new EnemyDiagonal;
 			Enemy *test3 = new EnemyShooting;
 
 			Enemy::enemyList;
 
-			//Enemy::GetInst<EnemyDiagonal>();
 			std::vector<Enemy*> testt = Enemy::GetInst<EnemyDiagonal>();
 			std::vector<Enemy*> testt3 = Enemy::GetInst<EnemyDiagonal, EnemyShooting>();
+			*/
+
+			Player::getInstance().SaveGame();
 
 			//While application is running
 			while (!quit)
@@ -111,7 +113,7 @@ int main(int argc, char* argv[])
 
 				//Proceed to next level if board is clear
 				if (GameField::getInstance().IsClear())
-					Player::getInstance().NextLevel();
+					Player::getInstance().NextLevel(Player::getInstance().level);
 
 				//Play sounds, for ball
 				//Bounce from pallet

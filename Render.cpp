@@ -533,6 +533,11 @@ void handleInput(SDL_Event& e)
 			if ((Racket::getInstance()).shooting) {
 				Missile *aux = new Missile((Racket::getInstance()).x, (Racket::getInstance()).y);
 			}
+		case SDLK_s: Player::getInstance().SaveGame();
+			break;
+		case SDLK_l: Player::getInstance().LoadGame();
+			break;
+
 		}
 	}
 

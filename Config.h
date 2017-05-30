@@ -8,6 +8,8 @@ const int SIDEBAR_WIDTH = 200;
 const int BLOCK_WIDTH = 40;
 const int BLOCK_HEIGHT = 16;
 
+const char* SAVENAME = "save.txt";
+
 //Gamefield
 
 const int FIELD_WIDTH = SCREEN_WIDTH / BLOCK_WIDTH;

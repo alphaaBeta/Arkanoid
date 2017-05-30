@@ -10,7 +10,7 @@ int FileOp::LoadLevel(int n) {
 
 	try {
 		f.open("levels.json");
-		if (!f.good() || !f.is_open()) throw "Blad otwierania pliku 'level.json'!";
+		if (!f.good() || !f.is_open()) throw "Error with opening file 'level.json'!";
 		json l;
 		f >> l;
 		//we won't be needing the file anymore
@@ -39,11 +39,61 @@ int FileOp::LoadLevel(int n) {
 	}
 }
 
-int Player::NextLevel()
+
+int FileOp::SaveGame(SaveData save) {
+
+	std::ofstream f;
+	try {
+		
+		f.open(SAVENAME);
+		if (!f.good() || !f.is_open()) throw "Error with creating/opening savefile!";
+		save.LoadFromPlayer();
+
+		f << save;
+
+		f.close();
+		return 1;
+
+	}
+	catch (std::string s) {
+		std::cerr << s << std::endl;
+		if (f.is_open()) f.close();
+		return 0;
+
+	}
+
+}
+
+SaveData FileOp::LoadGame() {
+	std::ifstream f;
+
+	try {
+
+		f.open(SAVENAME);
+		if (!f.good() || !f.is_open()) throw "Error with creating/opening savefile!";
+		SaveData save;
+
+		f >> save;
+
+		f.close();
+		return save;
+
+	}
+	catch(std::string s) {
+		std::cerr << s << std::endl;
+		if (f.is_open()) f.close();
+		SaveData save = { 0, 0, 0, 0 };
+		return save;
+	}
+
+}
+
+int Player::NextLevel(int n)
 {
 	
-	level++;
-	lives++;
+	level = n;
+	scoreAtStart = score;
+	livesAtStart = lives;
 
 	//Remove blocks
 	GameField::getInstance().PurgeBlocks();
@@ -61,4 +111,25 @@ int Player::NextLevel()
 		
 
 	else return 0;
+}
+
+int Player::LoadGame() {
+
+	SaveData save = FileOp::LoadGame();
+
+	Player::getInstance().level = save.level;
+	Player::getInstance().score = save.score;
+	Player::getInstance().lives = save.lives;
+	Player::getInstance().difficulty = save.difficulty;
+
+	return 1;
+}
+
+int Player::SaveGame() {
+
+	SaveData save;
+	save.LoadFromPlayer();
+
+	if (FileOp::SaveGame(save)) return 1;
+	return 0;
 }

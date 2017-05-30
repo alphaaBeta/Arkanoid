@@ -12,6 +12,8 @@ public:
 	int size;	//radius
 	enum EnemyType { DIAGONAL, SHOOTINGDIAGONAL, GROUPPER, BLOCKER };
 
+	EnemyType enemyType;
+
 	static std::vector<Enemy *> enemyList;
 
 
@@ -21,7 +23,6 @@ public:
 		std::vector<Enemy *> aux;
 		
 		for (int i = 0; i < enemyList.size(); i++) {
-			std::cout << "X";
 
 			if (auto sp = dynamic_cast<T*>(enemyList[i])) {
 				
@@ -39,13 +40,12 @@ public:
 		std::vector<Enemy *> aux;
 
 		for (int i = 0; i < enemyList.size(); i++) {
-			std::cout << "X";
 
 			if (auto sp = dynamic_cast<T*>(enemyList[i])) {
 
 				aux.push_back(enemyList[i]);
-		}
 			}
+		}
 
 		std::vector<Enemy *> aux2 = GetInst<T2, Rest...>();
 		aux.insert(aux.end(), aux2.begin(), aux2.end());
@@ -74,8 +74,8 @@ protected:
 
 class EnemyDiagonal : public Enemy {
 public:
-	EnemyDiagonal(int x = 0, int dirX = 1) : Enemy(x, dirX) {}
-	//void Move(float timeStep);
+	EnemyDiagonal(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = DIAGONAL; }
+	void Move(float timeStep);
 	//void Act();
 
 
@@ -83,7 +83,7 @@ public:
 
 class EnemyShooting : public Enemy {
 public:
-	EnemyShooting(int x = 0, int dirX = 1) : Enemy(x, dirX) {}
+	EnemyShooting(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = SHOOTINGDIAGONAL; }
 	//~EnemyShooting();
 	//void Move(float timeStep);
 	//void Act();
@@ -92,11 +92,11 @@ public:
 
 class EnemyGroupper : Enemy {
 public:
-
+	EnemyGroupper(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = GROUPPER; }
 
 };
 
 class EnemyBlocker : Enemy {
 public:
-
+	EnemyBlocker(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = BLOCKER; }
 };
