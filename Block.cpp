@@ -5,7 +5,7 @@
 void Block::Hit(int a) {
 	this->health-=a;
 	if (health == 0 || (health == -1 && a == 2)) {
-		this->Destroy();
+		delete this;
 		Player::getInstance().score += 100;	//incrase player score
 	}
 	else if (health < 0) {	//indestructible blocks remain indestructible
@@ -13,7 +13,7 @@ void Block::Hit(int a) {
 	}
 }
 
-void Block::Destroy() {
+Block::~Block() {
 	
 	//Random chance of dropping a powerup
 	if (rand() % 100 < 10) {
@@ -62,5 +62,4 @@ void Block::Destroy() {
 	//Sets the block pointer to 0 on array.
 	GameField::getInstance().blockMatrix[this->x / BLOCK_WIDTH][this->y / BLOCK_HEIGHT] = 0;
 
-	delete this;
 }

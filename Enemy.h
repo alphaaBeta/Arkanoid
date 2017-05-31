@@ -2,6 +2,7 @@
 
 #include "Config.h"
 #include "Missile.h"
+#include "GameField.h"
 #include <vector>
 #include <typeinfo>
 
@@ -56,13 +57,13 @@ public:
 	
 
 
-	virtual void Move(float timeStep) {}
+	virtual void Move(float timeStep);
 
 	static void MoveAll(float timeStep);
 
 	virtual void Act() {}
 	
-	
+	virtual ~Enemy();
 
 protected:
 	
@@ -74,7 +75,7 @@ protected:
 		enemyList.push_back(this);
 	}
 
-	virtual ~Enemy();
+	
 };
 
 class EnemyDiagonal : public Enemy {
@@ -94,17 +95,27 @@ public:
 																	enemyType = SHOOTINGDIAGONAL; 
 																	colour = { 255, 0, 0, 255 };
 																	}
+	EnemyShooting(Enemy&);
+
 	void Act();
 
 };
 
 class EnemyGroupper : public Enemy {
 public:
-	EnemyGroupper(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = GROUPPER; }
+	EnemyGroupper(int x = 0, int dirX = 1) : Enemy(x, dirX) {
+															enemyType = GROUPPER;
+															colour = { 0, 255, 125, 255 };
+															}
+	void Act();
 
 };
 
 class EnemyBlocker : public Enemy {
 public:
-	EnemyBlocker(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = BLOCKER; }
+	EnemyBlocker(int x = 0, int dirX = 1) : Enemy(x, dirX) {
+															enemyType = BLOCKER;
+															colour = { 255, 0, 255, 255 };
+															}
+	void Act();
 };

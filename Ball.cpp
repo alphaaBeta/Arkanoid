@@ -5,6 +5,7 @@
 #include "Racket.h"
 #include "GameField.h"
 #include "Block.h"
+#include "Enemy.h"
 
 #define PI 3.14159265
 
@@ -44,6 +45,16 @@ void Ball::MultiplyBalls(int amt, Ball& src) {
 	}
 }
 
+
+Ball::~Ball() {
+	for (int i = 0; i < Ball::ballList.size(); i++) {
+		if (Ball::ballList[i] == this) {
+			Ball::ballList.erase(Ball::ballList.begin() + i);
+			ballAmount--;
+		}
+	}
+}
+
 char Ball::CheckCollision( float timeStep) {
 	
 
@@ -59,49 +70,6 @@ char Ball::CheckCollision( float timeStep) {
 	char how;
 
 	//Checking collison with blocks
-	
-	
-
-	
-
-	/*
-	//Collision with blocks
-	for (int i = 0; i < GameField::getInstance().BlockList.size(); i++) {
-		double xc, xb = GameField::getInstance().BlockList[i]->x;
-		double yc, yb = GameField::getInstance().BlockList[i]->y;
-
-		//Find closest x coord on the block, according to ball
-		if (this->x < xb) {
-			xc = xb;
-		}
-		else if (this->x > xb + BLOCK_WIDTH) {
-			xc = xb + BLOCK_WIDTH;
-		}
-		else
-			xc = this->x;
-
-
-		//Find closest y coord on the block, according to ball
-		if (this->y < yb) {
-			yc = yb;
-		}
-		else if (this->y > yb + BLOCK_HEIGHT) {
-			yc = yb + BLOCK_HEIGHT;
-		}
-		else
-			yc = this->y;
-
-		//Get squared distance between the point and ball coord, check with ball radius(squared)
-		if ((yc - this->y)*(yc - this->y) + (xc - this->x)*(xc - this->x) <= this->radius*this->radius) {
-
-			//Check on which side of the block is it
-			if(abs(yc-yb) <= 0.1 || abs(yc-yb-BLOCK_HEIGHT) <= 0.1)
-			 how = Bounce('y', GameField::getInstance().BlockList[i]);
-			else how = Bounce('x', GameField::getInstance().BlockList[i]);
-			return how;
-		}
-		
-	}*/
 	int xCord, yCord;
 	
 	if (Vy < 0) {
@@ -177,7 +145,7 @@ char Ball::CheckCollision( float timeStep) {
 
 	//if it falls out of the screen
 	if (ynew > SCREEN_HEIGHT) {
-		this->Destroy();
+		delete this;
 
 		if (Ball::ballList.empty()) {
 			Player::getInstance().lives--;
@@ -187,21 +155,26 @@ char Ball::CheckCollision( float timeStep) {
 		Ball::ballAmount--;
 	}
 
+	//Checking collision with enemies
+	for (int i = 0; i < Enemy::enemyList.size(); i++) {
+		Enemy * aux = Enemy::enemyList[i];
+		double distance = (xnew - aux->x)*(xnew - aux->x) + (ynew - aux->y)*(ynew - aux->y);
+
+		if (distance < ENEMY_SIZE*ENEMY_SIZE) {
+			how = 'y';
+			how = Bounce(how);
+			delete aux;
+
+
+			return how;
+		}
+		
+
+	}
+
 	
 	return 0 ;
 
-}
-
-void Ball::Destroy() {
-	for (int i = 0; i < Ball::ballList.size(); i++) {
-		if (Ball::ballList[i] == this) {
-
-			delete Ball::ballList[i];
-
-			Ball::ballList.erase(Ball::ballList.begin() + i);
-			
-		}
-	}
 }
 
 char Ball::Bounce(char how, Block *gothit) {

@@ -560,6 +560,14 @@ void handleInput(SDL_Event& e)
 			break;
 		case SDLK_f: for (int i = 0; i < Enemy::enemyList.size(); i++) Enemy::enemyList[i]->Act();
 			break;
+		case SDLK_1: new EnemyDiagonal(SCREEN_WIDTH/2);
+			break;
+		case SDLK_2: new EnemyShooting(SCREEN_WIDTH / 2);
+			break;
+		case SDLK_3: new EnemyGroupper(SCREEN_WIDTH / 2);
+			break;
+		case SDLK_4: new EnemyBlocker(SCREEN_WIDTH / 2);
+			break;
 
 		}
 	}

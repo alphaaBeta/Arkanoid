@@ -11,6 +11,30 @@ Enemy::~Enemy()
 	}
 }
 
+void Enemy::Move(float timeStep) {
+
+	double ynew;
+	ynew = this->y + (Vy*timeStep);
+
+
+	//disappearing at the bottom
+	if (!bounceY && ynew > SCREEN_HEIGHT) {
+		delete this;
+	}
+	//or bouncing at y = bounceY
+	else if (bounceY > 0 && ynew > bounceY) {
+		Vy = -ENEMY_SPEED / 10;
+	}
+	//or bouncing from the top
+	else if (ynew <= 0) {
+		Vy = ENEMY_SPEED / 10;
+	}
+
+	this->y = ynew;
+
+}
+
+
 void Enemy::MoveAll(float timeStep) {
 	for (int i = 0; i < Enemy::enemyList.size(); i++) {
 		Enemy::enemyList[i]->Move(timeStep);
@@ -53,3 +77,47 @@ void EnemyShooting::Act() {
 
 }
 
+EnemyShooting::EnemyShooting(Enemy& obj) {
+
+	EnemyShooting *aux = new EnemyShooting(obj.x, !signbit(obj.Vx));
+	x = obj.x;
+	y = obj.y;
+	Vx = obj.Vx;
+	Vy = obj.Vy;
+	size = obj.size;
+	bounceY = obj.bounceY;
+
+	
+	
+}
+
+void EnemyGroupper::Act() {
+
+	//Get a list of enemies of a type
+	std::vector<Enemy *> enList = Enemy::GetInst<EnemyDiagonal>();
+
+	for (int i = 0; i < enList.size(); i++) {
+
+		Enemy *auxe;
+
+		auxe = enList[i];
+
+		if (auxe->enemyType == DIAGONAL) {
+			double distance;
+
+			distance = (this->x - auxe->x)*(this->x - auxe->x) + (this->y - auxe->y)*(this->y - auxe->y);
+
+			if (distance < 2000) {
+				EnemyShooting auxx(*auxe);
+				delete enList[i];
+			}
+		}
+	}
+
+}
+
+void EnemyBlocker::Act() {
+
+
+
+}

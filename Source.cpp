@@ -71,18 +71,13 @@ int main(int argc, char* argv[])
 			
 			SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().leftViewport);
 			
-			Enemy *test = new EnemyDiagonal;
-			std::vector<Enemy*> testt = Enemy::GetInst<EnemyDiagonal>();
-			testt = Enemy::GetInst<EnemyDiagonal, EnemyShooting>();
-			Enemy *test2 = new EnemyDiagonal(100);
-			testt = Enemy::GetInst<EnemyDiagonal>();
-			testt = Enemy::GetInst<EnemyDiagonal, EnemyShooting>();
-			Enemy *test3 = new EnemyShooting(200);
+			//FOR TESTING////////////////////////////////////
+			/////////////////////////////////////////////////
 
-			Enemy::enemyList;
 
-			testt = Enemy::GetInst<EnemyDiagonal>();
-			testt = Enemy::GetInst<EnemyShooting>();
+
+			/////////////////////////////////////////////////
+			/////////////////////////////////////////////////
 
 
 			//While application is running
@@ -112,6 +107,13 @@ int main(int argc, char* argv[])
 					Missile::MoveAll(timeStep);
 					Enemy::MoveAll(timeStep);
 				}
+
+				//Checks for enemies
+				std::vector<Enemy *> enList = Enemy::GetInst<EnemyGroupper>();
+				for (int i = 0; i < enList.size(); i++) {
+					enList[i]->Act();
+				}
+				Enemy::enemyList;
 
 				//Proceed to next level if board is clear
 				if (GameField::getInstance().IsClear())
