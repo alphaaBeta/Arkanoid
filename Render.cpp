@@ -362,6 +362,11 @@ bool loadMedia()
 		success = false;
 	}
 
+	//Load enemy texture
+	if (!Render::getInstance().gEnemyTexture.loadFromFile("resources/enemy.bmp")) {
+		printf("Failed to load enemy texture!\n");
+		success = false;
+	}
 
 	//Load sound effects
 	Render::getInstance().gPing = Mix_LoadWAV("resources/ping.wav");
@@ -508,14 +513,30 @@ void Render::RenderBullets() {
 
 	Colour clr = { 255, 0, 0, 255 };
 
-	for (int i = 0; i < Missile::MissileList.size(); i++) {
+	for (int i = 0; i < Missile::missileList.size(); i++) {
 		Render::getInstance().gBulletTexture.setColor(clr.r, clr.g, clr.b);
 		Render::getInstance().gBulletTexture.setAlpha(clr.a);
 
 		Render::getInstance().gBulletTexture.render(\
-			Missile::MissileList[i]->x - 1,
-			Missile::MissileList[i]->y,
+			Missile::missileList[i]->x - 1,
+			Missile::missileList[i]->y,
 			&Rect);
+	}
+}
+
+//Render enemies
+void Render::RenderEnemies() {
+	SDL_Rect Rect = { 0,0 };
+	Rect.w = ENEMY_SIZE * 2;
+	Rect.h = ENEMY_SIZE * 2;
+
+	for (int i = 0; i < Enemy::enemyList.size(); i++) {
+		Colour clr = { Enemy::enemyList[i]->colour };
+
+		Render::getInstance().gEnemyTexture.setColor(clr.r, clr.g, clr.b);
+		Render::getInstance().gEnemyTexture.setAlpha(clr.a);
+		Render::getInstance().gEnemyTexture.render(int(Enemy::enemyList[i]->x - Enemy::enemyList[i]->size), int(Enemy::enemyList[i]->y - Enemy::enemyList[i]->size), &Rect);
+
 	}
 }
 
@@ -536,6 +557,8 @@ void handleInput(SDL_Event& e)
 		case SDLK_s: Player::getInstance().SaveGame();
 			break;
 		case SDLK_l: Player::getInstance().LoadGame();
+			break;
+		case SDLK_f: for (int i = 0; i < Enemy::enemyList.size(); i++) Enemy::enemyList[i]->Act();
 			break;
 
 		}

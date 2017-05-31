@@ -17,14 +17,13 @@ public:
 
 	Block* CheckCollision();
 		
-	void Destroy();
 
 	static void MoveAll(float timeStep);
 
 
 
 
-	static std::vector<Missile *> MissileList;
+	static std::vector<Missile *> missileList;
 
 	double x, y, Vy;
 };

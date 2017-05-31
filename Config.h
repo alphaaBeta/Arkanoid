@@ -1,5 +1,6 @@
 #pragma once
 //#include <iostream>	
+#include <string>
 
 const int SCREEN_WIDTH = 520;	//width of the gamefield
 const int SCREEN_HEIGHT = 480;
@@ -8,7 +9,7 @@ const int SIDEBAR_WIDTH = 200;
 const int BLOCK_WIDTH = 40;
 const int BLOCK_HEIGHT = 16;
 
-const char* SAVENAME = "save.txt";
+const std::string SAVENAME = "save.txt";
 
 //Gamefield
 

@@ -153,6 +153,7 @@
     <Image Include="resources\ball.png" />
     <Image Include="resources\block.png" />
     <Image Include="resources\bullet.bmp" />
+    <Image Include="resources\enemy.bmp" />
     <Image Include="resources\racket-1.bmp" />
     <Image Include="resources\racket-2.bmp" />
   </ItemGroup>

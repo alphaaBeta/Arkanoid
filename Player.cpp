@@ -88,6 +88,7 @@ SaveData FileOp::LoadGame() {
 
 }
 
+//increment the argument for next level
 int Player::NextLevel(int n)
 {
 	
@@ -117,10 +118,12 @@ int Player::LoadGame() {
 
 	SaveData save = FileOp::LoadGame();
 
-	Player::getInstance().level = save.level;
-	Player::getInstance().score = save.score;
-	Player::getInstance().lives = save.lives;
-	Player::getInstance().difficulty = save.difficulty;
+	level = save.level;
+	score = save.score;
+	lives = save.lives;
+	difficulty = save.difficulty;
+
+	NextLevel(level);
 
 	return 1;
 }

@@ -94,6 +94,9 @@
     <Image Include="resources\racket-2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="resources\enemy.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\arial.ttf">

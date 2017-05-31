@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-
 #include "Config.h"
 
 
@@ -96,7 +95,7 @@ public:
 	}
 
 
-	~Ball() {	}
+	~Ball() { ballAmount--; }
 
 
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Config.h"
+#include "Missile.h"
 #include <vector>
 #include <typeinfo>
 
@@ -10,9 +11,10 @@ class Enemy
 public:
 	double x, y, Vx, Vy;
 	int size;	//radius
-	enum EnemyType { DIAGONAL, SHOOTINGDIAGONAL, GROUPPER, BLOCKER };
+	double bounceY; //Where to  bounce off at Y axis
+	enum EnemyType { DIAGONAL, SHOOTINGDIAGONAL, GROUPPER, BLOCKER } enemyType;
 
-	EnemyType enemyType;
+	Colour colour;
 
 	static std::vector<Enemy *> enemyList;
 
@@ -54,14 +56,17 @@ public:
 	
 
 
-	void Move(float timeStep) {}
-	void Act() {}
+	virtual void Move(float timeStep) {}
+
+	static void MoveAll(float timeStep);
+
+	virtual void Act() {}
 	
 	
 
 protected:
 	
-	Enemy(int x = 0, int dirX = 1) : x(x), y(0), Vy(ENEMY_SPEED), size(ENEMY_SIZE) {
+	Enemy(int x = 0, int dirX = 1) : x(x), y(0), Vy(ENEMY_SPEED/10), size(ENEMY_SIZE), bounceY(0) {
 		if (dirX > 0)
 			Vx = ENEMY_SPEED;
 		else
@@ -74,29 +79,32 @@ protected:
 
 class EnemyDiagonal : public Enemy {
 public:
-	EnemyDiagonal(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = DIAGONAL; }
-	void Move(float timeStep);
-	//void Act();
+	EnemyDiagonal(int x = 0, int dirX = 1) : Enemy(x, dirX) {
+															enemyType = DIAGONAL;
+															colour = { 255, 255, 0, 255 };
+															}
+	void Move(float);
 
 
 };
 
-class EnemyShooting : public Enemy {
+class EnemyShooting : public EnemyDiagonal {
 public:
-	EnemyShooting(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = SHOOTINGDIAGONAL; }
-	//~EnemyShooting();
-	//void Move(float timeStep);
-	//void Act();
+	EnemyShooting(int x = 0, int dirX = 1) : EnemyDiagonal(x, dirX) { 
+																	enemyType = SHOOTINGDIAGONAL; 
+																	colour = { 255, 0, 0, 255 };
+																	}
+	void Act();
 
 };
 
-class EnemyGroupper : Enemy {
+class EnemyGroupper : public Enemy {
 public:
 	EnemyGroupper(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = GROUPPER; }
 
 };
 
-class EnemyBlocker : Enemy {
+class EnemyBlocker : public Enemy {
 public:
 	EnemyBlocker(int x = 0, int dirX = 1) : Enemy(x, dirX) { enemyType = BLOCKER; }
 };

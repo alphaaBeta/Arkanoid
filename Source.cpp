@@ -66,22 +66,24 @@ int main(int argc, char* argv[])
 			
 
 			//Loads nextlevel (level1)
-			Player::getInstance().NextLevel(Player::getInstance().level++);
+			Player::getInstance().NextLevel(Player::getInstance().level + 1);
 
 			
 			SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().leftViewport);
-			/*
+			
 			Enemy *test = new EnemyDiagonal;
-			Enemy *test2 = new EnemyDiagonal;
-			Enemy *test3 = new EnemyShooting;
+			std::vector<Enemy*> testt = Enemy::GetInst<EnemyDiagonal>();
+			testt = Enemy::GetInst<EnemyDiagonal, EnemyShooting>();
+			Enemy *test2 = new EnemyDiagonal(100);
+			testt = Enemy::GetInst<EnemyDiagonal>();
+			testt = Enemy::GetInst<EnemyDiagonal, EnemyShooting>();
+			Enemy *test3 = new EnemyShooting(200);
 
 			Enemy::enemyList;
 
-			std::vector<Enemy*> testt = Enemy::GetInst<EnemyDiagonal>();
-			std::vector<Enemy*> testt3 = Enemy::GetInst<EnemyDiagonal, EnemyShooting>();
-			*/
+			testt = Enemy::GetInst<EnemyDiagonal>();
+			testt = Enemy::GetInst<EnemyShooting>();
 
-			Player::getInstance().SaveGame();
 
 			//While application is running
 			while (!quit)
@@ -108,12 +110,12 @@ int main(int argc, char* argv[])
 					Racket::getInstance().Move(timeStep);
 					Powerup::MoveAll(timeStep);
 					Missile::MoveAll(timeStep);
-					//Enemy::MoveAll(timeStep);
+					Enemy::MoveAll(timeStep);
 				}
 
 				//Proceed to next level if board is clear
 				if (GameField::getInstance().IsClear())
-					Player::getInstance().NextLevel(Player::getInstance().level);
+					Player::getInstance().NextLevel(Player::getInstance().level + 1);
 
 				//Play sounds, for ball
 				//Bounce from pallet
@@ -140,7 +142,7 @@ int main(int argc, char* argv[])
 					Render::RenderPwups();
 					Render::RenderBullets();
 					Render::RenderRacket();
-					//Render::RenderEnemies();
+					Render::RenderEnemies();
 				}
 
 				//Rendering right interface

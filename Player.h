@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <sstream>
 #include "json.hpp"
 
 
@@ -89,20 +90,24 @@ struct SaveData {
 
 	friend std::istream& operator>>(std::istream& is, SaveData& obj)
 	{
-		//std::string level << is;
-		//std::string score << is;
-		//std::string lives << is;
-		//std::string diff << is;
-		istringstream iss;
-		iss << is;
+		
+		std::string level;
+		is >> level;
+		std::string	score;
+		is >> score;
+		std::string lives;
+		is >> lives;
+		std::string diff;
+		is >> diff;
 
-		obj.level << iss;
-		obj.score << iss;
-		obj.lives << iss;
-		obj.difficulty << iss;
+		
+		obj.level = std::stoi(level);
+		obj.score = std::stoi(score);
+		obj.lives = std::stoi(lives);
+		obj.difficulty = std::stoi(diff);
 
 
-		return iss;
+		return is;
 	}
 
 	void LoadFromPlayer() {

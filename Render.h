@@ -11,6 +11,7 @@
 #include "Block.h"
 #include "GameField.h"
 #include "Missile.h"
+#include "Enemy.h"
 
 
 //Texture wrapper class
@@ -122,6 +123,7 @@ public:
 	LTexture gPwupTexture;
 	LTexture gBulletTexture;
 	LTexture gTextTexture;
+	LTexture gEnemyTexture;
 
 	TTF_Font *gFont = 0;
 
@@ -133,6 +135,7 @@ public:
 	static void RenderRacket();
 	static void RenderPwups();
 	static void RenderBullets();
+	static void RenderEnemies();
 
 };
 
