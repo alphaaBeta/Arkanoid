@@ -6,6 +6,13 @@
 std::vector<Block *> GameField::blockList;
 std::vector<Powerup *> GameField::powerupList;
 
+
+GameField::~GameField() {
+	for (int i = 0; i < blockList.size(); i++) {
+		delete blockList[i];//TODO??
+	}
+}
+
 int GameField::AddBlock(int x, int y, BlockType type, Colour colour) {
 
 	if (blockMatrix[x][y] && type!=NONE) { return 0; }

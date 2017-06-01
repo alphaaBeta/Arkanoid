@@ -100,12 +100,24 @@ struct SaveData {
 		std::string diff;
 		is >> diff;
 
+		is.clear();
 		
-		obj.level = std::stoi(level);
-		obj.score = std::stoi(score);
-		obj.lives = std::stoi(lives);
-		obj.difficulty = std::stoi(diff);
+		try {
 
+			obj.level = std::stoi(level);
+			obj.score = std::stoi(score);
+			obj.lives = std::stoi(lives);
+			obj.difficulty = std::stoi(diff);
+
+		}
+		catch (std::exception exc) {
+			std::cerr << exc.what() << std::endl;
+			obj.level = 1;
+			obj.score = 0;
+			obj.lives = 1;
+			obj.difficulty = 1;
+			return is;
+		}
 
 		return is;
 	}

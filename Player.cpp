@@ -9,8 +9,10 @@ int FileOp::LoadLevel(int n) {
 	std::ifstream f;
 
 	try {
-		f.open("levels.json");
-		if (!f.good() || !f.is_open()) throw "Error with opening file 'level.json'!";
+		f.open("levels.json");	//throws FAILURE exception
+
+		//if (!f.good() || !f.is_open()) throw "Error with opening file 'level.json'!";
+		
 		json l;
 		f >> l;
 		//we won't be needing the file anymore
@@ -32,8 +34,8 @@ int FileOp::LoadLevel(int n) {
 		return 1;
 	}
 
-	catch (std::string a) {
-		std::cerr << a << std::endl;
+	catch (std::ios_base::failure ff) {
+		std::cerr << ff.what() << std::endl;
 		if (f.is_open()) f.close();
 		return 0;
 	}
@@ -46,7 +48,7 @@ int FileOp::SaveGame(SaveData save) {
 	try {
 		
 		f.open(SAVENAME);
-		if (!f.good() || !f.is_open()) throw "Error with creating/opening savefile!";
+		//if (!f.good() || !f.is_open()) throw "Error with creating/opening savefile!";
 		save.LoadFromPlayer();
 
 		f << save;
@@ -55,8 +57,8 @@ int FileOp::SaveGame(SaveData save) {
 		return 1;
 
 	}
-	catch (std::string s) {
-		std::cerr << s << std::endl;
+	catch (std::ios_base::failure ff) {
+		std::cerr << ff.what() << std::endl;
 		if (f.is_open()) f.close();
 		return 0;
 
@@ -69,8 +71,8 @@ SaveData FileOp::LoadGame() {
 
 	try {
 
-		f.open(SAVENAME);
-		if (!f.good() || !f.is_open()) throw "Error with creating/opening savefile!";
+		f.open(SAVENAME);	
+		//if (!f.good() || !f.is_open()) throw "Error with creating/opening savefile!";
 		SaveData save;
 
 		f >> save;
@@ -79,10 +81,10 @@ SaveData FileOp::LoadGame() {
 		return save;
 
 	}
-	catch(std::string s) {
-		std::cerr << s << std::endl;
+	catch(std::ios_base::failure ff) {
+		std::cerr << ff.what() << std::endl;
 		if (f.is_open()) f.close();
-		SaveData save = { 0, 0, 0, 0 };
+		SaveData save = { 1, 0, 1, 1 };
 		return save;
 	}
 

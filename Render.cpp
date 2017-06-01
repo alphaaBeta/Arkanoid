@@ -518,8 +518,8 @@ void Render::RenderBullets() {
 		Render::getInstance().gBulletTexture.setAlpha(clr.a);
 
 		Render::getInstance().gBulletTexture.render(\
-			Missile::missileList[i]->x - 1,
-			Missile::missileList[i]->y,
+			int(Missile::missileList[i]->x - 1),
+			int(Missile::missileList[i]->y),
 			&Rect);
 	}
 }

@@ -43,11 +43,7 @@ public:
 	bool IsClear();
 
 
-	~GameField() {
-		for (int i = 0; i < blockList.size(); i++) {
-			delete (blockList[i]);//TODO??
-		}
-	}
+	~GameField();
 
 	static GameField& getInstance()
 	{
