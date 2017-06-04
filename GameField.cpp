@@ -67,9 +67,11 @@ void GameField::PurgeBlocks() {
 			blockMatrix[x][y] = 0;
 		}
 	}
-	while (blockList.size()) {
-		delete blockList.back();
+	while (!blockList.empty()) {
+		
+		Block *aux = blockList.back();
 		blockList.pop_back();
+		delete aux;
 	}
 
 }

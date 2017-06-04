@@ -8,13 +8,17 @@ class Block;
 class Racket;
 
 
-
+/**
+* \brief A ball class. Contains all the methods that allow the ball to move, check collision etc.
+*/
 class Ball
 {
 
 private:
-	
-	//Creates an independent ball
+
+	/**
+	* \brief Creates an independent ball
+	*/
 	Ball() {
 
 		if (ballAmount == BALL_LIMIT - 1) { printf("Ball limit reached!"); }
@@ -33,7 +37,9 @@ private:
 
 	}
 
-	//creates additional ball at former ball's location
+	/**
+	* \brief Creates additional ball at former ball's location
+	*/
 	Ball(Ball& src) {
 
 		Ball *newBall = AddBall();
@@ -51,40 +57,119 @@ public:
 	/////////////////////
 	//----MAIN VARS----//
 	/////////////////////
-
+	/**
+	* \brief Hold the current amount of balls.
+	*/
 	static int ballAmount;
+
+
+	/**
+	* Defines the ball radious, in pixels.
+	* 
+	* \brief Ball size.
+	*/
 	int radius;
-	double x, y, Vx, Vy;
+
+
+	/**
+	* \brief Ball x coordinate
+	*/
+	double x;
+	/**
+	* \brief Ball y coordinate
+	*/
+	double y;
+	/**
+	* \brief Ball horizontal speed
+	*/
+	double Vx;
+	/**
+	* \brief Ball vertical speed
+	*/
+	double Vy;
+
+
+	/**
+	* States how much "hitpoints" does every hit to a block take from it.
+	* For example, power 3 destroys a block with 3 hitpoints in a single hit.
+	*
+	* \brief Defines how powerful the ball is.
+	*/
 	int power;
 
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
-	//Creates x balls at one's location
+
+	/**
+	* \brief Creates int balls at Ball's location
+	*
+	* \param int Number of balls to be created
+	*
+	* \param Ball& Takes the Ball& location and speed to create those balls. Changes variables a bit.
+	*/
 	void MultiplyBalls(int, Ball&);	
 
-	//checks if ball will collide with an object or gamefield edge. 
-	//Returns 'p' for racket, 'x' for horizontal and 'y' for vertical hit
+
+	/**
+	* \brief Checks if ball will collide with an object or gamefield edge. 
+	*
+	* \param float timeStep, to check future location
+	*
+	* \return 'p' for racket
+	* \return 'x' for horizontal bounce
+	* \return 'y' for vertical bounce
+	*/
 	char CheckCollision(float);
 
-	//Sets new speed vectors for the ball
-	//returns whether it bounced off the edge(block) or racket
+
+	/**
+	* \brief Sets new speed vectors for a ball, after bouncing.
+	*
+	* \param char type of bounce
+	* \param Block* Block that has been hit (if 0 - no block hit)
+	*
+	* \return 'p' for racket
+	* \return 'x' for horizontal bounce
+	* \return 'y' for vertical bounce
+	*/
 	char Bounce(char, Block * = 0);
 
-	//Calculates new ball location
-	//returns whatever Bounce does
+
+	/**
+	* \brief Calculates new ball location
+	*
+	* \param float timeStep, to check future location
+	*
+	* \return 'p' for racket
+	* \return 'x' for horizontal bounce
+	* \return 'y' for vertical bounce
+	*/
 	char Move( float );
 
-	//
-
-	//Moves all the balls
+	
+	/**
+	* \brief Moves all the balls on ballList vector
+	*
+	* \param float timeStep, for relaying to different Move(float) functions
+	*
+	* \return 'p' for racket
+	* \return 'x' for horizontal bounce
+	* \return 'y' for vertical bounce
+	*/
 	static char MoveBalls(float);
 
-	//List to keep track of balls
+
+	/**
+	* \brief Vector to keep track of balls.
+	*/
 	static std::vector<Ball *> ballList;
 
 	
+	/**
+	* \brief Static method of adding one ball, accessing the constructor.
+	*/
 	static Ball* AddBall() { 
 		Ball *newBall = new Ball;
 

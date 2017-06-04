@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Enemy.h"
 
 using json = nlohmann::json;
 
@@ -102,10 +103,14 @@ int Player::NextLevel(int n)
 	GameField::getInstance().PurgeBlocks();
 
 	//Remove balls
-	for (int i = 0; i < Ball::ballList.size(); i++)
-		delete Ball::ballList[i];
+	while (!Ball::ballList.empty() && Ball::ballList[0]) {
+		delete Ball::ballList[0];
+	}
 	if (!Ball::ballList.empty()) Ball::ballList.clear();
 
+	while (!Enemy::enemyList.empty() && Enemy::enemyList[0] ) {
+		delete Enemy::enemyList[0];
+	}
 
 	if (FileOp::LoadLevel(level)) {
 		Ball::AddBall();

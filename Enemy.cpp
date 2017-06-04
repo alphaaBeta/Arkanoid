@@ -80,12 +80,12 @@ void EnemyShooting::Act() {
 EnemyShooting::EnemyShooting(Enemy& obj) {
 
 	EnemyShooting *aux = new EnemyShooting(obj.x, !signbit(obj.Vx));
-	x = obj.x;
-	y = obj.y;
-	Vx = obj.Vx;
-	Vy = obj.Vy;
-	size = obj.size;
-	bounceY = obj.bounceY;
+	aux->x = obj.x;
+	aux->y = obj.y;
+	aux->Vx = obj.Vx;
+	aux->Vy = obj.Vy;
+	aux->size = obj.size;
+	aux->bounceY = obj.bounceY;
 
 	
 	
@@ -118,6 +118,11 @@ void EnemyGroupper::Act() {
 
 void EnemyBlocker::Act() {
 
-
+	//Check if field on matrix is occupied
+	if (!GameField::getInstance().blockMatrix[int(this->x) / BLOCK_WIDTH][int(this->y) / BLOCK_HEIGHT]) {
+		//if it's not
+		//Add a block  to that place
+		GameField::getInstance().AddBlock(int(this->x) / BLOCK_WIDTH, int(this->y) / BLOCK_HEIGHT, REGULAR);
+	}
 
 }

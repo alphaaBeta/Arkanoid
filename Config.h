@@ -55,8 +55,20 @@ enum BlockType { NONE, REGULAR, STRONG, VERY_STRONG, INDESTRUCTIBLE };
 
 
 struct Colour {
+	/**
+	* \brief Red value
+	*/
 	unsigned char r = 0;
+	/**
+	* \brief Green value
+	*/
 	unsigned char g = 0;
+	/**
+	* \brief Blue value
+	*/
 	unsigned char b = 0;
+	/**
+	* \brief Alpha value
+	*/
 	unsigned char a = 0;
 };

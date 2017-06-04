@@ -4,6 +4,8 @@
 #include "GameField.h"
 #include "Ball.h"
 
+
+
 #include <stdio.h>
 #include <string>
 #include <fstream>
@@ -11,12 +13,19 @@
 #include <sstream>
 #include "json.hpp"
 
-
+class Enemy;
 
 class Player;
 
 struct SaveData;
 
+/**
+* \brief Test brief
+*
+* \param haha testttt
+*
+* \return ha test
+*/
 class FileOp
 {
 	friend Player;
