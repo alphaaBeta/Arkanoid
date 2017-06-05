@@ -2,7 +2,10 @@
 
 #include "Config.h"
 
-class Racket	//singleton
+/**
+* \brief Class for racket.
+*/
+class Racket
 {
 private:
 	Racket() : x(double((SCREEN_WIDTH)/2)), y(double(SCREEN_HEIGHT - BLOCK_HEIGHT*2)), speed(0.0), width(double(RACKET_LENGTH)) {}
@@ -10,7 +13,6 @@ private:
 
 public:
 	
-	//~Racket();
 
 	static Racket& getInstance() {
 
@@ -22,28 +24,49 @@ public:
 	//----MAIN VARS----//
 	/////////////////////
 
-	//Speed of the racket
+
+	/**
+	* \brief Speed of the racket
+	*/
 	double speed;
 
-	//Width of the racket
+
+	/**
+	* \brief Width of the racket, from center.
+	*/
 	double width;
 	
-	//location of the center
-	double x, y; 
 
-	//If shooting is enabled
-	char shooting;
+	/**
+	* \brief X coordinate. Center of racket.
+	*/
+	double x;
+
+
+	/**
+	* \brief Y coordinate
+	*/
+	double y;
+
+
+	/**
+	* \brief Defining if shooting is possible
+	*/
+	char shootingEnabled;
 
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
-	//Returns 0 if border is hit
+	//
+	/**
+	* \brief Moves the racket, based on its speed.
+	*
+	* \param float timeStep
+	*
+	* \return 0 If border is hit.
+	*/
 	int Move(float);	
-
-
-	//TODO:
-	//-checks for bonuses player has
 
 };
 

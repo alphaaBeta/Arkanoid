@@ -473,12 +473,12 @@ void Render::RenderRacket() {
 	rackRect.h = 8;
 
 	//regular texture
-	if (!Racket::getInstance().shooting)
+	if (!Racket::getInstance().shootingEnabled)
 		Render::getInstance().gRacketTexture.render(int((Racket::getInstance()).x - ((Racket::getInstance()).width / 2)),
 			int((Racket::getInstance()).y),
 			&rackRect);
 	//if shooting powerup is up
-	else if (Racket::getInstance().shooting == 1)
+	else if (Racket::getInstance().shootingEnabled == 1)
 		Render::getInstance().gRacketTexture2.render(int((Racket::getInstance()).x - ((Racket::getInstance()).width / 2)),
 			int((Racket::getInstance()).y),
 			&rackRect);
@@ -551,7 +551,7 @@ void handleInput(SDL_Event& e)
 		case SDLK_LEFT: Racket::getInstance().speed -= RACKET_SPEED; break;
 		case SDLK_RIGHT: Racket::getInstance().speed += RACKET_SPEED; break;
 		case SDLK_UP:
-			if ((Racket::getInstance()).shooting) {
+			if ((Racket::getInstance()).shootingEnabled) {
 				Missile *aux = new Missile((Racket::getInstance()).x, (Racket::getInstance()).y);
 			}
 		case SDLK_s: Player::getInstance().SaveGame();

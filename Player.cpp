@@ -92,7 +92,7 @@ SaveData FileOp::LoadGame() {
 }
 
 //increment the argument for next level
-int Player::NextLevel(int n)
+int Player::LoadLevel(int n)
 {
 	
 	level = n;
@@ -130,7 +130,7 @@ int Player::LoadGame() {
 	lives = save.lives;
 	difficulty = save.difficulty;
 
-	NextLevel(level);
+	LoadLevel(level);
 
 	return 1;
 }

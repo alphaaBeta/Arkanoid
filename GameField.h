@@ -44,18 +44,28 @@ public:
 
 
 	/**
-	* \brief X
+	* \brief Adds a block to the matrix - gamefield.
 	*
-	* \param X Y
+	* \param int X coordinate in matrix
+	* \param int Y coordinate in matrix
+	* \param BlockType BlockType of the block to be placed
+	* \param Colour Colour of the block to be palced
 	*
-	* \return X Y
+	* \return 1 If placed successfully
+	* \return 0 If block exists in that spot
 	*/
 	int AddBlock(int, int, BlockType, Colour = { 0,0,0,0 });
 	
-	//Purge the matrix and vector
+
+	/**
+	* \brief Purge the matrix and vector
+	*/
 	void PurgeBlocks();
 
-	//Checks if board is clear
+
+	/**
+	* \brief Checks if board is clear
+	*/
 	bool IsClear();
 
 
@@ -71,7 +81,10 @@ public:
 
 private:
 	
-	//Setting pointers to 0
+
+	/**
+	* \brief Sets all pointers to 0
+	*/
 	GameField() {
 		for (int i = 0; i < FIELD_WIDTH; i++) {
 			for (int j = 0; j < FIELD_HEIGHT; j++) {

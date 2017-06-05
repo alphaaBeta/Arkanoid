@@ -1,6 +1,5 @@
 #pragma once
 
-//#include <vector>
 
 #include "Config.h"
 
@@ -9,8 +8,10 @@
 #include "Racket.h"
 #include "GameField.h"
 #include "Block.h"
-//#include "Enemy.h"
 
+/**
+* \brief Class for powerups.
+*/
 class Powerup
 {
 public:
@@ -26,9 +27,19 @@ public:
 		}
 	}
 
+	/**
+	* \brief Calls effect the powerup has on player when collected
+	*/
 	virtual void Collect() {}
 
-
+	/**
+	* \brief Calculates new position, checks for collision.
+	*
+	* \param float timeStep.
+	*
+	* \return char -1 When out of boundaries.
+	* \return char 1 else
+	*/
 	char Move(float timeStep) {
 		double ynew = this->y + (Vy * timeStep);
 		if (abs(this->y - Racket::getInstance().y) <= POWERUP_COLLECT_RANGE) {
@@ -44,6 +55,12 @@ public:
 		return 1;
 	}
 
+
+	/**
+	* \brief Calls Move() on all powerups in powerupList.
+	*
+	* \param float timeStep
+	*/
 	static void MoveAll(float timeStep) {
 
 		//If it falls out of the screen
@@ -56,12 +73,33 @@ public:
 	}
 
 
-	
-	double x, y, Vy;
+	/**
+	* \brief X coordinate
+	*/
+	double x;
 
+
+	/**
+	* \brief Y coordinate
+	*/
+	double y;
+
+
+	/**
+	* \brief Vertical speed of powerup
+	*/
+	double Vy;
+
+
+	/**
+	* \brief Colour of powerup
+	*/
 	Colour color;
 };
 
+/**
+* \brief Powerup incrasing the amount of balls.
+*/
 class TripleBallPWUP : public Powerup {
 public:
 	void Collect() {
@@ -74,6 +112,9 @@ public:
 	TripleBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 0, 255, 255 }; }
 };
 
+/**
+* \brief Powerup making balls bigger.
+*/
 class BigBallPWUP : public Powerup {
 public:
 	void Collect() {
@@ -86,16 +127,23 @@ public:
 	BigBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 0, 255, 255 }; }
 };
 
+/**
+* \brief Powerup that gives ability to shoot missiles.
+*/
 class ShootPWUP : public Powerup {
 public:
 	
 	void Collect() {
-		Racket::getInstance().shooting = 1;
+		Racket::getInstance().shootingEnabled = 1;
 		this->Destroy();
 	}
 	ShootPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 255, 20, 147, 255 }; }
 };
 
+
+/**
+* \brief Powerup incrasing the live amount.
+*/
 class ExtraLivePWUP : public Powerup {
 public:
 	void Collect() {
@@ -105,6 +153,9 @@ public:
 	ExtraLivePWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 255, 0, 255 }; }
 };
 
+/**
+* \brief Powerup incrasing the size of Racket.
+*/
 class BigRacketPWUP : public Powerup {
 public:
 	void Collect() {
@@ -114,6 +165,9 @@ public:
 	BigRacketPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 0, 255, 0, 255 }; }
 };
 
+/**
+* \brief Powerup decrasing the size of Racket.
+*/
 class SmallRacketPWUP : public Powerup {
 public:
 	void Collect() {
@@ -123,6 +177,9 @@ public:
 	SmallRacketPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 255, 0, 0, 255 }; }
 };
 
+/**
+* \brief Powerup incrasing the speed of balls.
+*/
 class FastBallPWUP : public Powerup {
 public:
 	void Collect() {
@@ -135,6 +192,9 @@ public:
 	FastBallPWUP(double xx, double yy) : Powerup(xx, yy) { this->color = { 255, 0, 0, 255 }; }
 };
 
+/**
+* \brief Powerup decrasing the speed of balls.
+*/
 class SlowBallPWUP : public Powerup {
 public:
 	void Collect() {

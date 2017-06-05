@@ -20,31 +20,42 @@ class Player;
 struct SaveData;
 
 /**
-* \brief Test brief
-*
-* \param haha testttt
-*
-* \return ha test
+* \brief Class containing methods for operations between player and files.
 */
 class FileOp
 {
 	friend Player;
 protected:
-	//Loads n level from JSON file
+
+	/**
+	* \brief Loads a level from JSON file
+	*
+	* \param int Number of level to be loaded.
+	*
+	* \return int success flag.
+	*/
 	static int LoadLevel(int n);
 
-	//Loads a savefile
+
+	/**
+	* \brief Loads a savefile
+	*/
 	static SaveData LoadGame();
 
-	//Saves the game
+
+	/**
+	* \brief Saves the game to file.
+	*/
 	static int SaveGame(SaveData);
 };
 
 
 
 
-
-class Player	//singleton
+/**
+* \brief Class containing all the data for player data: level, score, etc.
+*/
+class Player
 {
 
 private:
@@ -67,8 +78,41 @@ public:
 	//----MAIN VARS----//
 	/////////////////////
 
-	int lives, score, level, difficulty;
-	int scoreAtStart, livesAtStart;
+	/**
+	* \brief Lives the player has.
+	*/
+	int lives;
+	
+	
+	/**
+	* \brief Score a player has gained.
+	*/
+	int score;
+	
+	
+	/**
+	* \brief Number of current level.
+	*/
+	int level;
+	
+	
+	/**
+	* \brief Difficulty (not used)
+	*/
+	int difficulty;
+	
+	
+	/**
+	* \brief Score that player had at the start of the level. Score that is being saved.
+	*/
+	int scoreAtStart;
+	
+	
+	/**
+	* \brief Lives at the start of the level. Lives that are being saved.
+	*/
+	int livesAtStart;
+
 
 	/////////////////////
 
@@ -76,9 +120,30 @@ public:
 	//----MAIN METHODS----//
 	////////////////////////
 
-	//Proceeds to next level
-	int NextLevel(int);
+
+	/**
+	* \brief Loads a certain level.
+	*
+	* \param int Number of level to be loaded.
+	*
+	* \return int Success flag.
+	*/
+	int LoadLevel(int);
+
+
+	/**
+	* \brief X
+	*
+	* \return int Success flag.
+	*/
 	int LoadGame();
+
+
+	/**
+	* \brief X
+	*
+	* \return int Success flag.
+	*/
 	int SaveGame();
 
 	friend FileOp;
@@ -88,7 +153,9 @@ public:
 
 
 
-
+/**
+* \brief A temporary struct to easen saving/loading procedure.
+*/
 struct SaveData {
 	int level, score, lives, difficulty;
 

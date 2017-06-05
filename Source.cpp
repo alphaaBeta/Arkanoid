@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 			
 
 			//Loads nextlevel (level1)
-			Player::getInstance().NextLevel(Player::getInstance().level + 1);
+			Player::getInstance().LoadLevel(Player::getInstance().level + 1);
 
 			
 			SDL_RenderSetViewport(Render::getInstance().gRenderer, &Render::getInstance().leftViewport);
@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
 
 				//Proceed to next level if board is clear
 				if (GameField::getInstance().IsClear())
-					Player::getInstance().NextLevel(Player::getInstance().level + 1);
+					Player::getInstance().LoadLevel(Player::getInstance().level + 1);
 
 				//Play sounds, for ball
 				//Bounce from pallet
