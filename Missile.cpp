@@ -2,33 +2,40 @@
 
 
 
-std::vector<Missile *> Missile::MissileList;
+std::vector<Missile *> Missile::missileList;
 
 
 Missile::Missile()
 {
 	this->x = 0;
 	this->y = 0;
-	this->Vy = -400;
-	MissileList.push_back(this);
+	this->Vy = MISSILE_SPEED;
+	missileList.push_back(this);
 }
 
-Missile::Missile(double x, double y) {
+Missile::Missile(double x, double y, int s) {
 	this->x = x;
 	this->y = y;
-	this->Vy = -400;
-	MissileList.push_back(this);
+	this->Vy = s;
+	missileList.push_back(this);
 }
 
+//Removes missile from the vector 
 Missile::~Missile()
 {
+	for (int i = 0; i < missileList.size(); i++) {
+		if (missileList[i] == this) {
+			missileList.erase(missileList.begin() + i);
+		}
+
+	}
 }
 
 
 Block* Missile::CheckCollision() {
 	Block *aux = 0;
-	for (int i = 0; i < GameField::getInstance().BlockList.size(); i++) {
-		aux = GameField::getInstance().BlockList[i];
+	for (int i = 0; i < GameField::getInstance().blockList.size(); i++) {
+		aux = GameField::getInstance().blockList[i];
 		if (this->x >= aux->x && this->x < aux->x + BLOCK_WIDTH) {
 			if (this->y > aux->y && this->y <= aux->y + BLOCK_HEIGHT) {
 				return aux;
@@ -56,20 +63,10 @@ char Missile::Move(float timeStep) {
 	return 1;
 }
 
-void Missile::Destroy() {
-	for (int i = 0; i < MissileList.size(); i++) {
-		if (MissileList[i] == this) {
-			MissileList.erase(MissileList.begin() + i);
-		}
-
-	}
-	delete this;
-}
 
 void Missile::MoveAll(float timeStep) {
-	for (int i = 0; i < MissileList.size(); i++) {
-		if (MissileList[i]->Move(timeStep) == -1) {
-			MissileList[i]->Destroy();
-		}
+	for (int i = 0; i < missileList.size(); i++) {
+		if (missileList[i]->Move(timeStep) == -1)
+			delete missileList[i];
 	}
 }

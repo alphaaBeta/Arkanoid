@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <SDL_ttf.h>
 #include <string>
 
 #include "Ball.h"
@@ -10,90 +11,156 @@
 #include "Block.h"
 #include "GameField.h"
 #include "Missile.h"
+#include "Enemy.h"
 
 
-//Texture wrapper class
+
+/**
+* \brief Texture wrapper class
+*/
 class LTexture
 {
 public:
-	//Initializes variables
+	
+	/**
+	* \brief Initializes variables
+	*/
 	LTexture();
 
-	//Deallocates memory
+	
+	/**
+	* \brief Deallocates memory
+	*/
 	~LTexture();
 
-	//Loads image at specified path
+	
+	/**
+	* \brief Loads image at specified path
+	*/
 	bool loadFromFile(std::string path);
 
 #ifdef _SDL_TTF_H
-	//Creates image from font string
+
+	/**
+	* \brief Creates image from font string
+	*/
 	bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
 #endif
 
-	//Deallocates texture
+
+	/**
+	* \brief Deallocates texture
+	*/
 	void free();
 
-	//Set color modulation
+	
+	/**
+	* \brief Set color modulation
+	*/
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);
 
-	//Set blending
+	
+	/**
+	* \brief Set blending
+	*/
 	void setBlendMode(SDL_BlendMode blending);
 
-	//Set alpha modulation
+	
+	/**
+	* \brief Set alpha modulation
+	*/
 	void setAlpha(Uint8 alpha);
 
-	//Renders texture at given point
+	
+	/**
+	* \brief Renders texture at given point
+	*/
 	void render(int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-	//Gets image dimensions
+	
+	/**
+	* \brief Gets image dimensions
+	*/
 	int getWidth();
 	int getHeight();
 
 private:
-	//The actual hardware texture
+	
+	/**
+	* \brief The actual hardware texture
+	*/
 	SDL_Texture* mTexture;
 
-	//Image dimensions
+
+	/**
+	* \brief Image dimensions
+	*/
 	int mWidth;
 	int mHeight;
 };
 
 
 
-//The application time based timer
+
+/**
+* \brief The application time based timer
+*/
 class LTimer
 {
 public:
-	//Initializes variables
+	
+	/**
+	* \brief Initializes variables
+	*/
 	LTimer();
 
-	//The various clock actions
+	
+	/**
+	* \brief The various clock actions
+	*/
 	void start();
 	void stop();
 	void pause();
 	void unpause();
 
-	//Gets the timer's time
+	
+	/**
+	* \brief Gets the timer's time
+	*/
 	Uint32 getTicks();
 
-	//Checks the status of the timer
+
+	/**
+	* \brief Checks the status of the timer
+	*/
 	bool isStarted();
 	bool isPaused();
 
 private:
-	//The clock time when the timer started
+	
+	/**
+	* \brief The clock time when the timer started
+	*/
 	Uint32 mStartTicks;
 
-	//The ticks stored when the timer was paused
+	
+	/**
+	* \brief The ticks stored when the timer was paused
+	*/
 	Uint32 mPausedTicks;
 
-	//The timer status
+	
+	/**
+	* \brief The timer status
+	*/
 	bool mPaused;
 	bool mStarted;
 };
 
-
-class Render {//singleton
+/**
+* \brief Class containing some methods and texture pointers for rendering.
+*/
+class Render {
 private:
 	Render() {	}
 	Render(const Render&) { }
@@ -110,14 +177,23 @@ public:
 
 	SDL_Renderer* gRenderer = NULL;
 
-	//Scene textures
+	SDL_Rect leftViewport = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	SDL_Rect rightViewport = { SCREEN_WIDTH + 1, 0, SCREEN_WIDTH + SIDEBAR_WIDTH, SCREEN_HEIGHT };
+
+	
+	/**
+	* \brief Scene textures
+	*/
 	LTexture gBallTexture;
 	LTexture gBlockTexture;
 	LTexture gRacketTexture;
 	LTexture gRacketTexture2;
 	LTexture gPwupTexture;
 	LTexture gBulletTexture;
+	LTexture gTextTexture;
+	LTexture gEnemyTexture;
 
+	TTF_Font *gFont = 0;
 
 	Mix_Chunk *gPing = NULL;
 	Mix_Chunk *gRacketPong = NULL;
@@ -127,21 +203,29 @@ public:
 	static void RenderRacket();
 	static void RenderPwups();
 	static void RenderBullets();
+	static void RenderEnemies();
 
 };
 
-//Starts up SDL and creates window
+
+/**
+* \brief Starts up SDL and creates window
+*/
 bool init();
 
-//Loads media
+
+/**
+* \brief Loads media
+*/
 bool loadMedia();
 
-//Frees media and shuts down SDL
+
+/**
+* \brief Frees media and shuts down SDL
+*/
 void close();
 
-//The window renderer
-
-
-
-
+/**
+* \brief Handles input (eg. from keyboard)
+*/
 void handleInput(SDL_Event &);

@@ -168,7 +168,7 @@ bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor
 	free();
 
 	//Render text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Solid(Render::getInstance().gFont, textureText.c_str(), textColor);
 	if (textSurface != NULL)
 	{
 		//Create texture from surface pixels
@@ -276,7 +276,7 @@ bool init()
 		}
 
 		//Create window
-		Render::getInstance().gWindow = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		Render::getInstance().gWindow = SDL_CreateWindow("Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH+SIDEBAR_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (Render::getInstance().gWindow == NULL)
 		{
 			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -301,6 +301,13 @@ bool init()
 				if (!(IMG_Init(imgFlags) & imgFlags))
 				{
 					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+					success = false;
+				}
+
+				//Initialize SDL_ttf
+				if (TTF_Init() == -1)
+				{
+					printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
 					success = false;
 				}
 
@@ -355,6 +362,11 @@ bool loadMedia()
 		success = false;
 	}
 
+	//Load enemy texture
+	if (!Render::getInstance().gEnemyTexture.loadFromFile("resources/enemy.bmp")) {
+		printf("Failed to load enemy texture!\n");
+		success = false;
+	}
 
 	//Load sound effects
 	Render::getInstance().gPing = Mix_LoadWAV("resources/ping.wav");
@@ -371,6 +383,20 @@ bool loadMedia()
 		success = false;
 	}
 
+	//Load font
+	Render::getInstance().gFont = TTF_OpenFont("resources/arial.ttf", 28);
+	if (Render::getInstance().gFont == NULL)
+	{
+		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+		success = false;
+	}
+	else
+	{
+		//Set text color as black
+		SDL_Color textColor = { 0, 0, 0, 255 };
+
+	}
+
 	return success;
 }
 
@@ -380,6 +406,13 @@ void close()
 	Render::getInstance().gBallTexture.free();
 	Render::getInstance().gBlockTexture.free();
 	Render::getInstance().gRacketTexture.free();
+	Render::getInstance().gPwupTexture.free();
+	//Free font texture
+	Render::getInstance().gTextTexture.free();
+
+	//Free global font
+	TTF_CloseFont(Render::getInstance().gFont);
+	Render::getInstance().gFont = NULL;
 
 	Mix_FreeChunk(Render::getInstance().gPing);
 	Mix_FreeChunk(Render::getInstance().gRacketPong);
@@ -396,17 +429,19 @@ void close()
 	IMG_Quit();
 	SDL_Quit();
 	Mix_Quit();
+	TTF_Quit();
+
 }
 
 //Render all the balls
 void Render::RenderBalls() {
 
 	int i;
-	for (i = 0; i < (Ball::BallList).size(); i++) {
+	for (i = 0; i < (Ball::ballList).size(); i++) {
 		SDL_Rect ballRect = { 0, 0 };
-		ballRect.w = (Ball::BallList)[i]->radius * 2;
-		ballRect.h = (Ball::BallList)[i]->radius * 2;
-		Render::getInstance().gBallTexture.render(int((Ball::BallList)[i]->x - (Ball::BallList)[i]->radius), int((Ball::BallList)[i]->y - (Ball::BallList)[i]->radius), &ballRect);
+		ballRect.w = (Ball::ballList)[i]->radius * 2;
+		ballRect.h = (Ball::ballList)[i]->radius * 2;
+		Render::getInstance().gBallTexture.render(int((Ball::ballList)[i]->x - (Ball::ballList)[i]->radius), int((Ball::ballList)[i]->y - (Ball::ballList)[i]->radius), &ballRect);
 
 	}
 }
@@ -420,12 +455,12 @@ void Render::RenderBlocks() {
 	blockRect.w = BLOCK_WIDTH;
 	blockRect.h = BLOCK_HEIGHT;
 
-	for (i = 0; i < (GameField::BlockList).size(); i++) {
-		Colour clr = { GameField::getInstance().BlockList[i]->colour };
+	for (i = 0; i < (GameField::blockList).size(); i++) {
+		Colour clr = { GameField::getInstance().blockList[i]->colour };
 		//Setting colour and alpha of texture, before rendering the correct block
 		Render::getInstance().gBlockTexture.setColor(clr.r, clr.g, clr.b);
 		Render::getInstance().gBlockTexture.setAlpha(clr.a);
-		Render::getInstance().gBlockTexture.render(int((GameField::BlockList)[i]->x), int((GameField::BlockList)[i]->y), &blockRect);
+		Render::getInstance().gBlockTexture.render(int((GameField::blockList)[i]->x), int((GameField::blockList)[i]->y), &blockRect);
 
 	}
 }
@@ -438,12 +473,12 @@ void Render::RenderRacket() {
 	rackRect.h = 8;
 
 	//regular texture
-	if (!Racket::getInstance().shooting)
+	if (!Racket::getInstance().shootingEnabled)
 		Render::getInstance().gRacketTexture.render(int((Racket::getInstance()).x - ((Racket::getInstance()).width / 2)),
 			int((Racket::getInstance()).y),
 			&rackRect);
 	//if shooting powerup is up
-	else if (Racket::getInstance().shooting == 1)
+	else if (Racket::getInstance().shootingEnabled == 1)
 		Render::getInstance().gRacketTexture2.render(int((Racket::getInstance()).x - ((Racket::getInstance()).width / 2)),
 			int((Racket::getInstance()).y),
 			&rackRect);
@@ -457,12 +492,13 @@ void Render::RenderPwups() {
 	Rect.h = 12;
 	Colour clr;
 
-	for (int i = 0; i < GameField::getInstance().PowerupList.size(); i++) {
-		clr = GameField::getInstance().PowerupList[i]->color;
+	for (int i = 0; i < GameField::getInstance().powerupList.size(); i++) {
+		clr = GameField::getInstance().powerupList[i]->color;
 		Render::getInstance().gPwupTexture.setColor(clr.r, clr.g, clr.b);
 		Render::getInstance().gPwupTexture.setAlpha(clr.a);
-		Render::getInstance().gPwupTexture.render(GameField::getInstance().PowerupList[i]->x, \
-			GameField::getInstance().PowerupList[i]->y,
+		Render::getInstance().gPwupTexture.render(\
+			int(GameField::getInstance().powerupList[i]->x), \
+			int(GameField::getInstance().powerupList[i]->y), \
 			&Rect);
 	}
 
@@ -477,14 +513,30 @@ void Render::RenderBullets() {
 
 	Colour clr = { 255, 0, 0, 255 };
 
-	for (int i = 0; i < Missile::MissileList.size(); i++) {
+	for (int i = 0; i < Missile::missileList.size(); i++) {
 		Render::getInstance().gBulletTexture.setColor(clr.r, clr.g, clr.b);
 		Render::getInstance().gBulletTexture.setAlpha(clr.a);
 
 		Render::getInstance().gBulletTexture.render(\
-			Missile::MissileList[i]->x - 1,
-			Missile::MissileList[i]->y,
+			int(Missile::missileList[i]->x - 1),
+			int(Missile::missileList[i]->y),
 			&Rect);
+	}
+}
+
+//Render enemies
+void Render::RenderEnemies() {
+	SDL_Rect Rect = { 0,0 };
+	Rect.w = ENEMY_SIZE * 2;
+	Rect.h = ENEMY_SIZE * 2;
+
+	for (int i = 0; i < Enemy::enemyList.size(); i++) {
+		Colour clr = { Enemy::enemyList[i]->colour };
+
+		Render::getInstance().gEnemyTexture.setColor(clr.r, clr.g, clr.b);
+		Render::getInstance().gEnemyTexture.setAlpha(clr.a);
+		Render::getInstance().gEnemyTexture.render(int(Enemy::enemyList[i]->x - Enemy::enemyList[i]->size), int(Enemy::enemyList[i]->y - Enemy::enemyList[i]->size), &Rect);
+
 	}
 }
 
@@ -499,9 +551,24 @@ void handleInput(SDL_Event& e)
 		case SDLK_LEFT: Racket::getInstance().speed -= RACKET_SPEED; break;
 		case SDLK_RIGHT: Racket::getInstance().speed += RACKET_SPEED; break;
 		case SDLK_UP:
-			if ((Racket::getInstance()).shooting) {
+			if ((Racket::getInstance()).shootingEnabled) {
 				Missile *aux = new Missile((Racket::getInstance()).x, (Racket::getInstance()).y);
 			}
+		case SDLK_s: Player::getInstance().SaveGame();
+			break;
+		case SDLK_l: Player::getInstance().LoadGame();
+			break;
+		case SDLK_f: for (int i = 0; i < Enemy::enemyList.size(); i++) Enemy::enemyList[i]->Act();
+			break;
+		case SDLK_1: new EnemyDiagonal(SCREEN_WIDTH/2);
+			break;
+		case SDLK_2: new EnemyShooting(SCREEN_WIDTH / 2);
+			break;
+		case SDLK_3: new EnemyGroupper(SCREEN_WIDTH / 2);
+			break;
+		case SDLK_4: new EnemyBlocker(SCREEN_WIDTH / 2);
+			break;
+
 		}
 	}
 

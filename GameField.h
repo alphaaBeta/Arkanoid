@@ -6,8 +6,10 @@
 class Block;
 class Powerup;
 
-
-class GameField	//singleton
+/**
+* \brief A class containing most elements needed to calculate behaviour.
+*/
+class GameField
 {
 public:
 
@@ -17,31 +19,57 @@ public:
 	/////////////////////
 
 
-	//Matrix to roughly know block location
-	//Used to check if block is alredy placed in one place, to avoid multiple blocks on the same tile
-	Block *BlockMatrix[FIELD_WIDTH][FIELD_HEIGHT];
+	/**
+	*Used to check if block is alredy placed in one place, to avoid multiple blocks on the same tile.
+	*
+	* \brief Matrix to roughly know block location
+	*/
+	Block *blockMatrix[FIELD_WIDTH][FIELD_HEIGHT];
 
-	//List to keep track of blocks
-	static std::vector<Block *> BlockList;
 
-	//List to keep track of powerups
-	static std::vector<Powerup *> PowerupList;
+	/**
+	* \brief Vector to keep track of blocks
+	*/
+	static std::vector<Block *> blockList;
+
+
+	/**
+	* \brief Vector to keep track of powerups.
+	*/
+	static std::vector<Powerup *> powerupList;
 
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
-	//TODO: void LoadBlockLayout();	//load specific block layout(from file)
 
-	//x, y, type, colour
-	int AddBlock(int, int, BlockType, Colour);	
+	/**
+	* \brief Adds a block to the matrix - gamefield.
+	*
+	* \param int X coordinate in matrix
+	* \param int Y coordinate in matrix
+	* \param BlockType BlockType of the block to be placed
+	* \param Colour Colour of the block to be palced
+	*
+	* \return 1 If placed successfully
+	* \return 0 If block exists in that spot
+	*/
+	int AddBlock(int, int, BlockType, Colour = { 0,0,0,0 });
+	
+
+	/**
+	* \brief Purge the matrix and vector
+	*/
+	void PurgeBlocks();
 
 
-	~GameField() {
-		for (int i = 0; i < BlockList.size(); i++) {
-			delete (BlockList[i]);//TODO??
-		}
-	}
+	/**
+	* \brief Checks if board is clear
+	*/
+	bool IsClear();
+
+
+	~GameField();
 
 	static GameField& getInstance()
 	{
@@ -53,11 +81,14 @@ public:
 
 private:
 	
-	//Setting pointers to 0
+
+	/**
+	* \brief Sets all pointers to 0
+	*/
 	GameField() {
 		for (int i = 0; i < FIELD_WIDTH; i++) {
 			for (int j = 0; j < FIELD_HEIGHT; j++) {
-				BlockMatrix[i][j] = NULL;
+				blockMatrix[i][j] = NULL;
 			}
 		}
 	}

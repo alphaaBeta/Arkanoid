@@ -5,12 +5,9 @@
 #include "GameField.h"
 #include "Powerup.h"
 
-
-//colour struct, consists of:
-//r, g, b, a : red, green, blue, alpha
-
-
-
+/**
+* \brief A class for a block
+*/
 class Block
 {
 public:
@@ -21,31 +18,56 @@ public:
 		colour.a = a;
 	}
 
-	~Block() {}
+	~Block();
 
 	/////////////////////
 	//----MAIN VARS----//
 	/////////////////////
 
+	/**
+	* Block colour, defined by struct in Config.h. Contains of red, green, blue and alpha values, ranging from 0-255.
+	*
+	* \brief Block colour.
+	*/
 	Colour colour;
 
-	//Cords for upper left corner
-	int x, y; 
 
+	/**
+	* \brief x coordinate of upper left corner.
+	*/
+	int x;
+	/**
+	* \brief y coordinate of upper left corner
+	*/
+	int y; 
+
+
+	/**
+	* Defines how many times a block can be hit before disappearing.
+	*
+	* \brief Block "hitpoints"
+	*/
 	char health;
 
 	////////////////////////
 	//----MAIN METHODS----//
 	////////////////////////
 
+
+	/**
+	* \brief Records a block being hit, performs appropriate actions.
+	*
+	* \param int Strength of a hit (power)
+	*/
 	void Hit(int = 1);	
 
-	void Destroy();
 
 };
 
 
-
+/**
+* \brief Regular block with health = REGULAR_BLOCK_HEALTH (config.h)
+*/
 class RegularBlock : public Block 
 {
 public:
@@ -54,7 +76,9 @@ public:
 
 };
 
-
+/**
+* \brief Stronger block with health = STRONG_BLOCK_HEALTH (config.h)
+*/
 class StrongBlock : public Block
 {
 public:
@@ -62,7 +86,9 @@ public:
 		: Block(hlt, r, g, b, a) {}
 };
 
-
+/**
+* \brief Even stronger block with health = VERY_STRONG_BLOCK_HEALTH (config.h)
+*/
 class VeryStrongBlock : public Block
 {
 public:
@@ -71,6 +97,9 @@ public:
 };
 
 
+/**
+* \brief Block that cannot be destroyed
+*/
 class IndestructibleBlock : public Block
 {
 public:
