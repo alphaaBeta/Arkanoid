@@ -1,0 +1,106 @@
+\hypertarget{class_player}{}\section{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+
+
+Class containing all the data for player data\+: level, score, etc.  
+
+
+
+
+{\ttfamily \#include $<$Player.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_player_ad0ad39f2def9706f640756bfa18325b9}{Load\+Level} (int)
+\begin{DoxyCompactList}\small\item\em Loads a certain level. \end{DoxyCompactList}\item 
+int \hyperlink{class_player_a7d6d5ae271d5a9897f9e2aae65184dac}{Load\+Game} ()
+\begin{DoxyCompactList}\small\item\em X. \end{DoxyCompactList}\item 
+int \hyperlink{class_player_a39b5ad5853752cfce82e54b67c2e57e7}{Save\+Game} ()
+\begin{DoxyCompactList}\small\item\em X. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a676c1467083571da9294cff54a0e6f1d}\label{class_player_a676c1467083571da9294cff54a0e6f1d}} 
+static \hyperlink{class_player}{Player} \& {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_ab3300fa23175647f3ff50311dd2a7e04}\label{class_player_ab3300fa23175647f3ff50311dd2a7e04}} 
+int \hyperlink{class_player_ab3300fa23175647f3ff50311dd2a7e04}{lives}
+\begin{DoxyCompactList}\small\item\em Lives the player has. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_ace6abae8d66534ad0a1fd6458f786a6e}\label{class_player_ace6abae8d66534ad0a1fd6458f786a6e}} 
+int \hyperlink{class_player_ace6abae8d66534ad0a1fd6458f786a6e}{score}
+\begin{DoxyCompactList}\small\item\em Score a player has gained. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_aa1e06c89dea6981223879e6bfccdb5cd}\label{class_player_aa1e06c89dea6981223879e6bfccdb5cd}} 
+int \hyperlink{class_player_aa1e06c89dea6981223879e6bfccdb5cd}{level}
+\begin{DoxyCompactList}\small\item\em Number of current level. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_ab6e8ff0cf99d796e9159983e9b7294ef}\label{class_player_ab6e8ff0cf99d796e9159983e9b7294ef}} 
+int \hyperlink{class_player_ab6e8ff0cf99d796e9159983e9b7294ef}{difficulty}
+\begin{DoxyCompactList}\small\item\em Difficulty (not used) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a9ec05b48bbf5f21047492baa5987cf00}\label{class_player_a9ec05b48bbf5f21047492baa5987cf00}} 
+int \hyperlink{class_player_a9ec05b48bbf5f21047492baa5987cf00}{score\+At\+Start}
+\begin{DoxyCompactList}\small\item\em Score that player had at the start of the level. Score that is being saved. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a54017815d04a18442d298ee20f09c7f1}\label{class_player_a54017815d04a18442d298ee20f09c7f1}} 
+int \hyperlink{class_player_a54017815d04a18442d298ee20f09c7f1}{lives\+At\+Start}
+\begin{DoxyCompactList}\small\item\em Lives at the start of the level. Lives that are being saved. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a1f561778c9d4c2c0a990521bb2083219}\label{class_player_a1f561778c9d4c2c0a990521bb2083219}} 
+friend {\bfseries File\+Op}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class containing all the data for player data\+: level, score, etc. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_a7d6d5ae271d5a9897f9e2aae65184dac}\label{class_player_a7d6d5ae271d5a9897f9e2aae65184dac}} 
+\index{Player@{Player}!Load\+Game@{Load\+Game}}
+\index{Load\+Game@{Load\+Game}!Player@{Player}}
+\subsubsection{\texorpdfstring{Load\+Game()}{LoadGame()}}
+{\footnotesize\ttfamily int Player\+::\+Load\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+X. 
+
+\begin{DoxyReturn}{Returns}
+int Success flag. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_ad0ad39f2def9706f640756bfa18325b9}\label{class_player_ad0ad39f2def9706f640756bfa18325b9}} 
+\index{Player@{Player}!Load\+Level@{Load\+Level}}
+\index{Load\+Level@{Load\+Level}!Player@{Player}}
+\subsubsection{\texorpdfstring{Load\+Level()}{LoadLevel()}}
+{\footnotesize\ttfamily int Player\+::\+Load\+Level (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Loads a certain level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & Number of level to be loaded.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Success flag. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a39b5ad5853752cfce82e54b67c2e57e7}\label{class_player_a39b5ad5853752cfce82e54b67c2e57e7}} 
+\index{Player@{Player}!Save\+Game@{Save\+Game}}
+\index{Save\+Game@{Save\+Game}!Player@{Player}}
+\subsubsection{\texorpdfstring{Save\+Game()}{SaveGame()}}
+{\footnotesize\ttfamily int Player\+::\+Save\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+X. 
+
+\begin{DoxyReturn}{Returns}
+int Success flag. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Player.\+h\item 
+Arkanoid/Player.\+cpp\end{DoxyCompactItemize}

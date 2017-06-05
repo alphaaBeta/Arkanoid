@@ -1,0 +1,200 @@
+\hypertarget{class_ball}{}\section{Ball Class Reference}
+\label{class_ball}\index{Ball@{Ball}}
+
+
+A ball class. Contains all the methods that allow the ball to move, check collision etc.  
+
+
+
+
+{\ttfamily \#include $<$Ball.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_ball_ab7c303f4d158af0722e379eeeae72db6}{Multiply\+Balls} (int, \hyperlink{class_ball}{Ball} \&)
+\begin{DoxyCompactList}\small\item\em Creates int balls at \hyperlink{class_ball}{Ball}\textquotesingle{}s location. \end{DoxyCompactList}\item 
+char \hyperlink{class_ball_aebe80a6c3933f8fc029259a9b93b69c3}{Check\+Collision} (float)
+\begin{DoxyCompactList}\small\item\em Checks if ball will collide with an object or gamefield edge. \end{DoxyCompactList}\item 
+char \hyperlink{class_ball_a32baf305e64d31e71ba175aad54feb1b}{Bounce} (char, \hyperlink{class_block}{Block} $\ast$=0)
+\begin{DoxyCompactList}\small\item\em Sets new speed vectors for a ball, after bouncing. \end{DoxyCompactList}\item 
+char \hyperlink{class_ball_a6afd96091f6ddeaf12c77c7a3857f3f9}{Move} (float)
+\begin{DoxyCompactList}\small\item\em Calculates new ball location. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static char \hyperlink{class_ball_a8625cadb0e2072ad743325696d326176}{Move\+Balls} (float)
+\begin{DoxyCompactList}\small\item\em Moves all the balls on ball\+List vector. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ball_ad8cba82a576b26e3f2280e3fc50ba863}\label{class_ball_ad8cba82a576b26e3f2280e3fc50ba863}} 
+static \hyperlink{class_ball}{Ball} $\ast$ \hyperlink{class_ball_ad8cba82a576b26e3f2280e3fc50ba863}{Add\+Ball} ()
+\begin{DoxyCompactList}\small\item\em Static method of adding one ball, accessing the constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_ball_ab5b6ed9fe327aace1b4e4a6473838bc6}{radius}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_ball}{Ball} size. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ball_a60894aab5e27e93bacf2393b9110a049}\label{class_ball_a60894aab5e27e93bacf2393b9110a049}} 
+double \hyperlink{class_ball_a60894aab5e27e93bacf2393b9110a049}{x}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_ball}{Ball} x coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ball_a17d73231eab81d0e74cf28d0068fe5cb}\label{class_ball_a17d73231eab81d0e74cf28d0068fe5cb}} 
+double \hyperlink{class_ball_a17d73231eab81d0e74cf28d0068fe5cb}{y}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_ball}{Ball} y coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ball_a9fa468c47ad3479e49cbff27f4bc0478}\label{class_ball_a9fa468c47ad3479e49cbff27f4bc0478}} 
+double \hyperlink{class_ball_a9fa468c47ad3479e49cbff27f4bc0478}{Vx}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_ball}{Ball} horizontal speed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ball_ad8064c1cc1d293f621bae27d173f0ca4}\label{class_ball_ad8064c1cc1d293f621bae27d173f0ca4}} 
+double \hyperlink{class_ball_ad8064c1cc1d293f621bae27d173f0ca4}{Vy}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_ball}{Ball} vertical speed. \end{DoxyCompactList}\item 
+int \hyperlink{class_ball_a5b6d417551e2b5cddbc68566891eea46}{power}
+\begin{DoxyCompactList}\small\item\em Defines how powerful the ball is. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_ball_ad3c62a3deb711ae1baa9448224df9f74}\label{class_ball_ad3c62a3deb711ae1baa9448224df9f74}} 
+static int \hyperlink{class_ball_ad3c62a3deb711ae1baa9448224df9f74}{ball\+Amount} = 0
+\begin{DoxyCompactList}\small\item\em Hold the current amount of balls. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_ball_a365ffb0673756a6b96fd7ae0d3c8b91b}\label{class_ball_a365ffb0673756a6b96fd7ae0d3c8b91b}} 
+static std\+::vector$<$ \hyperlink{class_ball}{Ball} $\ast$ $>$ \hyperlink{class_ball_a365ffb0673756a6b96fd7ae0d3c8b91b}{ball\+List}
+\begin{DoxyCompactList}\small\item\em Vector to keep track of balls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A ball class. Contains all the methods that allow the ball to move, check collision etc. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_ball_a32baf305e64d31e71ba175aad54feb1b}\label{class_ball_a32baf305e64d31e71ba175aad54feb1b}} 
+\index{Ball@{Ball}!Bounce@{Bounce}}
+\index{Bounce@{Bounce}!Ball@{Ball}}
+\subsubsection{\texorpdfstring{Bounce()}{Bounce()}}
+{\footnotesize\ttfamily char Ball\+::\+Bounce (\begin{DoxyParamCaption}\item[{char}]{how,  }\item[{\hyperlink{class_block}{Block} $\ast$}]{gothit = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Sets new speed vectors for a ball, after bouncing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em char} & type of bounce \\
+\hline
+{\em Block$\ast$} & \hyperlink{class_block}{Block} that has been hit (if 0 -\/ no block hit)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}p\textquotesingle{} for racket 
+
+\textquotesingle{}x\textquotesingle{} for horizontal bounce 
+
+\textquotesingle{}y\textquotesingle{} for vertical bounce 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_ball_aebe80a6c3933f8fc029259a9b93b69c3}\label{class_ball_aebe80a6c3933f8fc029259a9b93b69c3}} 
+\index{Ball@{Ball}!Check\+Collision@{Check\+Collision}}
+\index{Check\+Collision@{Check\+Collision}!Ball@{Ball}}
+\subsubsection{\texorpdfstring{Check\+Collision()}{CheckCollision()}}
+{\footnotesize\ttfamily char Ball\+::\+Check\+Collision (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})}
+
+
+
+Checks if ball will collide with an object or gamefield edge. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step, to check future location\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}p\textquotesingle{} for racket 
+
+\textquotesingle{}x\textquotesingle{} for horizontal bounce 
+
+\textquotesingle{}y\textquotesingle{} for vertical bounce 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_ball_a6afd96091f6ddeaf12c77c7a3857f3f9}\label{class_ball_a6afd96091f6ddeaf12c77c7a3857f3f9}} 
+\index{Ball@{Ball}!Move@{Move}}
+\index{Move@{Move}!Ball@{Ball}}
+\subsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily char Ball\+::\+Move (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})}
+
+
+
+Calculates new ball location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step, to check future location\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}p\textquotesingle{} for racket 
+
+\textquotesingle{}x\textquotesingle{} for horizontal bounce 
+
+\textquotesingle{}y\textquotesingle{} for vertical bounce 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_ball_a8625cadb0e2072ad743325696d326176}\label{class_ball_a8625cadb0e2072ad743325696d326176}} 
+\index{Ball@{Ball}!Move\+Balls@{Move\+Balls}}
+\index{Move\+Balls@{Move\+Balls}!Ball@{Ball}}
+\subsubsection{\texorpdfstring{Move\+Balls()}{MoveBalls()}}
+{\footnotesize\ttfamily char Ball\+::\+Move\+Balls (\begin{DoxyParamCaption}\item[{float}]{time\+Stamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Moves all the balls on ball\+List vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step, for relaying to different \hyperlink{class_ball_a6afd96091f6ddeaf12c77c7a3857f3f9}{Move(float)} functions\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\textquotesingle{}p\textquotesingle{} for racket 
+
+\textquotesingle{}x\textquotesingle{} for horizontal bounce 
+
+\textquotesingle{}y\textquotesingle{} for vertical bounce 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_ball_ab7c303f4d158af0722e379eeeae72db6}\label{class_ball_ab7c303f4d158af0722e379eeeae72db6}} 
+\index{Ball@{Ball}!Multiply\+Balls@{Multiply\+Balls}}
+\index{Multiply\+Balls@{Multiply\+Balls}!Ball@{Ball}}
+\subsubsection{\texorpdfstring{Multiply\+Balls()}{MultiplyBalls()}}
+{\footnotesize\ttfamily void Ball\+::\+Multiply\+Balls (\begin{DoxyParamCaption}\item[{int}]{amt,  }\item[{\hyperlink{class_ball}{Ball} \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Creates int balls at \hyperlink{class_ball}{Ball}\textquotesingle{}s location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & Number of balls to be created\\
+\hline
+{\em Ball\&} & Takes the \hyperlink{class_ball}{Ball}\& location and speed to create those balls. Changes variables a bit. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_ball_a5b6d417551e2b5cddbc68566891eea46}\label{class_ball_a5b6d417551e2b5cddbc68566891eea46}} 
+\index{Ball@{Ball}!power@{power}}
+\index{power@{power}!Ball@{Ball}}
+\subsubsection{\texorpdfstring{power}{power}}
+{\footnotesize\ttfamily int Ball\+::power}
+
+
+
+Defines how powerful the ball is. 
+
+States how much \char`\"{}hitpoints\char`\"{} does every hit to a block take from it. For example, power 3 destroys a block with 3 hitpoints in a single hit. \mbox{\Hypertarget{class_ball_ab5b6ed9fe327aace1b4e4a6473838bc6}\label{class_ball_ab5b6ed9fe327aace1b4e4a6473838bc6}} 
+\index{Ball@{Ball}!radius@{radius}}
+\index{radius@{radius}!Ball@{Ball}}
+\subsubsection{\texorpdfstring{radius}{radius}}
+{\footnotesize\ttfamily int Ball\+::radius}
+
+
+
+\hyperlink{class_ball}{Ball} size. 
+
+Defines the ball radious, in pixels. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Ball.\+h\item 
+Arkanoid/Ball.\+cpp\end{DoxyCompactItemize}

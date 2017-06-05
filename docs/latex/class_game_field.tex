@@ -1,0 +1,93 @@
+\hypertarget{class_game_field}{}\section{Game\+Field Class Reference}
+\label{class_game_field}\index{Game\+Field@{Game\+Field}}
+
+
+A class containing most elements needed to calculate behaviour.  
+
+
+
+
+{\ttfamily \#include $<$Game\+Field.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_game_field_ac5ab828d2d8dbabc75dedfc8f699a42c}{Add\+Block} (int, int, Block\+Type, \hyperlink{struct_colour}{Colour}=\{ 0, 0, 0, 0 \})
+\begin{DoxyCompactList}\small\item\em Adds a block to the matrix -\/ gamefield. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_field_a507ffac780fc8775a56e5e7af44c8960}\label{class_game_field_a507ffac780fc8775a56e5e7af44c8960}} 
+void \hyperlink{class_game_field_a507ffac780fc8775a56e5e7af44c8960}{Purge\+Blocks} ()
+\begin{DoxyCompactList}\small\item\em Purge the matrix and vector. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_field_ad408237f35b181d21dd5fa1b473c8ca8}\label{class_game_field_ad408237f35b181d21dd5fa1b473c8ca8}} 
+bool \hyperlink{class_game_field_ad408237f35b181d21dd5fa1b473c8ca8}{Is\+Clear} ()
+\begin{DoxyCompactList}\small\item\em Checks if board is clear. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_field_ad487d606fc86f967f58ec65d85684058}\label{class_game_field_ad487d606fc86f967f58ec65d85684058}} 
+static \hyperlink{class_game_field}{Game\+Field} \& {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_block}{Block} $\ast$ \hyperlink{class_game_field_a5b6cafcddfb83370e71363fc7b46a6f7}{block\+Matrix} \mbox{[}F\+I\+E\+L\+D\+\_\+\+W\+I\+D\+TH\mbox{]}\mbox{[}F\+I\+E\+L\+D\+\_\+\+H\+E\+I\+G\+HT\mbox{]}
+\begin{DoxyCompactList}\small\item\em Matrix to roughly know block location. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_field_a993a881f800ac9c73cea3060eea16aea}\label{class_game_field_a993a881f800ac9c73cea3060eea16aea}} 
+static std\+::vector$<$ \hyperlink{class_block}{Block} $\ast$ $>$ \hyperlink{class_game_field_a993a881f800ac9c73cea3060eea16aea}{block\+List}
+\begin{DoxyCompactList}\small\item\em Vector to keep track of blocks. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_field_a73fb44513fda2f45f7ddfe589222067c}\label{class_game_field_a73fb44513fda2f45f7ddfe589222067c}} 
+static std\+::vector$<$ \hyperlink{class_powerup}{Powerup} $\ast$ $>$ \hyperlink{class_game_field_a73fb44513fda2f45f7ddfe589222067c}{powerup\+List}
+\begin{DoxyCompactList}\small\item\em Vector to keep track of powerups. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class containing most elements needed to calculate behaviour. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_field_ac5ab828d2d8dbabc75dedfc8f699a42c}\label{class_game_field_ac5ab828d2d8dbabc75dedfc8f699a42c}} 
+\index{Game\+Field@{Game\+Field}!Add\+Block@{Add\+Block}}
+\index{Add\+Block@{Add\+Block}!Game\+Field@{Game\+Field}}
+\subsubsection{\texorpdfstring{Add\+Block()}{AddBlock()}}
+{\footnotesize\ttfamily int Game\+Field\+::\+Add\+Block (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{Block\+Type}]{type,  }\item[{\hyperlink{struct_colour}{Colour}}]{colour = {\ttfamily \{~0,0,0,0~\}} }\end{DoxyParamCaption})}
+
+
+
+Adds a block to the matrix -\/ gamefield. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & X coordinate in matrix \\
+\hline
+{\em int} & Y coordinate in matrix \\
+\hline
+{\em Block\+Type} & Block\+Type of the block to be placed \\
+\hline
+{\em \hyperlink{struct_colour}{Colour}} & \hyperlink{struct_colour}{Colour} of the block to be palced\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 If placed successfully 
+
+0 If block exists in that spot 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_field_a5b6cafcddfb83370e71363fc7b46a6f7}\label{class_game_field_a5b6cafcddfb83370e71363fc7b46a6f7}} 
+\index{Game\+Field@{Game\+Field}!block\+Matrix@{block\+Matrix}}
+\index{block\+Matrix@{block\+Matrix}!Game\+Field@{Game\+Field}}
+\subsubsection{\texorpdfstring{block\+Matrix}{blockMatrix}}
+{\footnotesize\ttfamily \hyperlink{class_block}{Block}$\ast$ Game\+Field\+::block\+Matrix\mbox{[}F\+I\+E\+L\+D\+\_\+\+W\+I\+D\+TH\mbox{]}\mbox{[}F\+I\+E\+L\+D\+\_\+\+H\+E\+I\+G\+HT\mbox{]}}
+
+
+
+Matrix to roughly know block location. 
+
+Used to check if block is alredy placed in one place, to avoid multiple blocks on the same tile. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Game\+Field.\+h\item 
+Arkanoid/Game\+Field.\+cpp\end{DoxyCompactItemize}

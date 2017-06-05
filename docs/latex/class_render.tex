@@ -1,0 +1,92 @@
+\hypertarget{class_render}{}\section{Render Class Reference}
+\label{class_render}\index{Render@{Render}}
+
+
+Class containing some methods and texture pointers for rendering.  
+
+
+
+
+{\ttfamily \#include $<$Render.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_render_adec8165d47785008ef1b593cd7f2866f}\label{class_render_adec8165d47785008ef1b593cd7f2866f}} 
+static \hyperlink{class_render}{Render} \& {\bfseries get\+Instance} ()
+\item 
+\mbox{\Hypertarget{class_render_aa0e41ce94983c5ead71a3a2bff83b62b}\label{class_render_aa0e41ce94983c5ead71a3a2bff83b62b}} 
+static void {\bfseries Render\+Balls} ()
+\item 
+\mbox{\Hypertarget{class_render_ab14b3c69b68bb08457d9416426a291f2}\label{class_render_ab14b3c69b68bb08457d9416426a291f2}} 
+static void {\bfseries Render\+Blocks} ()
+\item 
+\mbox{\Hypertarget{class_render_a4a257b71e0f6de8639e00c61a560662d}\label{class_render_a4a257b71e0f6de8639e00c61a560662d}} 
+static void {\bfseries Render\+Racket} ()
+\item 
+\mbox{\Hypertarget{class_render_a2d2dbb588a127236e25106d63e2e031d}\label{class_render_a2d2dbb588a127236e25106d63e2e031d}} 
+static void {\bfseries Render\+Pwups} ()
+\item 
+\mbox{\Hypertarget{class_render_af79f3fef9fceb2615207f5b9feecf014}\label{class_render_af79f3fef9fceb2615207f5b9feecf014}} 
+static void {\bfseries Render\+Bullets} ()
+\item 
+\mbox{\Hypertarget{class_render_af07aacd067217ff6ee66067a374e9397}\label{class_render_af07aacd067217ff6ee66067a374e9397}} 
+static void {\bfseries Render\+Enemies} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_render_a56f4679c30a4da025f82f93847d8489a}\label{class_render_a56f4679c30a4da025f82f93847d8489a}} 
+S\+D\+L\+\_\+\+Window $\ast$ {\bfseries g\+Window} = N\+U\+LL
+\item 
+\mbox{\Hypertarget{class_render_afa0976cec27200747482493e6e9ca779}\label{class_render_afa0976cec27200747482493e6e9ca779}} 
+S\+D\+L\+\_\+\+Renderer $\ast$ {\bfseries g\+Renderer} = N\+U\+LL
+\item 
+\mbox{\Hypertarget{class_render_af698eaede8e7778ca77187baaaeb8cbe}\label{class_render_af698eaede8e7778ca77187baaaeb8cbe}} 
+S\+D\+L\+\_\+\+Rect {\bfseries left\+Viewport} = \{ 0, 0, S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH, S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT \}
+\item 
+\mbox{\Hypertarget{class_render_af4e82c87974121b37bbbcb001cc46a83}\label{class_render_af4e82c87974121b37bbbcb001cc46a83}} 
+S\+D\+L\+\_\+\+Rect {\bfseries right\+Viewport} = \{ S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH + 1, 0, S\+C\+R\+E\+E\+N\+\_\+\+W\+I\+D\+TH + S\+I\+D\+E\+B\+A\+R\+\_\+\+W\+I\+D\+TH, S\+C\+R\+E\+E\+N\+\_\+\+H\+E\+I\+G\+HT \}
+\item 
+\mbox{\Hypertarget{class_render_a5c144f87e4aa2ef8643a8e2dc139e478}\label{class_render_a5c144f87e4aa2ef8643a8e2dc139e478}} 
+\hyperlink{class_l_texture}{L\+Texture} \hyperlink{class_render_a5c144f87e4aa2ef8643a8e2dc139e478}{g\+Ball\+Texture}
+\begin{DoxyCompactList}\small\item\em Scene textures. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_render_aca8afc8957a810bb962ab8f5a31d8500}\label{class_render_aca8afc8957a810bb962ab8f5a31d8500}} 
+\hyperlink{class_l_texture}{L\+Texture} {\bfseries g\+Block\+Texture}
+\item 
+\mbox{\Hypertarget{class_render_a948ab1b6efa9c18ec8fde021cd745963}\label{class_render_a948ab1b6efa9c18ec8fde021cd745963}} 
+\hyperlink{class_l_texture}{L\+Texture} {\bfseries g\+Racket\+Texture}
+\item 
+\mbox{\Hypertarget{class_render_a0c4f77794b5dabecf25f84415fb3ad85}\label{class_render_a0c4f77794b5dabecf25f84415fb3ad85}} 
+\hyperlink{class_l_texture}{L\+Texture} {\bfseries g\+Racket\+Texture2}
+\item 
+\mbox{\Hypertarget{class_render_a02ca1847aad2235c4c703f4f4ee20b78}\label{class_render_a02ca1847aad2235c4c703f4f4ee20b78}} 
+\hyperlink{class_l_texture}{L\+Texture} {\bfseries g\+Pwup\+Texture}
+\item 
+\mbox{\Hypertarget{class_render_a8c281707bee4ff9460abf48e2fbf0f9c}\label{class_render_a8c281707bee4ff9460abf48e2fbf0f9c}} 
+\hyperlink{class_l_texture}{L\+Texture} {\bfseries g\+Bullet\+Texture}
+\item 
+\mbox{\Hypertarget{class_render_a34a83802700f31426f018fb201d412dc}\label{class_render_a34a83802700f31426f018fb201d412dc}} 
+\hyperlink{class_l_texture}{L\+Texture} {\bfseries g\+Text\+Texture}
+\item 
+\mbox{\Hypertarget{class_render_af3847d2c17f0062661e6b8c0b06170db}\label{class_render_af3847d2c17f0062661e6b8c0b06170db}} 
+\hyperlink{class_l_texture}{L\+Texture} {\bfseries g\+Enemy\+Texture}
+\item 
+\mbox{\Hypertarget{class_render_af372a476ddfb76f9e641ca629766daff}\label{class_render_af372a476ddfb76f9e641ca629766daff}} 
+T\+T\+F\+\_\+\+Font $\ast$ {\bfseries g\+Font} = 0
+\item 
+\mbox{\Hypertarget{class_render_af2b513498a39277236db315092995f5b}\label{class_render_af2b513498a39277236db315092995f5b}} 
+Mix\+\_\+\+Chunk $\ast$ {\bfseries g\+Ping} = N\+U\+LL
+\item 
+\mbox{\Hypertarget{class_render_a018ac074d1596fdc0f5cc6f474605ec9}\label{class_render_a018ac074d1596fdc0f5cc6f474605ec9}} 
+Mix\+\_\+\+Chunk $\ast$ {\bfseries g\+Racket\+Pong} = N\+U\+LL
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class containing some methods and texture pointers for rendering. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Render.\+h\item 
+Arkanoid/Render.\+cpp\end{DoxyCompactItemize}

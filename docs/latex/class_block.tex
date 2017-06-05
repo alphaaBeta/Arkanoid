@@ -1,0 +1,88 @@
+\hypertarget{class_block}{}\section{Block Class Reference}
+\label{class_block}\index{Block@{Block}}
+
+
+A class for a block.  
+
+
+
+
+{\ttfamily \#include $<$Block.\+h$>$}
+
+Inheritance diagram for Block\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_block}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_block_ab79a68da4bbf6a22e1d91ac81d30ade8}\label{class_block_ab79a68da4bbf6a22e1d91ac81d30ade8}} 
+{\bfseries Block} (char hlt=1, unsigned char r=0, unsigned char g=0, unsigned char b=0, unsigned char a=255)
+\item 
+void \hyperlink{class_block_aabe6fcade4ece2795cf4ada1f0241442}{Hit} (int=1)
+\begin{DoxyCompactList}\small\item\em Records a block being hit, performs appropriate actions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_colour}{Colour} \hyperlink{class_block_acb5551f2233e2a97b9d9e7ab40590e33}{colour}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_block}{Block} colour. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_block_a13d0a6d225233353862fa5adcbadf661}\label{class_block_a13d0a6d225233353862fa5adcbadf661}} 
+int \hyperlink{class_block_a13d0a6d225233353862fa5adcbadf661}{x}
+\begin{DoxyCompactList}\small\item\em x coordinate of upper left corner. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_block_a9328d6b6fcc9f9c019d091d87ceda41c}\label{class_block_a9328d6b6fcc9f9c019d091d87ceda41c}} 
+int \hyperlink{class_block_a9328d6b6fcc9f9c019d091d87ceda41c}{y}
+\begin{DoxyCompactList}\small\item\em y coordinate of upper left corner \end{DoxyCompactList}\item 
+char \hyperlink{class_block_a5e2a1909ae2f2572cd75b2c38d3abddb}{health}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_block}{Block} \char`\"{}hitpoints\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class for a block. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_block_aabe6fcade4ece2795cf4ada1f0241442}\label{class_block_aabe6fcade4ece2795cf4ada1f0241442}} 
+\index{Block@{Block}!Hit@{Hit}}
+\index{Hit@{Hit}!Block@{Block}}
+\subsubsection{\texorpdfstring{Hit()}{Hit()}}
+{\footnotesize\ttfamily void Block\+::\+Hit (\begin{DoxyParamCaption}\item[{int}]{a = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Records a block being hit, performs appropriate actions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & Strength of a hit (power) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_block_acb5551f2233e2a97b9d9e7ab40590e33}\label{class_block_acb5551f2233e2a97b9d9e7ab40590e33}} 
+\index{Block@{Block}!colour@{colour}}
+\index{colour@{colour}!Block@{Block}}
+\subsubsection{\texorpdfstring{colour}{colour}}
+{\footnotesize\ttfamily \hyperlink{struct_colour}{Colour} Block\+::colour}
+
+
+
+\hyperlink{class_block}{Block} colour. 
+
+\hyperlink{class_block}{Block} colour, defined by struct in \hyperlink{_config_8h_source}{Config.\+h}. Contains of red, green, blue and alpha values, ranging from 0-\/255. \mbox{\Hypertarget{class_block_a5e2a1909ae2f2572cd75b2c38d3abddb}\label{class_block_a5e2a1909ae2f2572cd75b2c38d3abddb}} 
+\index{Block@{Block}!health@{health}}
+\index{health@{health}!Block@{Block}}
+\subsubsection{\texorpdfstring{health}{health}}
+{\footnotesize\ttfamily char Block\+::health}
+
+
+
+\hyperlink{class_block}{Block} \char`\"{}hitpoints\char`\"{}. 
+
+Defines how many times a block can be hit before disappearing. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Block.\+h\item 
+Arkanoid/Block.\+cpp\end{DoxyCompactItemize}

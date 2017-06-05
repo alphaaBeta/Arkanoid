@@ -1,0 +1,121 @@
+\hypertarget{class_missile}{}\section{Missile Class Reference}
+\label{class_missile}\index{Missile@{Missile}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_missile_aa5ce8791a8e7ebd4ea0afab390b73a1a}\label{class_missile_aa5ce8791a8e7ebd4ea0afab390b73a1a}} 
+\hyperlink{class_missile_aa5ce8791a8e7ebd4ea0afab390b73a1a}{Missile} ()
+\begin{DoxyCompactList}\small\item\em Creates a missile at 0,0. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_missile_ad42379e48a46ec3556056f98ce8bd912}\label{class_missile_ad42379e48a46ec3556056f98ce8bd912}} 
+\hyperlink{class_missile_ad42379e48a46ec3556056f98ce8bd912}{$\sim$\+Missile} ()
+\begin{DoxyCompactList}\small\item\em Removes missile from missile\+List. \end{DoxyCompactList}\item 
+\hyperlink{class_missile_a63dbc713a488f9920811ac24f2639968}{Missile} (double, double, int=-\/M\+I\+S\+S\+I\+L\+E\+\_\+\+S\+P\+E\+ED)
+\begin{DoxyCompactList}\small\item\em Creates a missile with set coordinates. \end{DoxyCompactList}\item 
+char \hyperlink{class_missile_a25babb76b7fb981142721fa02a265b31}{Move} (float time\+Step)
+\begin{DoxyCompactList}\small\item\em Calculates new position based on time\+Step, checks collision. \end{DoxyCompactList}\item 
+\hyperlink{class_block}{Block} $\ast$ \hyperlink{class_missile_ab0820871eedcfe00ed389785f22d4558}{Check\+Collision} ()
+\begin{DoxyCompactList}\small\item\em Checks for collision with blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_missile_a7456f2bdca970cb8511c74696dd643b4}{Move\+All} (float time\+Step)
+\begin{DoxyCompactList}\small\item\em Moves all the missiles in missile\+List. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_missile_a763cf58f17fed394b8ea34e09e35dc10}\label{class_missile_a763cf58f17fed394b8ea34e09e35dc10}} 
+double \hyperlink{class_missile_a763cf58f17fed394b8ea34e09e35dc10}{x}
+\begin{DoxyCompactList}\small\item\em X coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_missile_a375910ba165198e112b2dffae9e7e387}\label{class_missile_a375910ba165198e112b2dffae9e7e387}} 
+double \hyperlink{class_missile_a375910ba165198e112b2dffae9e7e387}{y}
+\begin{DoxyCompactList}\small\item\em Y coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_missile_a4814062269e86e6a6aaad58edc9cced7}\label{class_missile_a4814062269e86e6a6aaad58edc9cced7}} 
+double \hyperlink{class_missile_a4814062269e86e6a6aaad58edc9cced7}{Vy}
+\begin{DoxyCompactList}\small\item\em Vertical speed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_missile_a019a3af7bf785a49ba80d3add483b5b5}\label{class_missile_a019a3af7bf785a49ba80d3add483b5b5}} 
+static std\+::vector$<$ \hyperlink{class_missile}{Missile} $\ast$ $>$ \hyperlink{class_missile_a019a3af7bf785a49ba80d3add483b5b5}{missile\+List}
+\begin{DoxyCompactList}\small\item\em A list of pointers to all missiles. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_missile_a63dbc713a488f9920811ac24f2639968}\label{class_missile_a63dbc713a488f9920811ac24f2639968}} 
+\index{Missile@{Missile}!Missile@{Missile}}
+\index{Missile@{Missile}!Missile@{Missile}}
+\subsubsection{\texorpdfstring{Missile()}{Missile()}}
+{\footnotesize\ttfamily Missile\+::\+Missile (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{int}]{s = {\ttfamily -\/MISSILE\+\_\+SPEED} }\end{DoxyParamCaption})}
+
+
+
+Creates a missile with set coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em double} & X position in gamefield \\
+\hline
+{\em double} & Y position in gamefield \\
+\hline
+{\em int} & \hyperlink{class_missile}{Missile} speed. Negative numbers make missile go up. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_missile_ab0820871eedcfe00ed389785f22d4558}\label{class_missile_ab0820871eedcfe00ed389785f22d4558}} 
+\index{Missile@{Missile}!Check\+Collision@{Check\+Collision}}
+\index{Check\+Collision@{Check\+Collision}!Missile@{Missile}}
+\subsubsection{\texorpdfstring{Check\+Collision()}{CheckCollision()}}
+{\footnotesize\ttfamily \hyperlink{class_block}{Block} $\ast$ Missile\+::\+Check\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks for collision with blocks. 
+
+\begin{DoxyReturn}{Returns}
+Block$\ast$ a pointer to block that has been hit. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_missile_a25babb76b7fb981142721fa02a265b31}\label{class_missile_a25babb76b7fb981142721fa02a265b31}} 
+\index{Missile@{Missile}!Move@{Move}}
+\index{Move@{Move}!Missile@{Missile}}
+\subsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily char Missile\+::\+Move (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})}
+
+
+
+Calculates new position based on time\+Step, checks collision. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 If a boundary or object has been hit. 
+
+1 else 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_missile_a7456f2bdca970cb8511c74696dd643b4}\label{class_missile_a7456f2bdca970cb8511c74696dd643b4}} 
+\index{Missile@{Missile}!Move\+All@{Move\+All}}
+\index{Move\+All@{Move\+All}!Missile@{Missile}}
+\subsubsection{\texorpdfstring{Move\+All()}{MoveAll()}}
+{\footnotesize\ttfamily void Missile\+::\+Move\+All (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Moves all the missiles in missile\+List. 
+
+Function checks if \hyperlink{class_missile_a25babb76b7fb981142721fa02a265b31}{Move()} call on missiles resulted in -\/1. If it did, missile gets destroyed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Missile.\+h\item 
+Arkanoid/Missile.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,97 @@
+\hypertarget{class_powerup}{}\section{Powerup Class Reference}
+\label{class_powerup}\index{Powerup@{Powerup}}
+
+
+Class for powerups.  
+
+
+
+
+{\ttfamily \#include $<$Powerup.\+h$>$}
+
+Inheritance diagram for Powerup\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=9.000000cm]{class_powerup}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_powerup_ab4bdb1e3b63095c936d2505ffce31f3e}\label{class_powerup_ab4bdb1e3b63095c936d2505ffce31f3e}} 
+{\bfseries Powerup} (double xx, double yy)
+\item 
+\mbox{\Hypertarget{class_powerup_a8a2434d845b29044736c2618b1fce1db}\label{class_powerup_a8a2434d845b29044736c2618b1fce1db}} 
+void {\bfseries Destroy} ()
+\item 
+\mbox{\Hypertarget{class_powerup_a27c8857f4e41c6d09efcc4447a9102cf}\label{class_powerup_a27c8857f4e41c6d09efcc4447a9102cf}} 
+virtual void \hyperlink{class_powerup_a27c8857f4e41c6d09efcc4447a9102cf}{Collect} ()
+\begin{DoxyCompactList}\small\item\em Calls effect the powerup has on player when collected. \end{DoxyCompactList}\item 
+char \hyperlink{class_powerup_a5e81fffa256f0f339c4ac430d897a1ae}{Move} (float time\+Step)
+\begin{DoxyCompactList}\small\item\em Calculates new position, checks for collision. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_powerup_a0a9b0365e47a25e5bee5112357d7d1cd}{Move\+All} (float time\+Step)
+\begin{DoxyCompactList}\small\item\em Calls \hyperlink{class_powerup_a5e81fffa256f0f339c4ac430d897a1ae}{Move()} on all powerups in powerup\+List. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_powerup_ac021dce376ab3946c8bb9f13add88f9c}\label{class_powerup_ac021dce376ab3946c8bb9f13add88f9c}} 
+double \hyperlink{class_powerup_ac021dce376ab3946c8bb9f13add88f9c}{x}
+\begin{DoxyCompactList}\small\item\em X coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_powerup_af28a919bbed400c8e213d69e25d6a864}\label{class_powerup_af28a919bbed400c8e213d69e25d6a864}} 
+double \hyperlink{class_powerup_af28a919bbed400c8e213d69e25d6a864}{y}
+\begin{DoxyCompactList}\small\item\em Y coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_powerup_a219f4a4c1e6d9c0cb6ee60a03c3d9046}\label{class_powerup_a219f4a4c1e6d9c0cb6ee60a03c3d9046}} 
+double \hyperlink{class_powerup_a219f4a4c1e6d9c0cb6ee60a03c3d9046}{Vy}
+\begin{DoxyCompactList}\small\item\em Vertical speed of powerup. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_powerup_a852c3a59988fe5067c5ebef799c50740}\label{class_powerup_a852c3a59988fe5067c5ebef799c50740}} 
+\hyperlink{struct_colour}{Colour} \hyperlink{class_powerup_a852c3a59988fe5067c5ebef799c50740}{color}
+\begin{DoxyCompactList}\small\item\em \hyperlink{struct_colour}{Colour} of powerup. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for powerups. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_powerup_a5e81fffa256f0f339c4ac430d897a1ae}\label{class_powerup_a5e81fffa256f0f339c4ac430d897a1ae}} 
+\index{Powerup@{Powerup}!Move@{Move}}
+\index{Move@{Move}!Powerup@{Powerup}}
+\subsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily char Powerup\+::\+Move (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculates new position, checks for collision. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char -\/1 When out of boundaries. 
+
+char 1 else 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_powerup_a0a9b0365e47a25e5bee5112357d7d1cd}\label{class_powerup_a0a9b0365e47a25e5bee5112357d7d1cd}} 
+\index{Powerup@{Powerup}!Move\+All@{Move\+All}}
+\index{Move\+All@{Move\+All}!Powerup@{Powerup}}
+\subsubsection{\texorpdfstring{Move\+All()}{MoveAll()}}
+{\footnotesize\ttfamily static void Powerup\+::\+Move\+All (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calls \hyperlink{class_powerup_a5e81fffa256f0f339c4ac430d897a1ae}{Move()} on all powerups in powerup\+List. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Powerup.\+h\end{DoxyCompactItemize}

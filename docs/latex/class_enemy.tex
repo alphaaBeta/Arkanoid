@@ -1,0 +1,185 @@
+\hypertarget{class_enemy}{}\section{Enemy Class Reference}
+\label{class_enemy}\index{Enemy@{Enemy}}
+
+
+Main class for enemy, containing all variables and some default methods.  
+
+
+
+
+{\ttfamily \#include $<$Enemy.\+h$>$}
+
+Inheritance diagram for Enemy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_enemy}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}\label{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}} 
+enum \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}{Enemy\+Type} \{ {\bfseries D\+I\+A\+G\+O\+N\+AL}, 
+{\bfseries S\+H\+O\+O\+T\+I\+N\+G\+D\+I\+A\+G\+O\+N\+AL}, 
+{\bfseries G\+R\+O\+U\+P\+P\+ER}, 
+{\bfseries B\+L\+O\+C\+K\+ER}
+ \}\begin{DoxyCompactList}\small\item\em \hyperlink{class_enemy}{Enemy} type flag. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_enemy_ab7e37cac9017834db50d2aaf94e75034}{Move} (float time\+Step)
+\begin{DoxyCompactList}\small\item\em Moves an enemy. Directly down for main class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_ac65dfd9eae4c84e890f9196941b18d62}\label{class_enemy_ac65dfd9eae4c84e890f9196941b18d62}} 
+virtual void \hyperlink{class_enemy_ac65dfd9eae4c84e890f9196941b18d62}{Act} ()
+\begin{DoxyCompactList}\small\item\em Performs an action enemy is supposed to do. Nothing for main class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_ac0eec4755e28c02688065f9657150ac3}\label{class_enemy_ac0eec4755e28c02688065f9657150ac3}} 
+virtual \hyperlink{class_enemy_ac0eec4755e28c02688065f9657150ac3}{$\sim$\+Enemy} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for polimorphism. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\static std\+::vector$<$ \hyperlink{class_enemy}{Enemy} $\ast$ $>$ \hyperlink{class_enemy_a747d610b1a24386b9bd85c50132ffa98}{Get\+Inst} ()
+\begin{DoxyCompactList}\small\item\em Function returning a vector of enemies of said type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T , class T2 , class... Rest$>$ }\\static std\+::vector$<$ \hyperlink{class_enemy}{Enemy} $\ast$ $>$ \hyperlink{class_enemy_a4c0528b6b7e94cfbceada5bd00f7193d}{Get\+Inst} ()
+\begin{DoxyCompactList}\small\item\em Function returning a vector of enemies of said type. \end{DoxyCompactList}\item 
+static void \hyperlink{class_enemy_afcf5991522f6f881e97b5910ac353633}{Move\+All} (float time\+Step)
+\begin{DoxyCompactList}\small\item\em Calls specific Move methods on all enemies on enemy\+List vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_a05e9e91e87d6eae0da31cc6d78a0b43d}\label{class_enemy_a05e9e91e87d6eae0da31cc6d78a0b43d}} 
+double \hyperlink{class_enemy_a05e9e91e87d6eae0da31cc6d78a0b43d}{x}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_enemy}{Enemy} x coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_a23d38ed46475359ad6a4e06d4dd49131}\label{class_enemy_a23d38ed46475359ad6a4e06d4dd49131}} 
+double \hyperlink{class_enemy_a23d38ed46475359ad6a4e06d4dd49131}{y}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_enemy}{Enemy} y coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_af615681d1038587714a8552823e303d0}\label{class_enemy_af615681d1038587714a8552823e303d0}} 
+double \hyperlink{class_enemy_af615681d1038587714a8552823e303d0}{Vx}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_enemy}{Enemy} horizontal speed vector. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_a60b9d71f1d711cb2d79787e4cce46046}\label{class_enemy_a60b9d71f1d711cb2d79787e4cce46046}} 
+double \hyperlink{class_enemy_a60b9d71f1d711cb2d79787e4cce46046}{Vy}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_enemy}{Enemy} vertical speed vector. \end{DoxyCompactList}\item 
+int \hyperlink{class_enemy_aa8e17bc99723176548d71447e54cac73}{size}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_enemy}{Enemy} size, in pixels. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_a0be1b3814551bf2d43cbcd00a2c8134e}\label{class_enemy_a0be1b3814551bf2d43cbcd00a2c8134e}} 
+double \hyperlink{class_enemy_a0be1b3814551bf2d43cbcd00a2c8134e}{bounceY}
+\begin{DoxyCompactList}\small\item\em y coordinate value at which enemies will bounce off. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_aebb86651c5be3c4e359a15b2832e5e4a}\label{class_enemy_aebb86651c5be3c4e359a15b2832e5e4a}} 
+enum \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}{Enemy\+::\+Enemy\+Type} {\bfseries enemy\+Type}
+\item 
+\hyperlink{struct_colour}{Colour} \hyperlink{class_enemy_a8fcd6954051e37e2ee89104e57145112}{colour}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_enemy}{Enemy} colour. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_ad21b742c9768be0162f53d1beb212830}\label{class_enemy_ad21b742c9768be0162f53d1beb212830}} 
+static std\+::vector$<$ \hyperlink{class_enemy}{Enemy} $\ast$ $>$ \hyperlink{class_enemy_ad21b742c9768be0162f53d1beb212830}{enemy\+List}
+\begin{DoxyCompactList}\small\item\em List of enemies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_a6124e0876e6ffd333ea69a246aecc993}\label{class_enemy_a6124e0876e6ffd333ea69a246aecc993}} 
+{\bfseries Enemy} (int \hyperlink{class_enemy_a05e9e91e87d6eae0da31cc6d78a0b43d}{x}=0, int dirX=1)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Main class for enemy, containing all variables and some default methods. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_a747d610b1a24386b9bd85c50132ffa98}\label{class_enemy_a747d610b1a24386b9bd85c50132ffa98}} 
+\index{Enemy@{Enemy}!Get\+Inst@{Get\+Inst}}
+\index{Get\+Inst@{Get\+Inst}!Enemy@{Enemy}}
+\subsubsection{\texorpdfstring{Get\+Inst()}{GetInst()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+static std\+::vector$<$\hyperlink{class_enemy}{Enemy} $\ast$$>$ Enemy\+::\+Get\+Inst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Function returning a vector of enemies of said type. 
+
+Template function that is being called as\+: \hyperlink{class_enemy_a747d610b1a24386b9bd85c50132ffa98}{Get\+Inst$<$\+Enemy\+Type1$>$()}.
+
+\begin{DoxyReturn}{Returns}
+vector$<$\+Enemy $\ast$$>$ Vector of enemies of wanted types. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_a4c0528b6b7e94cfbceada5bd00f7193d}\label{class_enemy_a4c0528b6b7e94cfbceada5bd00f7193d}} 
+\index{Enemy@{Enemy}!Get\+Inst@{Get\+Inst}}
+\index{Get\+Inst@{Get\+Inst}!Enemy@{Enemy}}
+\subsubsection{\texorpdfstring{Get\+Inst()}{GetInst()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T , class T2 , class... Rest$>$ \\
+static std\+::vector$<$\hyperlink{class_enemy}{Enemy} $\ast$$>$ Enemy\+::\+Get\+Inst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Function returning a vector of enemies of said type. 
+
+Template function that is being called as\+: \hyperlink{class_enemy_a747d610b1a24386b9bd85c50132ffa98}{Get\+Inst$<$\+Enemy\+Type1, Enemy\+Type2,...$>$()}.
+
+\begin{DoxyReturn}{Returns}
+vector$<$\+Enemy $\ast$$>$ Vector of enemies of wanted types. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_ab7e37cac9017834db50d2aaf94e75034}\label{class_enemy_ab7e37cac9017834db50d2aaf94e75034}} 
+\index{Enemy@{Enemy}!Move@{Move}}
+\index{Move@{Move}!Enemy@{Enemy}}
+\subsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily void Enemy\+::\+Move (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Moves an enemy. Directly down for main class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{class_enemy_diagonal_aa33718254422fa69663e22c00e80d1d9}{Enemy\+Diagonal}.
+
+\mbox{\Hypertarget{class_enemy_afcf5991522f6f881e97b5910ac353633}\label{class_enemy_afcf5991522f6f881e97b5910ac353633}} 
+\index{Enemy@{Enemy}!Move\+All@{Move\+All}}
+\index{Move\+All@{Move\+All}!Enemy@{Enemy}}
+\subsubsection{\texorpdfstring{Move\+All()}{MoveAll()}}
+{\footnotesize\ttfamily void Enemy\+::\+Move\+All (\begin{DoxyParamCaption}\item[{float}]{time\+Step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calls specific Move methods on all enemies on enemy\+List vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & time\+Step \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_enemy_a8fcd6954051e37e2ee89104e57145112}\label{class_enemy_a8fcd6954051e37e2ee89104e57145112}} 
+\index{Enemy@{Enemy}!colour@{colour}}
+\index{colour@{colour}!Enemy@{Enemy}}
+\subsubsection{\texorpdfstring{colour}{colour}}
+{\footnotesize\ttfamily \hyperlink{struct_colour}{Colour} Enemy\+::colour}
+
+
+
+\hyperlink{class_enemy}{Enemy} colour. 
+
+\hyperlink{class_enemy}{Enemy} colour, defined by struct in \hyperlink{_config_8h_source}{Config.\+h}. Contains of red, green, blue and alpha values, ranging from 0-\/255. \mbox{\Hypertarget{class_enemy_aa8e17bc99723176548d71447e54cac73}\label{class_enemy_aa8e17bc99723176548d71447e54cac73}} 
+\index{Enemy@{Enemy}!size@{size}}
+\index{size@{size}!Enemy@{Enemy}}
+\subsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int Enemy\+::size}
+
+
+
+\hyperlink{class_enemy}{Enemy} size, in pixels. 
+
+\hyperlink{class_enemy}{Enemy} is a ball, size defines the ball\textquotesingle{}s radius. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arkanoid/Enemy.\+h\item 
+Arkanoid/Enemy.\+cpp\end{DoxyCompactItemize}
